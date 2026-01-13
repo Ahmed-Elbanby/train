@@ -117,7 +117,7 @@
                                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                         },
                                         success: function () {
-                                            window.location.href = "/";
+                                            window.location.href = "/dashboard";
                                         },
                                         error: function (xhr) {
                                             let errors = xhr.responseJSON.errors;
