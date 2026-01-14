@@ -3,8 +3,8 @@
         <div class="row g-3 mb-3 align-items-center">
             <div class="col">
                 <ol class="breadcrumb bg-transparent mb-0">
-                    <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('dashboard.index') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('dashboard.profile') }}">Crafted pages</a>
+                    <li class="breadcrumb-item"><a class="text-secondary" href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a class="text-secondary" href="crafted-page.html">Crafted pages</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">My Profile</li>
                 </ol>
@@ -12,7 +12,7 @@
         </div>
         <div class="row align-items-center">
             <div class="col-auto">
-                <h1 class="fs-5 color-900 mt-1 mb-0">Welcome back, {{ auth('admin')->user()->name }}</h1>
+                <h1 class="fs-5 color-900 mt-1 mb-0">Welcome back, Allie!</h1>
                 <small class="text-muted">You have 12 new messages and 7 new notifications.</small>
             </div>
             <div class="col d-flex justify-content-lg-end mt-2 mt-md-0">

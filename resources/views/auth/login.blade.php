@@ -70,9 +70,9 @@
                 <div id="loginError"></div>
                 <div class="col-12">
                   <div class="mb-2">
-                    <label class="form-label">Email address</label>
-                    <input type="email" name="email" class="form-control form-control-lg"
-                      placeholder="name@example.com"  required>
+                    <label class="form-label">Username or Email</label>
+                    <input type="text" name="login" class="form-control form-control-lg"
+                      placeholder=""  required>
                   </div>
                 </div>
                 <div class="col-12">

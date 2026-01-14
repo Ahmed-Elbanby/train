@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\AdminRegisterController;
+use App\Http\Controllers\AdminProfileController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,15 +19,17 @@ Route::view('/register', 'auth.register')->name('register');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth:admin')->group(function () {
-    Route::view('/dashboard', 'dashboard.index')->name('dashboard');
-    Route::view('/profile', 'dashboard.profile');
+    Route::view('/dashboard', 'dashboard.index')->name('dashboard.index');
+    Route::view('/profile', 'dashboard.profile')->name('dashboard.profile');
+    Route::post('/admin/profile/update', [AdminProfileController::class, 'update'])
+        ->name('admin.profile.update');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 Route::post('/login', [AdminLoginController::class, 'login']);
 Route::post('/register', [AdminRegisterController::class, 'register']);

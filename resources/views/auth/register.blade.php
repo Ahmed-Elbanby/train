@@ -57,7 +57,7 @@
                     <div class="col-lg-6 d-flex justify-content-center align-items-center">
                         <div class="card shadow-sm w-100 p-4 p-md-5" style="max-width: 32rem;">
 
-                            <form id="registerForm" class="row g-3">
+                            <form id="registerForm" enctype="multipart/form-data" class="row g-3">
                                 @csrf
                                 <div class="col-12 text-center mb-5">
                                     <h1>Create account</h1>
@@ -70,13 +70,18 @@
                                         placeholder="John Pots" required>
                                 </div>
                                 <!-- <div class="col-6">
-<label class="form-label">&nbsp;</label>
-<input type="text" class="form-control form-control-lg" placeholder="Parker">
-</div> -->
+    <label class="form-label">&nbsp;</label>
+    <input type="text" class="form-control form-control-lg" placeholder="Parker">
+    </div> -->
                                 <div class="col-12">
                                     <label class="form-label">Email address</label>
                                     <input type="email" name="email" class="form-control form-control-lg"
                                         placeholder="name@example.com" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" name="username" class="form-control form-control-lg"
+                                        placeholder="username" required>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label">Password</label>
@@ -85,12 +90,22 @@
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label">Confirm password</label>
-                                    <input type="password" name="password_confirmation"
-                                        class="form-control form-control-lg" placeholder="8+ characters required" required>
+                                    <input type="password" name="password_confirmation" class="form-control form-control-lg"
+                                        placeholder="8+ characters required" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Phone</label>
+                                    <input type="text" name="phone" class="form-control form-control-lg"
+                                        placeholder="Phone number" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Profile Photo</label>
+                                    <input type="file" name="photo" class="form-control form-control-lg" accept="image/*">
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input type="checkbox" id="flexCheckDefault" name="terms" value="" class="form-check-input" required>
+                                        <input type="checkbox" id="flexCheckDefault" name="terms" value=""
+                                            class="form-check-input" required>
                                         <label class="form-check-label" for="flexCheckDefault"> I accept the <a href="#"
                                                 title="" class="text-primary">Terms and Conditions</a>
                                         </label>
@@ -106,13 +121,15 @@
                                 </div>
                             </form>
                             <script>
-                                $('#registerForm').on('submit', function(e) {
+                                $('#registerForm').on('submit', function (e) {
                                     e.preventDefault();
-                                
+
+                                    let FormData = new FormData(this);
+
                                     $.ajax({
                                         url: "/register",
                                         method: "POST",
-                                        data: $(this).serialize(),
+                                        data: FormData,
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                         },
@@ -126,7 +143,7 @@
                                         }
                                     });
                                 });
-                        </script>
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -181,8 +198,7 @@
                                 <div class="col-7">
                                     <ul class="list-unstyled mb-0">
                                         <li>
-                                            <button id="primaryColorPicker"
-                                                class="btn bg-primary avatar xs me-2"></button>
+                                            <button id="primaryColorPicker" class="btn bg-primary avatar xs me-2"></button>
                                             <label>Primary Color</label>
                                         </li>
                                         <li>
@@ -210,28 +226,23 @@
                                 <div class="col-5">
                                     <ul class="list-unstyled mb-0">
                                         <li>
-                                            <button id="chartColorPicker1"
-                                                class="btn chart-color1 avatar xs me-2"></button>
+                                            <button id="chartColorPicker1" class="btn chart-color1 avatar xs me-2"></button>
                                             <label>Chart Color 1</label>
                                         </li>
                                         <li>
-                                            <button id="chartColorPicker2"
-                                                class="btn chart-color2 avatar xs me-2"></button>
+                                            <button id="chartColorPicker2" class="btn chart-color2 avatar xs me-2"></button>
                                             <label>Chart Color 2</label>
                                         </li>
                                         <li>
-                                            <button id="chartColorPicker3"
-                                                class="btn chart-color3 avatar xs me-2"></button>
+                                            <button id="chartColorPicker3" class="btn chart-color3 avatar xs me-2"></button>
                                             <label>Chart Color 3</label>
                                         </li>
                                         <li>
-                                            <button id="chartColorPicker4"
-                                                class="btn chart-color4 avatar xs me-2"></button>
+                                            <button id="chartColorPicker4" class="btn chart-color4 avatar xs me-2"></button>
                                             <label>Chart Color 4</label>
                                         </li>
                                         <li>
-                                            <button id="chartColorPicker5"
-                                                class="btn chart-color5 avatar xs me-2"></button>
+                                            <button id="chartColorPicker5" class="btn chart-color5 avatar xs me-2"></button>
                                             <label>Chart Color 5</label>
                                         </li>
                                     </ul>
@@ -412,8 +423,7 @@
                 </div>
                 <div class="px-xl-4 modal-footer d-flex justify-content-start text-center">
                     <button type="button" class="btn flex-fill btn-primary lift">Save Changes</button>
-                    <button type="button" class="btn flex-fill btn-white border lift"
-                        data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn flex-fill btn-white border lift" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

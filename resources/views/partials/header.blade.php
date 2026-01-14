@@ -17,7 +17,7 @@
                         <span class="line"></span>
                     </span>
                 </button>
-                <a href="./index.html" class="brand-icon d-flex align-items-center mx-2 mx-sm-3 text-primary">
+                <a href="{{ route('dashboard.index') }}" class="brand-icon d-flex align-items-center mx-2 mx-sm-3 text-primary">
                     <svg height="22" viewBox="0 0 67 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path class="fill-muted"
                             d="M0.863281 18.9997V1.14968H3.11328V16.9997H10.9133V18.9997H0.863281Z" />
@@ -125,7 +125,7 @@
                                         <ul class="list-unstyled list mb-0">
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="./assets/img/xs/avatar5.jpg"
+                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar5.jpg') }}"
                                                         alt="">
                                                     <div class="flex-fill ms-3">
                                                         <p class="d-flex justify-content-between mb-0"><span>Olive
@@ -138,7 +138,7 @@
                                             </li>
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="./assets/img/xs/avatar6.jpg"
+                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar6.jpg') }}"
                                                         alt="">
                                                     <div class="flex-fill ms-3">
                                                         <p class="d-flex justify-content-between mb-0"><span>Del
@@ -151,7 +151,7 @@
                                             </li>
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="./assets/img/xs/avatar1.jpg"
+                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar1.jpg') }}"
                                                         alt="">
                                                     <div class="flex-fill ms-3">
                                                         <p class="d-flex justify-content-between mb-0"><span>Rose
@@ -178,7 +178,7 @@
                                             </li>
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="./assets/img/xs/avatar3.jpg"
+                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar3.jpg') }}"
                                                         alt="">
                                                     <div class="flex-fill ms-3">
                                                         <p class="d-flex justify-content-between mb-0"><span>Eileen
@@ -191,7 +191,7 @@
                                             </li>
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="./assets/img/xs/avatar4.jpg"
+                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar4.jpg') }}"
                                                         alt="">
                                                     <div class="flex-fill ms-3">
                                                         <p class="d-flex justify-content-between mb-0"><span>Carmen
@@ -205,7 +205,7 @@
                                             </li>
                                             <li class="py-2">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="./assets/img/xs/avatar7.jpg"
+                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar7.jpg') }}"
                                                         alt="">
                                                     <div class="flex-fill ms-3">
                                                         <p class="d-flex justify-content-between mb-0"><span>Karen
@@ -441,13 +441,17 @@
                     <div class="dropdown morphing scale-left user-profile mx-lg-3 mx-2">
                         <a class="nav-link dropdown-toggle rounded-circle after-none p-0" href="#" role="button"
                             data-bs-toggle="dropdown">
-                            <img class="avatar img-thumbnail rounded-circle shadow" src="./assets/img/profile_av.png"
+                            <img class="avatar img-thumbnail rounded-circle shadow" src="{{ auth('admin')->user()->photo
+                                                ? asset('storage/' . auth('admin')->user()->photo)
+                                                : asset('assets/img/avatar.png') }}"
                                 alt="">
                         </a>
                         <div class="dropdown-menu border-0 rounded-4 shadow p-0">
                             <div class="card border-0 w240">
                                 <div class="card-body border-bottom d-flex">
-                                    <img class="avatar rounded-circle" src="./assets/img/profile_av.png" alt="">
+                                    <img class="avatar rounded-circle" src="{{ auth('admin')->user()->photo
+                                                ? asset('storage/' . auth('admin')->user()->photo)
+                                                : asset('assets/img/avatar.png') }}" alt="">
                                     <div class="flex-fill ms-3">
                                         <h6 class="card-title mb-0">{{ auth('admin')->user()->name }}</h6>
                                         <span class="text-muted"><a href="/cdn-cgi/l/email-protection"
@@ -457,7 +461,7 @@
                                 </div>
                                 <div class="list-group m-2 mb-3">
                                     <a class="list-group-item list-group-item-action border-0"
-                                        href="page-profile.html"><i class="w30 fa fa-user"></i>My Profile</a>
+                                        href="{{ route('dashboard.profile') }}"><i class="w30 fa fa-user"></i>My Profile</a>
                                     <a class="list-group-item list-group-item-action border-0"
                                         href="account-settings.html"><i class="w30 fa fa-gear"></i>Settings</a>
                                     <a class="list-group-item list-group-item-action border-0"

@@ -11,13 +11,26 @@ class AdminLoginController extends Controller
 {
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
+        // $credentials = $request->validate([
+        //     'login' => 'required',
+        //     'password' => 'required',
+        // ]);
+
+        $request->validate([
+            'login' => 'required',
             'password' => 'required',
         ]);
 
-        $admin = Admin::where('email', $credentials['email'])
-            ->first();
+        $loginType = filter_var($request->login, FILTER_VALIDATE_EMAIL)
+            ? 'email'
+            : 'username';
+
+        $credentials = [
+            $loginType => $request->login,
+            'password' => $request->password,
+        ];
+
+        $admin = Admin::where($loginType, $request['login'])->first();
 
         if (!$admin) {
             return response()->json([
@@ -35,7 +48,7 @@ class AdminLoginController extends Controller
             $request->session()->regenerate();
             return response()->json(['status' => 'success']);
         }
-        
+
         return response()->json([
             'message' => 'Invalid credentials'
         ], 422);

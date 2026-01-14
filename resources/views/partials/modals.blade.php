@@ -129,7 +129,7 @@
                 </div>
                 <ul class="list-group list-group-flush list-group-custom custom_scroll mb-0" style="height: 300px;">
                   <li class="list-group-item d-flex align-items-center">
-                    <img class="avatar rounded" src="./assets/img/xs/avatar1.jpg" alt="">
+                    <img class="avatar rounded" src="{{ asset('assets/img/xs/avatar1.jpg') }}" alt="">
                     <div class="flex-fill ms-2">
                       <div class="h6 mb-0">Chris Fox</div>
                       <small class="text-muted">Angular Developer</small>
@@ -141,7 +141,7 @@
                     </select>
                   </li>
                   <li class="list-group-item d-flex align-items-center">
-                    <img class="avatar rounded" src="./assets/img/xs/avatar2.jpg" alt="">
+                    <img class="avatar rounded" src="{{ asset('assets/img/xs/avatar2.jpg') }}" alt="">
                     <div class="flex-fill ms-2">
                       <div class="h6 mb-0">Joge Lucky</div>
                       <small class="text-muted">ReactJs Developer</small>
@@ -153,7 +153,7 @@
                     </select>
                   </li>
                   <li class="list-group-item d-flex align-items-center">
-                    <img class="avatar rounded" src="./assets/img/xs/avatar3.jpg" alt="">
+                    <img class="avatar rounded" src="{{ asset('assets/img/xs/avatar3.jpg') }}" alt="">
                     <div class="flex-fill ms-2">
                       <div class="h6 mb-0">Chris Fox</div>
                       <small class="text-muted">NodeJs Developer</small>
@@ -165,7 +165,7 @@
                     </select>
                   </li>
                   <li class="list-group-item d-flex align-items-center">
-                    <img class="avatar rounded" src="./assets/img/xs/avatar4.jpg" alt="">
+                    <img class="avatar rounded" src="{{ asset('assets/img/xs/avatar4.jpg') }}" alt="">
                     <div class="flex-fill ms-2">
                       <div class="h6 mb-0">Chris Fox</div>
                       <small class="text-muted">Sr. Designer</small>
@@ -177,7 +177,7 @@
                     </select>
                   </li>
                   <li class="list-group-item d-flex align-items-center">
-                    <img class="avatar rounded" src="./assets/img/xs/avatar5.jpg" alt="">
+                    <img class="avatar rounded" src="{{ asset('assets/img/xs/avatar5.jpg') }}" alt="">
                     <div class="flex-fill ms-2">
                       <div class="h6 mb-0">Chris Fox</div>
                       <small class="text-muted">Designer</small>
@@ -189,7 +189,7 @@
                     </select>
                   </li>
                   <li class="list-group-item d-flex align-items-center">
-                    <img class="avatar rounded" src="./assets/img/xs/avatar6.jpg" alt="">
+                    <img class="avatar rounded" src="{{ asset('assets/img/xs/avatar6.jpg') }}" alt="">
                     <div class="flex-fill ms-2">
                       <div class="h6 mb-0">Chris Fox</div>
                       <small class="text-muted">Front-End Developer</small>
@@ -201,7 +201,7 @@
                     </select>
                   </li>
                   <li class="list-group-item d-flex align-items-center">
-                    <img class="avatar rounded" src="./assets/img/xs/avatar7.jpg" alt="">
+                    <img class="avatar rounded" src="{{ asset('assets/img/xs/avatar7.jpg') }}" alt="">
                     <div class="flex-fill ms-2">
                       <div class="h6 mb-0">Chris Fox</div>
                       <small class="text-muted">QA</small>
@@ -213,7 +213,7 @@
                     </select>
                   </li>
                   <li class="list-group-item d-flex align-items-center">
-                    <img class="avatar rounded" src="./assets/img/xs/avatar8.jpg" alt="">
+                    <img class="avatar rounded" src="{{ asset('assets/img/xs/avatar8.jpg') }}" alt="">
                     <div class="flex-fill ms-2">
                       <div class="h6 mb-0">Chris Fox</div>
                       <small class="text-muted">Laravel Developer</small>
@@ -294,7 +294,7 @@
                   <button class="btn btn-lg bg-secondary text-light text-uppercase">View project</button>
                 </div>
                 <div class="card-body">
-                  <img class="img-fluid" src="./assets/img/project-team.svg" alt="" />
+                  <img class="img-fluid" src="{{ asset('assets/img/project-team.svg') }}" alt="" />
                 </div>
               </div>
             </div>
@@ -501,7 +501,7 @@
 
             <div class="timeline-item ti-info p-3">
               <div class="timeline-icon">
-                <img class="avatar sm rounded-circle" src="./assets/img/xs/avatar1.jpg" alt="">
+                <img class="avatar sm rounded-circle" src="{{ asset('assets/img/xs/avatar1.jpg') }}" alt="">
               </div>
               <div class="timeline-content ms-3">
                 <div>Meeting with Alice</div>
@@ -571,47 +571,47 @@
           <div class="nav flex-column nav-pills p-3 h-100">
             <a class="nav-link rounded-circle p-1 mb-2 active" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-1" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar1.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar1.jpg') }}" alt="avatar">
             </a>
             <a class="nav-link rounded-circle p-1 mb-2" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-2" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar2.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar2.jpg') }}" alt="avatar">
             </a>
             <a class="nav-link rounded-circle p-1 mb-2" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-3" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar3.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar3.jpg') }}" alt="avatar">
             </a>
             <a class="nav-link rounded-circle p-1 mb-2" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-2" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar4.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar4.jpg') }}" alt="avatar">
             </a>
             <a class="nav-link rounded-circle p-1 mb-2" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-5" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar5.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar5.jpg') }}" alt="avatar">
             </a>
             <a class="nav-link rounded-circle p-1 mb-2" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-1" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar6.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar6.jpg') }}" alt="avatar">
             </a>
             <a class="nav-link rounded-circle p-1 mb-2" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-7" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar7.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar7.jpg') }}" alt="avatar">
             </a>
             <a class="nav-link rounded-circle p-1 mb-2" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-3" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar8.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar8.jpg') }}" alt="avatar">
             </a>
             <a class="nav-link rounded-circle p-1 mb-2" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-3" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar9.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar9.jpg') }}" alt="avatar">
             </a>
             <a class="nav-link rounded-circle p-1 mb-2" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-1" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar10.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar10.jpg') }}" alt="avatar">
             </a>
             <a class="nav-link rounded-circle p-1 mb-2" href="javascript:void(0);" data-bs-toggle="pill"
               data-bs-target="#c-user-1" title="">
-              <img class="avatar sm rounded-circle border" src="./assets/img/xs/avatar5.jpg" alt="avatar">
+              <img class="avatar sm rounded-circle border" src="{{ asset('assets/img/xs/avatar5.jpg') }}" alt="avatar">
             </a>
           </div>
           <div class="tab-content shadow-sm">
@@ -621,7 +621,7 @@
                 <div class="card-header border-bottom py-3">
                   <div class="d-flex">
                     <a href="javascript:void(0);" title="">
-                      <img class="avatar rounded-circle" src="./assets/img/xs/avatar1.jpg" alt="avatar">
+                      <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar1.jpg') }}" alt="avatar">
                     </a>
                     <div class="ms-3">
                       <h6 class="mb-0">Orlando Lentz</h6>
@@ -654,7 +654,7 @@
                     <li class="mb-3 d-flex flex-row align-items-end">
                       <div class="max-width-70">
                         <div class="user-info mb-1">
-                          <img class="avatar xs rounded-circle me-1" src="./assets/img/xs/avatar1.jpg" alt="avatar">
+                          <img class="avatar xs rounded-circle me-1" src="{{ asset('assets/img/xs/avatar1.jpg') }}" alt="avatar">
                           <span class="text-muted small">10:10 AM, Today</span>
                         </div>
                         <div class="card p-3">
@@ -697,7 +697,7 @@
                     <li class="mb-3 d-flex flex-row align-items-end">
                       <div class="max-width-70">
                         <div class="user-info mb-1">
-                          <img class="avatar xs rounded-circle me-1" src="./assets/img/xs/avatar1.jpg" alt="avatar">
+                          <img class="avatar xs rounded-circle me-1" src="{{ asset('assets/img/xs/avatar1.jpg') }}" alt="avatar">
                           <span class="text-muted small">10:10 AM, Today</span>
                         </div>
                         <div class="card p-3">
@@ -720,7 +720,7 @@
                     <li class="mb-3 d-flex flex-row align-items-end">
                       <div class="max-width-70">
                         <div class="user-info mb-1">
-                          <img class="avatar xs rounded-circle me-1" src="./assets/img/xs/avatar1.jpg" alt="avatar">
+                          <img class="avatar xs rounded-circle me-1" src="{{ asset('assets/img/xs/avatar1.jpg') }}" alt="avatar">
                           <span class="text-muted small">10:10 AM, Today</span>
                         </div>
                         <div class="card p-3">
@@ -764,14 +764,14 @@
                     <li class="mb-3 d-flex flex-row align-items-end">
                       <div class="max-width-70">
                         <div class="user-info mb-1">
-                          <img class="avatar xs rounded-circle me-1" src="./assets/img/xs/avatar1.jpg" alt="avatar">
+                          <img class="avatar xs rounded-circle me-1" src="{{ asset('assets/img/xs/avatar1.jpg') }}" alt="avatar">
                           <span class="text-muted small">10:10 AM, Today</span>
                         </div>
                         <div class="card p-3">
                           <div class="message">
                             <p>Please find attached images</p>
-                            <img class="w120 img-thumbnail" src="./assets/img/gallery/3.jpg" alt="">
-                            <img class="w120 img-thumbnail" src="./assets/img/gallery/4.jpg" alt="">
+                            <img class="w120 img-thumbnail" src="{{ asset('assets/img/gallery/3.jpg') }}" alt="">
+                            <img class="w120 img-thumbnail" src="{{ asset('assets/img/gallery/4.jpg') }}" alt="">
                           </div>
                         </div>
                       </div>
@@ -824,7 +824,7 @@
                 <div class="card-header border-bottom py-3">
                   <div class="d-flex">
                     <a href="javascript:void(0);" title="">
-                      <img class="avatar rounded-circle" src="./assets/img/xs/avatar2.jpg" alt="avatar">
+                      <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar2.jpg') }}" alt="avatar">
                     </a>
                     <div class="ms-3">
                       <h6 class="mb-0">Orlando Lentz</h6>
@@ -878,7 +878,7 @@
                     <li class="mb-3 d-flex flex-row align-items-end">
                       <div class="max-width-70">
                         <div class="user-info mb-1">
-                          <img class="avatar xs rounded-circle me-1" src="./assets/img/xs/avatar2.jpg" alt="avatar">
+                          <img class="avatar xs rounded-circle me-1" src="{{ asset('assets/img/xs/avatar2.jpg') }}" alt="avatar">
                           <span class="text-muted small">10:10 AM, Today</span>
                         </div>
                         <div class="card p-3">
@@ -922,14 +922,14 @@
                     <li class="mb-3 d-flex flex-row align-items-end">
                       <div class="max-width-70">
                         <div class="user-info mb-1">
-                          <img class="avatar xs rounded-circle me-1" src="./assets/img/xs/avatar2.jpg" alt="avatar">
+                          <img class="avatar xs rounded-circle me-1" src="{{ asset('assets/img/xs/avatar2.jpg') }}" alt="avatar">
                           <span class="text-muted small">10:10 AM, Today</span>
                         </div>
                         <div class="card p-3">
                           <div class="message">
                             <p>Please find attached images</p>
-                            <img class="w120 img-thumbnail" src="./assets/img/gallery/1.jpg" alt="">
-                            <img class="w120 img-thumbnail" src="./assets/img/gallery/2.jpg" alt="">
+                            <img class="w120 img-thumbnail" src="{{ asset('assets/img/gallery/1.jpg') }}" alt="">
+                            <img class="w120 img-thumbnail" src="{{ asset('assets/img/gallery/2.jpg') }}" alt="">
                           </div>
                         </div>
                       </div>
@@ -969,7 +969,7 @@
                     <li class="mb-3 d-flex flex-row align-items-end">
                       <div class="max-width-70">
                         <div class="user-info mb-1">
-                          <img class="avatar xs rounded-circle me-1" src="./assets/img/xs/avatar2.jpg" alt="avatar">
+                          <img class="avatar xs rounded-circle me-1" src="{{ asset('assets/img/xs/avatar2.jpg') }}" alt="avatar">
                           <span class="text-muted small">10:10 AM, Today</span>
                         </div>
                         <div class="card p-3">
@@ -992,7 +992,7 @@
                     <li class="mb-3 d-flex flex-row align-items-end">
                       <div class="max-width-70">
                         <div class="user-info mb-1">
-                          <img class="avatar xs rounded-circle me-1" src="./assets/img/xs/avatar2.jpg" alt="avatar">
+                          <img class="avatar xs rounded-circle me-1" src="{{ asset('assets/img/xs/avatar2.jpg') }}" alt="avatar">
                           <span class="text-muted small">10:10 AM, Today</span>
                         </div>
                         <div class="card p-3">
@@ -1129,25 +1129,25 @@
               <label class="m-1 theme-switch" for="theme-switch">
                 <input type="checkbox" id="theme-switch" />
                 <span class="card p-2">
-                  <img class="img-fluid" src="./assets/img/dark-version.svg" alt="Dark Mode" />
+                  <img class="img-fluid" src="{{ asset('assets/img/dark-version.svg') }}" alt="Dark Mode" />
                 </span>
               </label>
               <label class="m-1 theme-dark" for="theme-dark">
                 <input type="checkbox" id="theme-dark" />
                 <span class="card p-2">
-                  <img class="img-fluid" src="./assets/img/dark-theme.svg" alt="Theme Dark Mode" />
+                  <img class="img-fluid" src="{{ asset('assets/img/dark-theme.svg') }}" alt="Theme Dark Mode" />
                 </span>
               </label>
               <label class="m-1 theme-high-contrast" for="theme-high-contrast">
                 <input type="checkbox" id="theme-high-contrast" />
                 <span class="card p-2">
-                  <img class="img-fluid" src="./assets/img/high-version.svg" alt="High Contrast" />
+                  <img class="img-fluid" src="{{ asset('assets/img/high-version.svg') }}" alt="High Contrast" />
                 </span>
               </label>
               <label class="m-1 theme-rtl" for="theme-rtl">
                 <input type="checkbox" id="theme-rtl" />
                 <span class="card p-2">
-                  <img class="img-fluid" src="./assets/img/rtl-version.svg" alt="RTL Mode!" />
+                  <img class="img-fluid" src="{{ asset('assets/img/rtl-version.svg') }}" alt="RTL Mode!" />
                 </span>
               </label>
             </div>
@@ -1159,25 +1159,25 @@
               <label class="m-1" for="font-opensans">
                 <input type="radio" name="font" id="font-opensans" value="font-opensans" />
                 <span class="card p-2">
-                  <img class="img-fluid" src="./assets/img/font-opensans.svg" alt="Dark Mode" />
+                  <img class="img-fluid" src="{{ asset('assets/img/font-opensans.svg') }}" alt="Dark Mode" />
                 </span>
               </label>
               <label class="m-1" for="font-quicksand">
                 <input type="radio" name="font" id="font-quicksand" value="font-quicksand" />
                 <span class="card p-2">
-                  <img class="img-fluid" src="./assets/img/font-quicksand.svg" alt="Dark Mode" />
+                  <img class="img-fluid" src="{{ asset('assets/img/font-quicksand.svg') }}" alt="Dark Mode" />
                 </span>
               </label>
               <label class="m-1" for="font-nunito">
                 <input type="radio" name="font" id="font-nunito" value="font-nunito" checked="" />
                 <span class="card p-2">
-                  <img class="img-fluid" src="./assets/img/font-nunito.svg" alt="Dark Mode" />
+                  <img class="img-fluid" src="{{ asset('assets/img/font-nunito.svg') }}" alt="Dark Mode" />
                 </span>
               </label>
               <label class="m-1" for="font-raleway">
                 <input type="radio" name="font" id="font-raleway" value="font-raleway" />
                 <span class="card p-2">
-                  <img class="img-fluid" src="./assets/img/font-raleway.svg" alt="Dark Mode" />
+                  <img class="img-fluid" src="{{ asset('assets/img/font-raleway.svg') }}" alt="Dark Mode" />
                 </span>
               </label>
             </div>
@@ -1251,15 +1251,15 @@
                 <div class="bg-images">
                   <ul class="list-unstyled d-flex">
                     <li class="sidebar-img-1 me-1 sidebar-img-active"><a class="rounded sidebar-img" id="img-1"
-                        href="#"><img src="./assets/img/sidebar-bg/sidebar-1.jpg" alt="" /></a></li>
+                        href="#"><img src="{{ asset('assets/img/sidebar-bg/sidebar-1.jpg') }}" alt="" /></a></li>
                     <li class="sidebar-img-2 me-1"><a class="rounded sidebar-img" id="img-2" href="#"><img
-                          src="./assets/img/sidebar-bg/sidebar-2.jpg" alt="" /></a></li>
+                          src="{{ asset('assets/img/sidebar-bg/sidebar-2.jpg') }}" alt="" /></a></li>
                     <li class="sidebar-img-3 me-1"><a class="rounded sidebar-img" id="img-3" href="#"><img
-                          src="./assets/img/sidebar-bg/sidebar-3.jpg" alt="" /></a></li>
+                          src="{{ asset('assets/img/sidebar-bg/sidebar-3.jpg') }}" alt="" /></a></li>
                     <li class="sidebar-img-4 me-1"><a class="rounded sidebar-img" id="img-4" href="#"><img
-                          src="./assets/img/sidebar-bg/sidebar-4.jpg" alt="" /></a></li>
+                          src="{{ asset('assets/img/sidebar-bg/sidebar-4.jpg') }}" alt="" /></a></li>
                     <li class="sidebar-img-5 me-1"><a class="rounded sidebar-img" id="img-5" href="#"><img
-                          src="./assets/img/sidebar-bg/sidebar-5.jpg" alt="" /></a></li>
+                          src="{{ asset('assets/img/sidebar-bg/sidebar-5.jpg') }}" alt="" /></a></li>
                   </ul>
                 </div>
               </li>

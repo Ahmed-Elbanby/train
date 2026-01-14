@@ -15,7 +15,10 @@ return new class extends Migration
         $table->id();
         $table->string('name', 100);
         $table->string('email')->unique();
+        $table->string('username')->unique();
         $table->string('password');
+        $table->string('phone', 15)->nullable();
+        $table->string('photo')->nullable();
         $table->boolean('is_active')->default(true);
         // $table->timestamp('created_at')->useCurrent();
         // $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

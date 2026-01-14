@@ -8,7 +8,7 @@
   <meta name="description" content="Responsive Bootstrap 5 admin dashboard template & web App ui kit.">
   <meta name="keyword"
     content="LUNO, Bootstrap 5, ReactJs, Angular, Laravel, VueJs, ASP .Net, Admin Dashboard, Admin Theme, HRMS, Projects, Hospital Admin, CRM Admin, Events, Fitness, Music, Inventory, Job Portal">
-  <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
   <title>@yield('title', 'Dashboard')</title>
 
   @include('partials.styles')
