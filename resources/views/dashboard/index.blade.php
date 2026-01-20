@@ -11,7 +11,7 @@
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card overflow-hidden">
             <div class="card-body">
-              <svg class="position-absolute top-0 end-0 mt-4 me-3" xmlns="http://www.w3.org/2000/svg" width="26"
+              <svg class="{{ app()->getLocale() === 'ar' ? 'position-absolute top-0 start-0 mt-4 ms-3' : 'position-absolute top-0 end-0 mt-4 me-3' }}" xmlns="http://www.w3.org/2000/svg" width="26"
                 fill="currentColor" viewBox="0 0 16 16">
                 <path class="fill-muted"
                   d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
@@ -53,7 +53,7 @@
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card overflow-hidden">
             <div class="card-body">
-              <svg class="position-absolute top-0 end-0 mt-4 me-3" xmlns="http://www.w3.org/2000/svg" width="26"
+              <svg class="{{ app()->getLocale() === 'ar' ? 'position-absolute top-0 start-0 mt-4 ms-3' : 'position-absolute top-0 end-0 mt-4 me-3' }}" xmlns="http://www.w3.org/2000/svg" width="26"
                 fill="currentColor" viewBox="0 0 16 16">
                 <path class="fill-primary" fill-rule="evenodd"
                   d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
@@ -77,7 +77,7 @@
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card overflow-hidden">
             <div class="card-body">
-              <svg class="position-absolute top-0 end-0 mt-4 me-3" xmlns="http://www.w3.org/2000/svg" width="26"
+              <svg class="{{ app()->getLocale() === 'ar' ? 'position-absolute top-0 start-0 mt-4 ms-3' : 'position-absolute top-0 end-0 mt-4 me-3' }}" xmlns="http://www.w3.org/2000/svg" width="26"
                 fill="currentColor" viewBox="0 0 16 16">
                 <path class="fill-muted"
                   d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z" />

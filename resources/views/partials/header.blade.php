@@ -1,3 +1,5 @@
+@use('Mcamara\LaravelLocalization\Facades\LaravelLocalization')
+
 <header class="page-header sticky-top px-xl-4 px-sm-2 px-0 py-lg-2 py-1">
     <div class="container-fluid">
         <nav class="navbar">
@@ -154,7 +156,8 @@
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
                                                     <div class="avatar rounded-circle no-thumbnail">
-                                                        {{ __('dash.pt_initials') }}</div>
+                                                        {{ __('dash.pt_initials') }}
+                                                    </div>
                                                     <div class="flex-fill ms-3">
                                                         <p class="d-flex justify-content-between mb-0">
                                                             <span>{{ __('dash.pat_thettick') }}</span>
@@ -294,10 +297,11 @@
                                     d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z" />
                             </svg>
                         </a>
-                        <div class="{{ app()->getLocale() === 'ar' ? 'dropdown-menu rounded-4 shadow border-0 p-0' : 'dropdown-menu rounded-4 shadow border-0 p-0' }}" data-bs-popper="none">
+                        <div class="{{ app()->getLocale() === 'ar' ? 'dropdown-menu rounded-4 shadow border-0 p-0' : 'dropdown-menu rounded-4 shadow border-0 p-0' }}"
+                            data-bs-popper="none">
                             <div class="card">
                                 <div class="list-group list-group-custom" style="width: 200px;">
-                                    <a href="#" class="list-group-item"><span
+                                    <!-- <a href="#" class="list-group-item"><span
                                             class="flag-icon flag-icon-gb me-2"></span>{{ __('dash.uk_english') }}</a>
                                     <a href="#" class="list-group-item"><span
                                             class="flag-icon flag-icon-us me-2"></span>{{ __('dash.us_english') }}</a>
@@ -306,7 +310,13 @@
                                     <a href="#" class="list-group-item"><span
                                             class="flag-icon flag-icon-in me-2"></span>{{ __('dash.hindi') }}</a>
                                     <a href="#" class="list-group-item"><span
-                                            class="flag-icon flag-icon-sa me-2"></span>{{ __('dash.saudi_arabia') }}</a>
+                                            class="flag-icon flag-icon-sa me-2"></span>{{ __('dash.saudi_arabia') }}</a> -->
+
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="list-group-item">
+                                            <span class="flag-icon flag-icon-{{ strtolower(substr($localeCode, -2)) }} me-2"></span>{{ $properties['native'] }}
+                                        </a>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
