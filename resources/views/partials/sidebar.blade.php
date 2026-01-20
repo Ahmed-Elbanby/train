@@ -52,9 +52,10 @@
                         <span class="arrow fa fa-angle-left ms-auto text-end"></span>
                     </a>
                     <ul class="sub-menu collapse show" id="my_dashboard">
-                        <li><a class="ms-link active" href="index.html">{{ __('dash.analysis') }}</a></li>
-                        <li><a class="ms-link" href="index-wallet.html">{{ __('dash.my_wallet') }}</a></li>
-                        <li><a class="ms-link" href="index-iot.html">{{ __('dash.iot') }}</a></li>
+                        <li><a class="ms-link active" href="#">{{ __('dash.analysis') }}</a></li>
+                        <li><a class="ms-link" href="#">{{ __('dash.my_wallet') }}</a></li>
+                        <li><a class="ms-link" href="#">{{ __('dash.iot') }}</a></li>
+                        <li><a class="ms-link" href="{{ route('admins.index') }}">{{ __('dash.admins_control') }}</a></li>
                     </ul>
                 </li>
                 <li class="collapsed">

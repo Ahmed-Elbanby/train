@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\AdminRegisterController;
 use App\Http\Controllers\AdminProfileController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\AdminController;
 
 
 
@@ -35,6 +36,13 @@ Route::group([
     Route::post('/login', [AdminLoginController::class, 'login']);
     Route::post('/register', [AdminRegisterController::class, 'register']);
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
+
+    Route::get('/admins', [AdminController::class, 'index'])->name('admins.index');
+    Route::post('/admins', [AdminController::class, 'store'])->name('admins.store');
+    Route::get('/admins/{admin}/edit', [AdminController::class, 'edit'])->name('admins.edit');
+    // Accept both POST and PUT so forms using method override work and AJAX POSTs also match
+    Route::match(['post', 'put'], '/admins/{admin}', [AdminController::class, 'update'])->name('admins.update');
+    Route::delete('/admins/{admin}', [AdminController::class, 'destroy'])->name('admins.destroy');
 
 });
 
