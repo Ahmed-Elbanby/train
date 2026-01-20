@@ -1,47 +1,45 @@
-<div class="sidebar p-2 py-md-3 @@cardClass">
+<div class="sidebar p-2 py-md-3 @@cardClass" dir="rtl">
     <div class="container-fluid">
-
         <div class="title-text d-flex align-items-center mb-4 mt-1">
             <h4 class="sidebar-title mb-0 flex-grow-1"><span class="sm-txt">L</span><span>UNO Admin</span></h4>
             <div class="dropdown morphing scale-left">
                 <a class="dropdown-toggle more-icon" href="#" role="button" data-bs-toggle="dropdown"><i
                         class="fa fa-ellipsis-h"></i></a>
                 <ul class="dropdown-menu shadow border-0 p-2 mt-2" data-bs-popper="none">
-                    <li class="fw-bold px-2">Quick Actions</li>
+                    <li class="fw-bold px-2">{{ __('dash.quick_actions') }}</li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="./landing/index.html" aria-current="page">Landing page</a></li>
-                    <li><a class="dropdown-item" href="./inventory/index.html">Inventory</a></li>
-                    <li><a class="dropdown-item" href="./ecommerce/index.html">eCommerce</a></li>
-                    <li><a class="dropdown-item" href="./hrms/index.html">HRMS</a></li>
+                    <li><a class="dropdown-item" href="./landing/index.html"
+                            aria-current="page">{{ __('dash.landing_page') }}</a></li>
+                    <li><a class="dropdown-item" href="./inventory/index.html">{{ __('dash.inventory') }}</a></li>
+                    <li><a class="dropdown-item" href="./ecommerce/index.html">{{ __('dash.ecommerce') }}</a></li>
+                    <li><a class="dropdown-item" href="./hrms/index.html">{{ __('dash.hrms') }}</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="./account-invoices.html">Invoices List</a></li>
-                    <li><a class="dropdown-item" href="./account-create-invoices.html">Create Invoices</a></li>
+                    <li><a class="dropdown-item" href="./account-invoices.html">{{ __('dash.invoices_list') }}</a></li>
+                    <li><a class="dropdown-item"
+                            href="./account-create-invoices.html">{{ __('dash.create_invoices') }}</a></li>
                 </ul>
             </div>
         </div>
-
         <div class="create-new py-3 mb-2">
             <div class="d-flex">
                 <select class="form-select rounded-pill me-1">
-                    <option selected>Select Project</option>
-                    <option value="1">Luno University</option>
-                    <option value="2">Book Manager</option>
-                    <option value="3">Luno Sass App</option>
+                    <option selected>{{ __('dash.select_project') }}</option>
+                    <option value="1">{{ __('dash.luno_university') }}</option>
+                    <option value="2">{{ __('dash.book_manager') }}</option>
+                    <option value="3">{{ __('dash.luno_sass_app') }}</option>
                 </select>
                 <button class="btn bg-primary text-white rounded-circle" data-bs-toggle="modal"
                     data-bs-target="#CreateNew" type="button"><i class="fa fa-plus"></i></button>
             </div>
         </div>
-
         <div class="main-menu flex-grow-1">
             <ul class="menu-list">
-                <li class="divider py-2 lh-sm"><span class="small">MAIN</span><br> <small class="text-muted">Unique
-                        dashboard
-                        designs </small></li>
+                <li class="divider py-2 lh-sm"><span class="small">{{ __('dash.main') }}</span><br> <small
+                        class="text-muted">{{ __('dash.unique_dashboard_designs') }}</small></li>
                 <li class="collapsed">
                     <a class="m-link active" data-bs-toggle="collapse" data-bs-target="#my_dashboard" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
@@ -50,14 +48,13 @@
                             <path class="var(--secondary-color)" fill-rule="evenodd"
                                 d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
                         </svg>
-                        <span class="ms-2">My Dashboard</span>
-                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        <span class="ms-2">{{ __('dash.my_dashboard') }}</span>
+                        <span class="arrow fa fa-angle-left ms-auto text-end"></span>
                     </a>
-
                     <ul class="sub-menu collapse show" id="my_dashboard">
-                        <li><a class="ms-link active" href="index.html">Analysis</a></li>
-                        <li><a class="ms-link" href="index-wallet.html">My wallet</a></li>
-                        <li><a class="ms-link" href="index-iot.html">IOT</a></li>
+                        <li><a class="ms-link active" href="index.html">{{ __('dash.analysis') }}</a></li>
+                        <li><a class="ms-link" href="index-wallet.html">{{ __('dash.my_wallet') }}</a></li>
+                        <li><a class="ms-link" href="index-iot.html">{{ __('dash.iot') }}</a></li>
                     </ul>
                 </li>
                 <li class="collapsed">
@@ -68,26 +65,28 @@
                             <path fill-rule="evenodd"
                                 d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
                         </svg>
-                        <span class="ms-2">Unique Dashboard</span>
-                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        <span class="ms-2">{{ __('dash.unique_dashboard') }}</span>
+                        <span class="arrow fa fa-angle-left ms-auto text-end"></span>
                     </a>
-
                     <ul class="sub-menu collapse" id="menu_dashboard">
-                        <li><a class="ms-link" href="./crm/index.html">CRM Management</a></li>
-                        <li><a class="ms-link" href="./crypto/index.html">Cryptocurrency</a></li>
-                        <li><a class="ms-link" href="./ecommerce/index.html">eCommerce</a></li>
-                        <li><a class="ms-link" href="./event/index.html">Event Management</a></li>
-                        <li><a class="ms-link" href="./fitness/index.html">Fitness Analytics</a></li>
-                        <li><a class="ms-link" href="./hospital/index.html">Hospital Management</a></li>
-                        <li><a class="ms-link" href="./hrms/index.html">HR & Project</a></li>
-                        <li><a class="ms-link" href="./inventory/index.html">Inventory Management</a></li>
-                        <li><a class="ms-link" href="./job-portal/index.html">job Portal</a></li>
-                        <li><a class="ms-link" href="./music/index.html">Music Streaming</a></li>
-                        <li><a class="ms-link" href="./nft/index.html">NFT Dashboard (New)</a></li>
-                        <li><a class="ms-link" href="./real-estate/index.html">Real-Estate</a></li>
-                        <li><a class="ms-link" href="./restaurant/index.html">Restaurant & Cafe</a></li>
-                        <li><a class="ms-link" href="./server/index.html">Server Analysis</a></li>
-                        <li><a class="ms-link" href="./university/index.html">School / University</a></li>
+                        <li><a class="ms-link" href="./crm/index.html">{{ __('dash.crm_management') }}</a></li>
+                        <li><a class="ms-link" href="./crypto/index.html">{{ __('dash.cryptocurrency') }}</a></li>
+                        <li><a class="ms-link" href="./ecommerce/index.html">{{ __('dash.ecommerce') }}</a></li>
+                        <li><a class="ms-link" href="./event/index.html">{{ __('dash.event_management') }}</a></li>
+                        <li><a class="ms-link" href="./fitness/index.html">{{ __('dash.fitness_analytics') }}</a></li>
+                        <li><a class="ms-link" href="./hospital/index.html">{{ __('dash.hospital_management') }}</a>
+                        </li>
+                        <li><a class="ms-link" href="./hrms/index.html">{{ __('dash.hr_project') }}</a></li>
+                        <li><a class="ms-link" href="./inventory/index.html">{{ __('dash.inventory_management') }}</a>
+                        </li>
+                        <li><a class="ms-link" href="./job-portal/index.html">{{ __('dash.job_portal') }}</a></li>
+                        <li><a class="ms-link" href="./music/index.html">{{ __('dash.music_streaming') }}</a></li>
+                        <li><a class="ms-link" href="./nft/index.html">{{ __('dash.nft_dashboard') }}</a></li>
+                        <li><a class="ms-link" href="./real-estate/index.html">{{ __('dash.real_estate') }}</a></li>
+                        <li><a class="ms-link" href="./restaurant/index.html">{{ __('dash.restaurant_cafe') }}</a></li>
+                        <li><a class="ms-link" href="./server/index.html">{{ __('dash.server_analysis') }}</a></li>
+                        <li><a class="ms-link" href="./university/index.html">{{ __('dash.school_university') }}</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="collapsed">
@@ -97,26 +96,25 @@
                                 d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z" />
                             <path class="fill-secondary" d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                         </svg>
-                        <span class="ms-2">Applications</span>
-                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        <span class="ms-2">{{ __('dash.applications') }}</span>
+                        <span class="arrow fa fa-angle-left ms-auto text-end"></span>
                     </a>
-
                     <ul class="sub-menu collapse" id="menu-Applications">
-                        <li><a class="ms-link" href="app-calendar.html">Calendar</a></li>
-                        <li><a class="ms-link" href="app-calendar-tui.html">tui Calendar</a></li>
-                        <li><a class="ms-link" href="app-email.html">Email App</a></li>
-                        <li><a class="ms-link" href="app-chat.html">Chat app</a></li>
-                        <li><a class="ms-link" href="app-campaigns.html">Campaigns</a></li>
-                        <li><a class="ms-link" href="app-social.html">Social App</a></li>
-                        <li><a class="ms-link" href="app-file-manager.html">File Manager</a></li>
-                        <li><a class="ms-link" href="app-todo.html">Todo App</a></li>
-                        <li><a class="ms-link" href="app-contacts.html">Contacts</a></li>
-                        <li><a class="ms-link" href="app-tasks.html">Tasks</a></li>
-                        <li><a class="ms-link" href="app-project.html">Project List</a></li>
-                        <li><a class="ms-link" href="app-jkanban.html">Kanban Board</a></li>
-                        <li><a class="ms-link" href="app-blog.html">Blog Post</a></li>
-                        <li><a class="ms-link" href="app-blog-detail.html">Blog Details</a></li>
-                        <li><a class="ms-link" href="./landing/blog.html">Blog Preivew</a></li>
+                        <li><a class="ms-link" href="app-calendar.html">{{ __('dash.calendar') }}</a></li>
+                        <li><a class="ms-link" href="app-calendar-tui.html">{{ __('dash.tui_calendar') }}</a></li>
+                        <li><a class="ms-link" href="app-email.html">{{ __('dash.email_app') }}</a></li>
+                        <li><a class="ms-link" href="app-chat.html">{{ __('dash.chat_app') }}</a></li>
+                        <li><a class="ms-link" href="app-campaigns.html">{{ __('dash.campaigns') }}</a></li>
+                        <li><a class="ms-link" href="app-social.html">{{ __('dash.social_app') }}</a></li>
+                        <li><a class="ms-link" href="app-file-manager.html">{{ __('dash.file_manager') }}</a></li>
+                        <li><a class="ms-link" href="app-todo.html">{{ __('dash.todo_app') }}</a></li>
+                        <li><a class="ms-link" href="app-contacts.html">{{ __('dash.contacts') }}</a></li>
+                        <li><a class="ms-link" href="app-tasks.html">{{ __('dash.tasks') }}</a></li>
+                        <li><a class="ms-link" href="app-project.html">{{ __('dash.project_list') }}</a></li>
+                        <li><a class="ms-link" href="app-jkanban.html">{{ __('dash.kanban_board') }}</a></li>
+                        <li><a class="ms-link" href="app-blog.html">{{ __('dash.blog_post') }}</a></li>
+                        <li><a class="ms-link" href="app-blog-detail.html">{{ __('dash.blog_details') }}</a></li>
+                        <li><a class="ms-link" href="./landing/blog.html">{{ __('dash.blog_preview') }}</a></li>
                     </ul>
                 </li>
                 <li class="collapsed">
@@ -129,21 +127,20 @@
                             <path
                                 d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                         </svg>
-                        <span class="ms-2">Crafted Pages</span>
-                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        <span class="ms-2">{{ __('dash.crafted_pages') }}</span>
+                        <span class="arrow fa fa-angle-left ms-auto text-end"></span>
                     </a>
-
                     <ul class="sub-menu collapse" id="menu_pages">
-                        <li><a class="ms-link" href="page-profile.html">My Profile</a></li>
-                        <li><a class="ms-link" href="page-bookmark.html">Bookmarks</a></li>
-                        <li><a class="ms-link" href="page-timeline.html">Timeline</a></li>
-                        <li><a class="ms-link" href="page-imagegallery.html">Image Gallery</a></li>
-                        <li><a class="ms-link" href="page-pricing.html">Pricing</a></li>
-                        <li><a class="ms-link" href="page-teamsboard.html">Teams Board</a></li>
-                        <li><a class="ms-link" href="page-support-ticket.html">Support Ticket</a></li>
-                        <li><a class="ms-link" href="page-faqs.html">FAQs</a></li>
-                        <li><a class="ms-link" href="page-search.html">Search Pages</a></li>
-                        <li><a class="ms-link" href="page-footers.html">Footers</a></li>
+                        <li><a class="ms-link" href="page-profile.html">{{ __('dash.my_profile') }}</a></li>
+                        <li><a class="ms-link" href="page-bookmark.html">{{ __('dash.bookmarks') }}</a></li>
+                        <li><a class="ms-link" href="page-timeline.html">{{ __('dash.timeline') }}</a></li>
+                        <li><a class="ms-link" href="page-imagegallery.html">{{ __('dash.image_gallery') }}</a></li>
+                        <li><a class="ms-link" href="page-pricing.html">{{ __('dash.pricing') }}</a></li>
+                        <li><a class="ms-link" href="page-teamsboard.html">{{ __('dash.teams_board') }}</a></li>
+                        <li><a class="ms-link" href="page-support-ticket.html">{{ __('dash.support_ticket') }}</a></li>
+                        <li><a class="ms-link" href="page-faqs.html">{{ __('dash.faqs') }}</a></li>
+                        <li><a class="ms-link" href="page-search.html">{{ __('dash.search_pages') }}</a></li>
+                        <li><a class="ms-link" href="page-footers.html">{{ __('dash.footers') }}</a></li>
                     </ul>
                 </li>
                 <li class="collapsed">
@@ -154,15 +151,15 @@
                             <path class="fill-secondary"
                                 d="M8.5 11C8.5 11 8 11 8 10.5C8 10 8.5 8.5 11 8.5C13.5 8.5 14 10 14 10.5C14 11 13.5 11 13.5 11H8.5ZM11 8C11.3978 8 11.7794 7.84196 12.0607 7.56066C12.342 7.27936 12.5 6.89782 12.5 6.5C12.5 6.10218 12.342 5.72064 12.0607 5.43934C11.7794 5.15804 11.3978 5 11 5C10.6022 5 10.2206 5.15804 9.93934 5.43934C9.65804 5.72064 9.5 6.10218 9.5 6.5C9.5 6.89782 9.65804 7.27936 9.93934 7.56066C10.2206 7.84196 10.6022 8 11 8V8Z" />
                         </svg>
-                        <span class="ms-2">Account</span>
-                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        <span class="ms-2">{{ __('dash.account') }}</span>
+                        <span class="arrow fa fa-angle-left ms-auto text-end"></span>
                     </a>
-
                     <ul class="sub-menu collapse" id="menu-Account">
-                        <li><a class="ms-link" href="account-settings.html">Settings</a></li>
-                        <li><a class="ms-link" href="account-invoices.html">Invoice List</a></li>
-                        <li><a class="ms-link" href="account-create-invoice.html">Create Invoices</a></li>
-                        <li><a class="ms-link" href="account-billing.html">Billing</a></li>
+                        <li><a class="ms-link" href="account-settings.html">{{ __('dash.settings') }}</a></li>
+                        <li><a class="ms-link" href="account-invoices.html">{{ __('dash.invoices_list') }}</a></li>
+                        <li><a class="ms-link" href="account-create-invoice.html">{{ __('dash.create_invoices') }}</a>
+                        </li>
+                        <li><a class="ms-link" href="account-billing.html">{{ __('dash.billing') }}</a></li>
                     </ul>
                 </li>
                 <li class="collapsed">
@@ -173,20 +170,20 @@
                             <path class="fill-secondary"
                                 d="M8 5.38462C8.21217 5.38462 8.41566 5.46566 8.56569 5.60992C8.71571 5.75418 8.8 5.94983 8.8 6.15385V6.53846H7.2V6.15385C7.2 5.94983 7.28429 5.75418 7.43431 5.60992C7.58434 5.46566 7.78783 5.38462 8 5.38462ZM9.2 6.53846V6.15385C9.2 5.84783 9.07357 5.55434 8.84853 5.33795C8.62348 5.12157 8.31826 5 8 5C7.68174 5 7.37652 5.12157 7.15147 5.33795C6.92643 5.55434 6.8 5.84783 6.8 6.15385V6.53846C6.58783 6.53846 6.38434 6.61951 6.23431 6.76376C6.08429 6.90802 6 7.10368 6 7.30769V9.23077C6 9.43478 6.08429 9.63044 6.23431 9.7747C6.38434 9.91896 6.58783 10 6.8 10H9.2C9.41217 10 9.61566 9.91896 9.76569 9.7747C9.91571 9.63044 10 9.43478 10 9.23077V7.30769C10 7.10368 9.91571 6.90802 9.76569 6.76376C9.61566 6.61951 9.41217 6.53846 9.2 6.53846Z" />
                         </svg>
-                        <span class="ms-2">Authentication</span>
-                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        <span class="ms-2">{{ __('dash.authentication') }}</span>
+                        <span class="arrow fa fa-angle-left ms-auto text-end"></span>
                     </a>
-
                     <ul class="sub-menu collapse" id="menu-Authentication">
                         <li><a class="ms-link" href="auth-404.html">404</a></li>
                         <li><a class="ms-link" href="auth-403.html">403</a></li>
                         <li><a class="ms-link" href="auth-500.html">500</a></li>
-                        <li><a class="ms-link" href="auth-signin.html">Sign in</a></li>
-                        <li><a class="ms-link" href="auth-signup.html">Sign up</a></li>
-                        <li><a class="ms-link" href="auth-password-reset.html">Password reset</a></li>
-                        <li><a class="ms-link" href="auth-two-step.html">2-Step Authentication</a></li>
-                        <li><a class="ms-link" href="auth-lockscreen.html">Lockscreen</a></li>
-                        <li><a class="ms-link" href="auth-maintenance.html">Maintenance</a></li>
+                        <li><a class="ms-link" href="auth-signin.html">{{ __('dash.sign_in') }}</a></li>
+                        <li><a class="ms-link" href="auth-signup.html">{{ __('dash.sign_up') }}</a></li>
+                        <li><a class="ms-link" href="auth-password-reset.html">{{ __('dash.password_reset') }}</a></li>
+                        <li><a class="ms-link" href="auth-two-step.html">{{ __('dash.two_step_authentication') }}</a>
+                        </li>
+                        <li><a class="ms-link" href="auth-lockscreen.html">{{ __('dash.lockscreen') }}</a></li>
+                        <li><a class="ms-link" href="auth-maintenance.html">{{ __('dash.maintenance') }}</a></li>
                     </ul>
                 </li>
                 <li class="collapsed">
@@ -201,37 +198,33 @@
                             <path class="fill-secondary"
                                 d="M12.4393 10.4393C12.158 10.7206 12 11.1022 12 11.5V12.5C12 12.8978 12.158 13.2794 12.4393 13.5607C12.7206 13.842 13.1022 14 13.5 14H14.5C14.8978 14 15.2794 13.842 15.5607 13.5607C15.842 13.2794 16 12.8978 16 12.5V11.5C16 11.1022 15.842 10.7206 15.5607 10.4393C15.2794 10.158 14.8978 10 14.5 10H13.5C13.1022 10 12.7206 10.158 12.4393 10.4393Z" />
                         </svg>
-                        <span class="ms-2">Menu Level 0</span>
-                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                        <span class="ms-2">{{ __('dash.menu_level_0') }}</span>
+                        <span class="arrow fa fa-angle-left ms-auto text-end"></span>
                     </a>
-
                     <ul class="sub-menu collapse" id="menu-level0">
                         <li class="collapsed">
                             <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-level1"
-                                href="#"><span>Menu Level
-                                    1</span> <span class="arrow fa fa-angle-right ms-auto text-end"></span></a>
-
+                                href="#"><span>{{ __('dash.menu_level_1') }}</span> <span
+                                    class="arrow fa fa-angle-left ms-auto text-end"></span></a>
                             <ul class="sub-menu collapse" id="menu-level1">
                                 <li class="collapsed">
                                     <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-level2"
-                                        href="#"><span>Menu Level
-                                            2</span> <span class="arrow fa fa-angle-right ms-auto text-end"></span></a>
-
+                                        href="#"><span>{{ __('dash.menu_level_2') }}</span> <span
+                                            class="arrow fa fa-angle-left ms-auto text-end"></span></a>
                                     <ul class="sub-menu collapse" id="menu-level2">
-                                        <li><a class="ms-link" href="#">Menu Level 3</a></li>
+                                        <li><a class="ms-link" href="#">{{ __('dash.menu_level_3') }}</a></li>
                                     </ul>
                                 </li>
-                                <li><a class="ms-link" href="#">Menu Level 2</a></li>
+                                <li><a class="ms-link" href="#">{{ __('dash.menu_level_2') }}</a></li>
                             </ul>
                         </li>
-                        <li><a class="ms-link" href="#">Menu Level 1</a></li>
+                        <li><a class="ms-link" href="#">{{ __('dash.menu_level_1') }}</a></li>
                     </ul>
                 </li>
             </ul>
             <ul class="menu-list">
-                <li class="divider py-2 lh-sm"><span class="small">RESOURCES</span><br> <small class="text-muted">you
-                        need to
-                        know about LUNO</small></li>
+                <li class="divider py-2 lh-sm"><span class="small">{{ __('dash.resources') }}</span><br> <small
+                        class="text-muted">{{ __('dash.you_need_to_know') }}</small></li>
                 <li>
                     <a class="m-link" href="layouts.html">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
@@ -240,7 +233,7 @@
                             <path class="fill-secondary"
                                 d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
                         </svg>
-                        <span class="ms-2">Layouts</span>
+                        <span class="ms-2">{{ __('dash.layouts') }}</span>
                     </a>
                 </li>
                 <li>
@@ -251,7 +244,7 @@
                             <path
                                 d="M13.991 7L14.015 7.001C14.2018 7.01372 14.3845 7.06227 14.553 7.144C14.6744 7.20048 14.7786 7.28812 14.855 7.398C14.922 7.498 15 7.675 15 8V13.991L14.999 14.015C14.9862 14.2018 14.9376 14.3845 14.856 14.553C14.7995 14.6743 14.7118 14.7785 14.602 14.855C14.502 14.922 14.325 15 14 15H2.009L1.985 14.999C1.79817 14.9862 1.61554 14.9376 1.447 14.856C1.32567 14.7995 1.22148 14.7118 1.145 14.602C1.078 14.502 1 14.325 1 14V8.009L1.001 7.985C1.01372 7.79815 1.06227 7.6155 1.144 7.447C1.20052 7.32567 1.28816 7.22148 1.398 7.145C1.498 7.078 1.675 7 2 7H13.991ZM14 6H2C0 6 0 8 0 8V14C0 16 2 16 2 16H14C16 16 16 14 16 14V8C16 6 14 6 14 6Z" />
                         </svg>
-                        <span class="ms-2">Modals Popups</span>
+                        <span class="ms-2">{{ __('dash.modals_popups') }}</span>
                     </a>
                 </li>
                 <li>
@@ -264,7 +257,7 @@
                             <path class="fill-secondary"
                                 d="M5.556 7.8225C5.54589 7.71838 5.55767 7.6133 5.59058 7.51401C5.6235 7.41472 5.67682 7.32341 5.74712 7.24595C5.81742 7.16849 5.90315 7.10659 5.9988 7.06424C6.09444 7.02188 6.19789 7 6.3025 7H7.5C7.5663 7 7.62989 7.02634 7.67678 7.07322C7.72366 7.12011 7.75 7.1837 7.75 7.25V7.441C7.75 7.789 7.5015 8.032 7.314 8.1755C7.29143 8.19154 7.27195 8.21153 7.2565 8.2345C7.25399 8.2384 7.25198 8.2426 7.2505 8.247L7.25 8.25V8.2515L7.2515 8.2565C7.2535 8.2615 7.2585 8.2705 7.2695 8.283C7.30776 8.32381 7.35362 8.35676 7.4045 8.38C7.545 8.45 7.755 8.5 8 8.5C8.246 8.5 8.456 8.45 8.595 8.38C8.64606 8.35681 8.69209 8.32386 8.7305 8.283C8.73784 8.27497 8.74391 8.26587 8.7485 8.256L8.75 8.251V8.247C8.74853 8.2426 8.74651 8.2384 8.744 8.2345C8.72855 8.21153 8.70907 8.19154 8.6865 8.1755C8.499 8.032 8.2505 7.789 8.2505 7.441V7.25C8.2505 7.18378 8.27677 7.12027 8.32355 7.0734C8.37032 7.02653 8.43378 7.00013 8.5 7H9.6975C9.80211 7 9.90556 7.02188 10.0012 7.06424C10.0968 7.10659 10.1826 7.16849 10.2529 7.24595C10.3232 7.32341 10.3765 7.41472 10.4094 7.51401C10.4423 7.6133 10.4541 7.71838 10.444 7.8225L10.3225 9.25H10.441C10.5385 9.25 10.651 9.1765 10.7785 9.01C10.8835 8.873 11.0425 8.75 11.25 8.75C11.534 8.75 11.7235 8.9735 11.827 9.181C11.9385 9.4035 12 9.6935 12 10C12 10.3065 11.9385 10.5965 11.827 10.819C11.7235 11.0265 11.534 11.25 11.25 11.25C11.0425 11.25 10.8835 11.127 10.7785 10.99C10.651 10.8235 10.5385 10.75 10.441 10.75H10.3225L10.444 12.1775C10.4541 12.2816 10.4423 12.3867 10.4094 12.486C10.3765 12.5853 10.3232 12.6766 10.2529 12.7541C10.1826 12.8315 10.0968 12.8934 10.0012 12.9358C9.90556 12.9781 9.80211 13 9.6975 13H8.5C8.4337 13 8.37011 12.9737 8.32322 12.9268C8.27634 12.8799 8.25 12.8163 8.25 12.75V12.559C8.25 12.211 8.4985 11.968 8.686 11.8245C8.70857 11.8085 8.72805 11.7885 8.7435 11.7655C8.74601 11.7616 8.74802 11.7574 8.7495 11.753L8.75 11.75V11.7485L8.7485 11.7435C8.74386 11.7338 8.7378 11.7249 8.7305 11.717C8.69225 11.6762 8.64639 11.6432 8.5955 11.62C8.455 11.55 8.245 11.5 8 11.5C7.7545 11.5 7.544 11.55 7.405 11.62C7.35393 11.6432 7.3079 11.6761 7.2695 11.717C7.26216 11.725 7.25609 11.7341 7.2515 11.744L7.25 11.749V11.75L7.2505 11.753C7.25198 11.7574 7.25399 11.7616 7.2565 11.7655C7.2645 11.779 7.2815 11.7995 7.314 11.8245C7.5015 11.968 7.75 12.211 7.75 12.559V12.75C7.75 12.8163 7.72366 12.8799 7.67678 12.9268C7.62989 12.9737 7.5663 13 7.5 13H6.3025C6.19789 13 6.09444 12.9781 5.9988 12.9358C5.90315 12.8934 5.81742 12.8315 5.74712 12.7541C5.67682 12.6766 5.6235 12.5853 5.59058 12.486C5.55767 12.3867 5.54589 12.2816 5.556 12.1775L5.678 10.75H5.559C5.4615 10.75 5.349 10.8235 5.2215 10.99C5.1165 11.127 4.9575 11.25 4.75 11.25C4.466 11.25 4.2765 11.0265 4.173 10.819C4.0615 10.5965 4 10.3065 4 10C4 9.6935 4.0615 9.4035 4.173 9.181C4.2765 8.9735 4.466 8.75 4.75 8.75C4.9575 8.75 5.1165 8.873 5.2215 9.01C5.349 9.1765 5.4615 9.25 5.559 9.25H5.678L5.556 7.8225Z" />
                         </svg>
-                        <span class="ms-2">Widget's</span>
+                        <span class="ms-2">{{ __('dash.widgets') }}</span>
                     </a>
                 </li>
                 <li>
@@ -277,7 +270,7 @@
                             <path
                                 d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                         </svg>
-                        <span class="ms-2">Documentation</span>
+                        <span class="ms-2">{{ __('dash.documentation') }}</span>
                     </a>
                 </li>
                 <li>
@@ -288,18 +281,16 @@
                             <path fill-rule="evenodd"
                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                         </svg>
-                        <span class="ms-2">Changelog</span>
+                        <span class="ms-2">{{ __('dash.changelog') }}</span>
                         <span id="Changelog"></span>
                     </a>
                 </li>
             </ul>
         </div>
-
-
         <ul class="menu-list nav navbar-nav flex-row text-center menu-footer-link">
             <li class="nav-item flex-fill p-2">
                 <a class="d-inline-block w-100 color-400" href="#" data-bs-toggle="modal"
-                    data-bs-target="#ScheduleModal" title="My Schedule">
+                    data-bs-target="#ScheduleModal" title="{{ __('dash.my_schedule') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
                         <path class="fill-secondary"
                             d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
@@ -312,7 +303,7 @@
             </li>
             <li class="nav-item flex-fill p-2">
                 <a class="d-inline-block w-100 color-400" href="#" data-bs-toggle="modal" data-bs-target="#MynotesModal"
-                    title="My notes">
+                    title="{{ __('dash.my_notes') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
                         <path class="fill-secondary"
                             d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z" />
@@ -332,7 +323,7 @@
                 </a>
             </li>
             <li class="nav-item flex-fill p-2">
-                <a class="d-inline-block w-100 color-400" href="./auth-signin.html" title="sign-out">
+                <a class="d-inline-block w-100 color-400" href="./auth-signin.html" title="{{ __('dash.sign_out') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M7.5 1v7h1V1h-1z" />
                         <path class="fill-secondary"

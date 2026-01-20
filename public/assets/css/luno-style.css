@@ -25013,7 +25013,7 @@ body {
     color: var(--color-600);
     font-family: Nunito, sans-serif;
     font-size: 16px;
-    direction: ltr
+    /* direction: ltr */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -25633,9 +25633,9 @@ body.rtl_mode .resume-box li::after {
     left: auto
 }
 
-body.rtl_mode .apexcharts-canvas {
+/* body.rtl_mode .apexcharts-canvas {
     direction: ltr
-}
+} */
 
 body.rtl_mode .post-card .author {
     float: right;
@@ -34808,10 +34808,10 @@ table.dataTable.dtr-inline.collapsed.d-row > tbody > tr[role=row] > td:first-chi
     margin-right: .5rem !important
 }
 
-.landing-page.rtl_mode .section.testimonials {
+/* .landing-page.rtl_mode .section.testimonials {
     direction: ltr;
     text-align: left
-}
+} */
 
 .landing-page.rtl_mode .section.facts .col {
     border-right: 0;
@@ -35092,3 +35092,48 @@ table.dataTable.dtr-inline.collapsed.d-row > tbody > tr[role=row] > td:first-chi
 }
 
 /*# sourceMappingURL=luno-style.css.map */
+
+
+
+
+
+
+
+
+
+
+/* =========   My Style    ========================================= */
+/* RTL support: when page is in RTL (Arabic), flip dropdown alignment */
+[dir="rtl"] .dropdown-menu {
+    text-align: right !important;
+}
+
+[dir="rtl"] .dropdown-menu[data-bs-popper] {
+    /* anchor dropdown to the right edge of the trigger; override inline Popper styles */
+    left: auto !important;
+    right: 0 !important;
+}
+
+[dir="rtl"] .dropdown-menu-start[data-bs-popper] {
+    /* start in LTR becomes end in RTL */
+    left: auto !important;
+    right: 0 !important;
+}
+
+[dir="rtl"] .dropdown-menu-end[data-bs-popper] {
+    /* end in LTR becomes start in RTL */
+    right: auto !important;
+    left: 0 !important;
+}
+
+/* Additional RTL fixes for morphing dropdowns (override Popper inline transform/placement) */
+[dir="rtl"] .dropdown.morphing .dropdown-menu[data-bs-popper],
+[dir="rtl"] .dropdown.morphing.scale-left .dropdown-menu[data-bs-popper],
+[dir="rtl"] .dropdown.morphing.scale-right .dropdown-menu[data-bs-popper] {
+    left: auto !important;
+    right: 0 !important;
+    top: 100% !important;
+    margin-top: var(--bs-dropdown-spacer, 0.125rem) !important;
+    transform: none !important;
+    transform-origin: top right !important;
+}

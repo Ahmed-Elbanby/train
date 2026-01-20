@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', __('dash.dashboard'))
 
 @section('content')
 
@@ -18,10 +18,10 @@
                 <path class="fill-primary"
                   d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
               </svg>
-              <div class="mb-2 text-uppercase">NEW EMPLOYEE</div>
+              <div class="mb-2 text-uppercase">{{ __('dash.new_employee') }}</div>
               <div><span class="h4">51</span> <span class="small text-muted"><i class="fa fa-level-up"></i> 13%</span>
               </div>
-              <small class="text-muted">Analytics for last week</small>
+              <small class="text-muted">{{ __('dash.analytics_for_last_week') }}</small>
             </div>
             <div class="progress" style="height: 4px;">
               <div class="progress-bar bg-secondary" role="progressbar" style="width: 85%" aria-valuenow="85"
@@ -32,17 +32,17 @@
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card overflow-hidden">
             <div class="card-body">
-              <svg class="position-absolute top-0 end-0 mt-4 me-3" xmlns="http://www.w3.org/2000/svg" width="26"
+              <svg class="{{ app()->getLocale() === 'ar' ? 'position-absolute top-0 start-0 mt-4 ms-3' : 'position-absolute top-0 end-0 mt-4 me-3' }}" xmlns="http://www.w3.org/2000/svg" width="26"
                 fill="currentColor" viewBox="0 0 16 16">
                 <path class="fill-muted"
                   d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z" />
                 <path class="fill-primary"
                   d="M2 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z" />
               </svg>
-              <div class="mb-2 text-uppercase">EXPENSE</div>
+              <div class="mb-2 text-uppercase">{{ __('dash.expense') }}</div>
               <div><span class="h4">$3,251</span> <span class="small text-muted"><i class="fa fa-level-up"></i>
                   13%</span></div>
-              <small class="text-muted">Analytics for last week</small>
+              <small class="text-muted">{{ __('dash.analytics_for_last_week') }}</small>
             </div>
             <div class="progress" style="height: 4px;">
               <div class="progress-bar bg-danger" role="progressbar" style="width: 13%" aria-valuenow="13"
@@ -63,10 +63,10 @@
                   d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z" />
                 <path class="fill-muted" d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
               </svg>
-              <div class="mb-2 text-uppercase">Revenue</div>
+              <div class="mb-2 text-uppercase">{{ __('dash.revenue') }}</div>
               <div><span class="h4">$18,925</span> <span class="small text-muted"><i class="fa fa-level-up"></i>
                   78%</span></div>
-              <small class="text-muted">Analytics for last week</small>
+              <small class="text-muted">{{ __('dash.analytics_for_last_week') }}</small>
             </div>
             <div class="progress" style="height: 4px;">
               <div class="progress-bar bg-secondary" role="progressbar" style="width: 78%" aria-valuenow="78"
@@ -84,10 +84,10 @@
                 <path class="fill-primary"
                   d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z" />
               </svg>
-              <div class="mb-2 text-uppercase">NEW LEADS</div>
+              <div class="mb-2 text-uppercase">{{ __('dash.new_leads') }}</div>
               <div><span class="h4">125</span> <span class="small text-muted"><i class="fa fa-level-up"></i>
                   55%</span></div>
-              <small class="text-muted">Analytics for last week</small>
+              <small class="text-muted">{{ __('dash.analytics_for_last_week') }}</small>
             </div>
             <div class="progress" style="height: 4px;">
               <div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="78"
@@ -99,13 +99,9 @@
           <div class="card text-center bg-primary-gradient">
             <div class="card-body d-flex align-items-center justify-content-center">
               <div>
-                <h4 class="mt-4">Welcome Back, Chris!!</h4>
-                <p class="card-text fs-6 mb-5"><strong>Need help?</strong> Check out the documentation of Luno Admin.
-                  It includes tons of <strong>Widgets</strong>, <strong>Components</strong>, and Elements with
-                  <strong>easy-to-follow</strong> documentation.
-                </p>
-                <a class="btn btn-lg bg-white text-uppercase px-4 lift" href="./docs/index.html" title="">Visit
-                  Documentation</a>
+                <h4 class="mt-4">{{ __('dash.welcome_back') }}</h4>
+                <p class="card-text fs-6 mb-5"><strong>{{ __('dash.need_help') }}</strong> {{ __('dash.help_description') }}</p>
+                <a class="btn btn-lg bg-white text-uppercase px-4 lift" href="./docs/index.html" title="">{{ __('dash.visit_documentation') }}</a>
               </div>
             </div>
           </div>
@@ -113,7 +109,7 @@
         <div class="col-xxl-6 col-xl-8 col-lg-8">
           <div class="card">
             <div class="card-header">
-              <h6 class="card-title m-0">LUNO Revenue</h6>
+              <h6 class="card-title m-0">{{ __('dash.luno_revenue') }}</h6>
 
               <div class="dropdown morphing scale-left">
                 <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i
@@ -121,12 +117,12 @@
                 <a href="#" class="more-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
                     class="fa fa-ellipsis-h"></i></a>
                 <ul class="dropdown-menu shadow border-0 p-2">
-                  <li><a class="dropdown-item" href="#">File Info</a></li>
-                  <li><a class="dropdown-item" href="#">Copy to</a></li>
-                  <li><a class="dropdown-item" href="#">Move to</a></li>
-                  <li><a class="dropdown-item" href="#">Rename</a></li>
-                  <li><a class="dropdown-item" href="#">Block</a></li>
-                  <li><a class="dropdown-item" href="#">Delete</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.file_info') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.copy_to') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.move_to') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.rename') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.block') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.delete') }}</a></li>
                 </ul>
               </div>
             </div>
@@ -138,7 +134,7 @@
         <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
           <div class="card">
             <div class="card-header">
-              <h6 class="card-title mb-0">Sales by Category</h6>
+              <h6 class="card-title mb-0">{{ __('dash.sales_by_category') }}</h6>
 
               <div class="dropdown morphing scale-left">
                 <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i
@@ -146,12 +142,12 @@
                 <a href="#" class="more-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
                     class="fa fa-ellipsis-h"></i></a>
                 <ul class="dropdown-menu shadow border-0 p-2">
-                  <li><a class="dropdown-item" href="#">File Info</a></li>
-                  <li><a class="dropdown-item" href="#">Copy to</a></li>
-                  <li><a class="dropdown-item" href="#">Move to</a></li>
-                  <li><a class="dropdown-item" href="#">Rename</a></li>
-                  <li><a class="dropdown-item" href="#">Block</a></li>
-                  <li><a class="dropdown-item" href="#">Delete</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.file_info') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.copy_to') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.move_to') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.rename') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.block') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.delete') }}</a></li>
                 </ul>
               </div>
             </div>
@@ -163,7 +159,7 @@
         <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-sm-6">
           <div class="card">
             <div class="card-header">
-              <h6 class="card-title mb-0">My Wallet</h6>
+              <h6 class="card-title mb-0">{{ __('dash.my_wallet') }}</h6>
 
               <div class="dropdown morphing scale-left">
                 <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i
@@ -171,29 +167,29 @@
                 <a href="#" class="more-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
                     class="fa fa-ellipsis-h"></i></a>
                 <ul class="dropdown-menu shadow border-0 p-2">
-                  <li><a class="dropdown-item" href="#">File Info</a></li>
-                  <li><a class="dropdown-item" href="#">Copy to</a></li>
-                  <li><a class="dropdown-item" href="#">Move to</a></li>
-                  <li><a class="dropdown-item" href="#">Rename</a></li>
-                  <li><a class="dropdown-item" href="#">Block</a></li>
-                  <li><a class="dropdown-item" href="#">Delete</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.file_info') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.copy_to') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.move_to') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.rename') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.block') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.delete') }}</a></li>
                 </ul>
               </div>
             </div>
             <div class="card-body">
-              <div>Available BTC <a href="crypto/index.html">View Account</a></div>
+              <div>{{ __('dash.available_btc') }} <a href="crypto/index.html">{{ __('dash.view_account') }}</a></div>
               <h3>0.0386245 BTC</h3>
               <div class="py-4">
-                <div class="text-uppercase text-muted small">Buy this month</div>
+                <div class="text-uppercase text-muted small">{{ __('dash.buy_this_month') }}</div>
                 <h5>3.0675432 BTC</h5>
-                <div class="mt-3 text-uppercase text-muted small">Sell this month</div>
+                <div class="mt-3 text-uppercase text-muted small">{{ __('dash.sell_this_month') }}</div>
                 <h5>2.0345618 BTC</h5>
               </div>
               <div class="btn-group d-flex">
                 <input type="radio" class="btn-check" name="gm-btnradio" id="gm-btnradio1" checked="">
-                <label class="btn btn-outline-secondary" for="gm-btnradio1">Buy</label>
+                <label class="btn btn-outline-secondary" for="gm-btnradio1">{{ __('dash.buy') }}</label>
                 <input type="radio" class="btn-check" name="gm-btnradio" id="gm-btnradio2">
-                <label class="btn btn-outline-secondary" for="gm-btnradio2">Sell</label>
+                <label class="btn btn-outline-secondary" for="gm-btnradio2">{{ __('dash.sell') }}</label>
               </div>
             </div>
           </div>
@@ -201,7 +197,7 @@
         <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-sm-6">
           <div class="card">
             <div class="card-header">
-              <h6 class="card-title mb-0">Downloads</h6>
+              <h6 class="card-title mb-0">{{ __('dash.downloads') }}</h6>
 
               <div class="dropdown morphing scale-left">
                 <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i
@@ -209,12 +205,12 @@
                 <a href="#" class="more-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
                     class="fa fa-ellipsis-h"></i></a>
                 <ul class="dropdown-menu shadow border-0 p-2">
-                  <li><a class="dropdown-item" href="#">File Info</a></li>
-                  <li><a class="dropdown-item" href="#">Copy to</a></li>
-                  <li><a class="dropdown-item" href="#">Move to</a></li>
-                  <li><a class="dropdown-item" href="#">Rename</a></li>
-                  <li><a class="dropdown-item" href="#">Block</a></li>
-                  <li><a class="dropdown-item" href="#">Delete</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.file_info') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.copy_to') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.move_to') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.rename') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.block') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.delete') }}</a></li>
                 </ul>
               </div>
             </div>
@@ -261,14 +257,14 @@
                   </div>
                 </li>
               </ul>
-              <small class="text-muted">Showing 4 out of 24 downloads.</small>
+              <small class="text-muted">{{ __('dash.showing_downloads') }}</small>
             </div>
           </div>
         </div>
         <div class="col-xxl-6 col-xl-12 col-lg-12 col-md-6">
           <div class="card">
             <div class="card-header">
-              <h6 class="card-title m-0">Reports overview</h6>
+              <h6 class="card-title m-0">{{ __('dash.reports_overview') }}</h6>
 
               <div class="dropdown morphing scale-left">
                 <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i
@@ -276,12 +272,12 @@
                 <a href="#" class="more-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
                     class="fa fa-ellipsis-h"></i></a>
                 <ul class="dropdown-menu shadow border-0 p-2">
-                  <li><a class="dropdown-item" href="#">File Info</a></li>
-                  <li><a class="dropdown-item" href="#">Copy to</a></li>
-                  <li><a class="dropdown-item" href="#">Move to</a></li>
-                  <li><a class="dropdown-item" href="#">Rename</a></li>
-                  <li><a class="dropdown-item" href="#">Block</a></li>
-                  <li><a class="dropdown-item" href="#">Delete</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.file_info') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.copy_to') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.move_to') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.rename') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.block') }}</a></li>
+                  <li><a class="dropdown-item" href="#">{{ __('dash.delete') }}</a></li>
                 </ul>
               </div>
             </div>
@@ -305,22 +301,22 @@
               <table class="table card-table table-nowrap mb-0">
                 <tbody>
                   <tr>
-                    <td><i class="fa fa-circle me-2 chart-text-color1"></i>Gross value</td>
+                    <td><i class="fa fa-circle me-2 chart-text-color1"></i>{{ __('dash.gross_value') }}</td>
                     <td>$3,500.71</td>
                     <td><span class="badge bg-success">+12.1%</span></td>
                   </tr>
                   <tr>
-                    <td><i class="fa fa-circle me-2 chart-text-color2"></i>Net volume from sales</td>
+                    <td><i class="fa fa-circle me-2 chart-text-color2"></i>{{ __('dash.net_volume_from_sales') }}</td>
                     <td>$2,980.45</td>
                     <td><span class="badge bg-warning">+6.9%</span></td>
                   </tr>
                   <tr>
-                    <td><i class="fa fa-circle me-2 chart-text-color3"></i>New volume from sales</td>
+                    <td><i class="fa fa-circle me-2 chart-text-color3"></i>{{ __('dash.new_volume_from_sales') }}</td>
                     <td>$950.00</td>
                     <td><span class="badge bg-danger">-1.5%</span></td>
                   </tr>
                   <tr>
-                    <td><i class="fa fa-circle me-2"></i>Other</td>
+                    <td><i class="fa fa-circle me-2"></i>{{ __('dash.other') }}</td>
                     <td>32</td>
                     <td><span class="badge bg-success">1.9%</span></td>
                   </tr>

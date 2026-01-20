@@ -25013,7 +25013,7 @@ body {
     color: var(--color-600);
     font-family: Nunito, sans-serif;
     font-size: 16px;
-    direction: ltr
+    /* direction: ltr */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -25633,9 +25633,9 @@ body.rtl_mode .resume-box li::after {
     left: auto
 }
 
-body.rtl_mode .apexcharts-canvas {
+/* body.rtl_mode .apexcharts-canvas {
     direction: ltr
-}
+} */
 
 body.rtl_mode .post-card .author {
     float: right;
@@ -34808,10 +34808,10 @@ table.dataTable.dtr-inline.collapsed.d-row > tbody > tr[role=row] > td:first-chi
     margin-right: .5rem !important
 }
 
-.landing-page.rtl_mode .section.testimonials {
+/* .landing-page.rtl_mode .section.testimonials {
     direction: ltr;
     text-align: left
-}
+} */
 
 .landing-page.rtl_mode .section.facts .col {
     border-right: 0;
@@ -34822,10 +34822,10 @@ table.dataTable.dtr-inline.collapsed.d-row > tbody > tr[role=row] > td:first-chi
     border-left: 0
 }
 
-.landing-page.rtl_mode .swiper-container {
+/* .landing-page.rtl_mode .swiper-container {
     direction: ltr;
     text-align: left
-}
+} */
 
 .landing-page.rtl_mode .accordion-button::after {
     margin-right: auto;

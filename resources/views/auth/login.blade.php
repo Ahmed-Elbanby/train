@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Login')
+@section('title', __('auth.login'))
 
 @section('content')
 
@@ -24,22 +24,22 @@
                 </svg>
               </div>
               <div class="mb-5">
-                <h2 class="color-900">Build digital products with:</h2>
+                <h2 class="color-900">{{__('auth.auth_text_1')}}</h2>
               </div>
 
               <ul class="list-unstyled mb-5">
                 <li class="mb-4">
-                  <span class="d-block mb-1 fs-4 fw-light">All-in-one tool</span>
-                  <span class="color-600">Amazing Features to make your life easier & work efficient</span>
+                  <span class="d-block mb-1 fs-4 fw-light">{{__('auth.auth_text_2')}}</span>
+                  <span class="color-600">{{__('auth.auth_text_3')}}</span>
                 </li>
                 <li>
-                  <span class="d-block mb-1 fs-4 fw-light">Easily add &amp; manage your services</span>
-                  <span class="color-600">It brings together your tasks, projects, timelines, files and more</span>
+                  <span class="d-block mb-1 fs-4 fw-light">{{__('auth.auth_text_4')}}</span>
+                  <span class="color-600">{{__('auth.auth_text_5')}}</span>
                 </li>
               </ul>
               <div class="mb-2">
-                <a href="#" class="me-3 color-600">Home</a>
-                <a href="#" class="me-3 color-600">About Us</a>
+                <a href="#" class="me-3 color-600">{{__('auth.home')}}</a>
+                <a href="#" class="me-3 color-600">{{__('auth.about_us')}}</a>
                 <a href="#" class="me-3 color-600">FAQs</a>
               </div>
               <div>
@@ -56,68 +56,66 @@
               <form id="loginForm" class="row g-3">
                 @csrf
                 <div class="col-12 text-center mb-5">
-                  <h1>Sign in</h1>
-                  <span class="text-muted">Free access to our dashboard.</span>
+                  <h1>{{__('auth.sign_in')}}</h1>
+                  <span class="text-muted">{{__('auth.auth_text_6')}}</span>
                 </div>
                 <div class="col-12 text-center mb-4">
                   <a class="btn btn-lg btn-outline-secondary btn-block" href="#">
                     <span class="d-flex justify-content-center align-items-center">
                       <img class="avatar xs me-2" src="{{ asset('assets/img/google.svg') }}" alt="Image Description">
-                      Sign in with Google </span>
+                      {{__('auth.sign_in_with_google')}} </span>
                   </a>
-                  <span class="dividers text-muted mt-4">OR</span>
+                  <span class="dividers text-muted mt-4">{{__('auth.or')}}</span>
                 </div>
                 <div id="loginError"></div>
                 <div class="col-12">
                   <div class="mb-2">
-                    <label class="form-label">Username or Email</label>
-                    <input type="text" name="login" class="form-control form-control-lg"
-                      placeholder=""  required>
+                    <label class="form-label">{{__('auth.username_or_email')}}</label>
+                    <input type="text" name="login" class="form-control form-control-lg" placeholder="" required>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="mb-2">
                     <div class="form-label">
-                      <span class="d-flex justify-content-between align-items-center"> Password <a class="text-primary"
-                          href="auth-password-reset.html">Forgot Password?</a>
+                      <span class="d-flex justify-content-between align-items-center"> {{__('auth.password')}} <a class="text-primary"
+                          href="auth-password-reset.html">{{__('auth.forgot_password')}}</a>
                       </span>
                     </div>
                     <input type="password" id="password" name="password" class="form-control form-control-lg"
-                      maxlength="10" placeholder="Enter the password" required>
+                      maxlength="10" placeholder="" required>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault"> Remember me </label>
+                    <label class="form-check-label" for="flexCheckDefault"> {{__('auth.remember_me')}} </label>
                   </div>
                 </div>
                 <div class="col-12 text-center mt-4">
-                  <button type="submit" class="btn btn-lg btn-block btn-dark lift text-uppercase">SIGN
-                    IN</button>
+                  <button type="submit" class="btn btn-lg btn-block btn-dark lift text-uppercase">{{__('auth.sign_in')}}</button>
                 </div>
                 <div class="col-12 text-center mt-4">
-                  <span class="text-muted">Don't have an account yet? <a href="{{ route('register') }}">Sign up here</a></span>
+                  <span class="text-muted">{{__('auth.dont_have_account')}} <a href="{{ route('register') }}">{{__('auth.sign_up_here')}}</a></span>
                 </div>
               </form>
               <script>
-                $('#loginForm').on('submit', function(e) {
-                    e.preventDefault();
-                
-                    $.ajax({
-                        url: "/login",
-                        method: "POST",
-                        data: $(this).serialize(),
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function () {
-                            window.location.href = "/dashboard";
-                        },
-                        error: function (xhr) {
-                            $('#loginError').text(xhr.responseJSON.message);
-                        }
-                    });
+                $('#loginForm').on('submit', function (e) {
+                  e.preventDefault();
+
+                  $.ajax({
+                    url: "/login",
+                    method: "POST",
+                    data: $(this).serialize(),
+                    headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function () {
+                      window.location.href = "/dashboard";
+                    },
+                    error: function (xhr) {
+                      $('#loginError').text(xhr.responseJSON.message);
+                    }
+                  });
                 });
               </script>
             </div>
@@ -127,9 +125,9 @@
     </div>
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
     <script>
-    //   $(function () {
-    //     $('#password').password()
-    //   })
+      //   $(function () {
+      //     $('#password').password()
+      //   })
     </script>
   </div>
 

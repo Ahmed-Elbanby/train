@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
   <meta charset="utf-8">
@@ -14,7 +14,7 @@
   @include('partials.styles')
 </head>
 
-<body class="layout-1" data-luno="theme-blue">
+<body class="layout-1" data-luno="theme-blue" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
   @include('partials.sidebar')
   

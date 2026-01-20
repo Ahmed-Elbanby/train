@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
 </head>
 
-<body id="layout-1" data-luno="theme-blue">
+<body id="layout-1" data-luno="theme-blue" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
     @yield('content')
     

@@ -1,7 +1,6 @@
 <header class="page-header sticky-top px-xl-4 px-sm-2 px-0 py-lg-2 py-1">
     <div class="container-fluid">
         <nav class="navbar">
-
             <div class="d-flex">
                 <button type="button" class="btn btn-link d-none d-xl-block sidebar-mini-btn p-0 text-primary">
                     <span class="hamburger-icon">
@@ -17,7 +16,8 @@
                         <span class="line"></span>
                     </span>
                 </button>
-                <a href="{{ route('dashboard.index') }}" class="brand-icon d-flex align-items-center mx-2 mx-sm-3 text-primary">
+                <a href="{{ route('dashboard.index') }}"
+                    class="brand-icon d-flex align-items-center mx-2 mx-sm-3 text-primary">
                     <svg height="22" viewBox="0 0 67 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path class="fill-muted"
                             d="M0.863281 18.9997V1.14968H3.11328V16.9997H10.9133V18.9997H0.863281Z" />
@@ -30,73 +30,61 @@
                     </svg>
                 </a>
             </div>
-
             <div class="header-left flex-grow-1 d-none d-md-block">
                 <div class="main-search px-3 flex-fill">
-                    <input class="form-control" type="text" placeholder="Enter your search key word">
+                    <input class="form-control" type="text" placeholder="{{ __('dash.enter_search_keyword') }}">
                     <div class="card shadow rounded-4 search-result slidedown">
                         <div class="card-body">
-                            <small class="text-uppercase text-muted">Recent searches</small>
+                            <small class="text-uppercase text-muted">{{ __('dash.recent_searches') }}</small>
                             <div class="d-flex flex-wrap align-items-start mt-2 mb-4">
-                                <a class="small rounded py-1 px-2 m-1 fw-normal bg-primary text-white" href="#">HRMS
-                                    Admin</a>
+                                <a class="small rounded py-1 px-2 m-1 fw-normal bg-primary text-white"
+                                    href="#">{{ __('dash.hrms_admin') }}</a>
                                 <a class="small rounded py-1 px-2 m-1 fw-normal bg-secondary text-white"
-                                    href="#">Hospital Admin</a>
+                                    href="#">{{ __('dash.hospital_admin') }}</a>
                                 <a class="small rounded py-1 px-2 m-1 fw-normal bg-info text-white"
-                                    href="./app-project.html">Project</a>
+                                    href="./app-project.html">{{ __('dash.project') }}</a>
                                 <a class="small rounded py-1 px-2 m-1 fw-normal bg-dark text-white"
-                                    href="./app-social.html">Social
-                                    App</a>
+                                    href="./app-social.html">{{ __('dash.social_app') }}</a>
                                 <a class="small rounded py-1 px-2 m-1 fw-normal bg-danger text-white"
-                                    href="#">University Admin</a>
+                                    href="#">{{ __('dash.university_admin') }}</a>
                             </div>
-                            <small class="text-uppercase text-muted">Suggestions</small>
+                            <small class="text-uppercase text-muted">{{ __('dash.suggestions') }}</small>
                             <div class="card list-group list-group-flush list-group-custom mt-2">
                                 <a class="list-group-item list-group-item-action text-truncate"
                                     href=".//docs/doc-helperclass.html">
-                                    <div class="fw-bold">Helper Class</div>
-                                    <small class="text-muted">Lorem Ipsum is simply dummy text of the printing and
-                                        typesetting
-                                        industry.</small>
+                                    <div class="fw-bold">{{ __('dash.helper_class') }}</div>
+                                    <small class="text-muted">{{ __('dash.helper_class_desc') }}</small>
                                 </a>
                                 <a class="list-group-item list-group-item-action text-truncate"
                                     href=".//docs/element-daterange.html">
-                                    <div class="fw-bold">Date Range Picker</div>
-                                    <small class="text-muted">There are many variations of passages of Lorem Ipsum
-                                        available</small>
+                                    <div class="fw-bold">{{ __('dash.date_range_picker') }}</div>
+                                    <small class="text-muted">{{ __('dash.date_range_picker_desc') }}</small>
                                 </a>
                                 <a class="list-group-item list-group-item-action text-truncate"
                                     href=".//docs/element-imageinput.html">
-                                    <div class="fw-bold">Image Input</div>
-                                    <small class="text-muted">It is a long established fact that a reader will be
-                                        distracted</small>
+                                    <div class="fw-bold">{{ __('dash.image_input') }}</div>
+                                    <small class="text-muted">{{ __('dash.image_input_desc') }}</small>
                                 </a>
                                 <a class="list-group-item list-group-item-action text-truncate"
                                     href=".//docs/plugin-table.html">
-                                    <div class="fw-bold">DataTables for jQuery</div>
-                                    <small class="text-muted">Lorem Ipsum is simply dummy text of the printing and
-                                        typesetting
-                                        industry.</small>
+                                    <div class="fw-bold">{{ __('dash.datatables_jquery') }}</div>
+                                    <small class="text-muted">{{ __('dash.datatables_jquery_desc') }}</small>
                                 </a>
                                 <a class="list-group-item list-group-item-action text-truncate"
                                     href=".//docs/doc-setup.html">
-                                    <div class="fw-bold">Development Setup</div>
-                                    <small class="text-muted">Contrary to popular belief, Lorem Ipsum is not simply
-                                        random
-                                        text.</small>
+                                    <div class="fw-bold">{{ __('dash.development_setup') }}</div>
+                                    <small class="text-muted">{{ __('dash.development_setup_desc') }}</small>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <ul class="header-right justify-content-end d-flex align-items-center mb-0">
-
                 <li>
                     <div class="dropdown morphing scale-left notifications">
                         <a class="nav-link dropdown-toggle after-none" href="#" role="button" data-bs-toggle="dropdown">
-                            <span class="d-none d-xl-block me-2">Notification</span>
+                            <span class="d-none d-xl-block me-2">{{ __('dash.notification') }}</span>
                             <svg class="d-inline-block d-xl-none" viewBox="0 0 16 16" width="18px" fill="currentColor"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -109,110 +97,110 @@
                         <div id="NotificationsDiv" class="dropdown-menu shadow rounded-4 border-0 p-0 m-0">
                             <div class="card w380">
                                 <div class="card-header p-3">
-                                    <h6 class="card-title mb-0">Notifications Center</h6>
+                                    <h6 class="card-title mb-0">{{ __('dash.notifications_center') }}</h6>
                                     <span class="badge bg-danger text-light">14</span>
                                 </div>
                                 <ul class="nav nav-tabs tab-card d-flex text-center" role="tablist">
                                     <li class="nav-item flex-fill"><a class="nav-link active" data-bs-toggle="tab"
-                                            href="#Noti-tab-Message" role="tab">Message</a></li>
+                                            href="#Noti-tab-Message" role="tab">{{ __('dash.message') }}</a></li>
                                     <li class="nav-item flex-fill"><a class="nav-link" data-bs-toggle="tab"
-                                            href="#Noti-tab-Events" role="tab">Events</a></li>
+                                            href="#Noti-tab-Events" role="tab">{{ __('dash.events') }}</a></li>
                                     <li class="nav-item flex-fill"><a class="nav-link" data-bs-toggle="tab"
-                                            href="#Noti-tab-Logs" role="tab">Logs</a></li>
+                                            href="#Noti-tab-Logs" role="tab">{{ __('dash.logs') }}</a></li>
                                 </ul>
                                 <div class="tab-content card-body custom_scroll">
                                     <div class="tab-pane fade show active" id="Noti-tab-Message" role="tabpanel">
                                         <ul class="list-unstyled list mb-0">
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar5.jpg') }}"
-                                                        alt="">
+                                                    <img class="avatar rounded-circle"
+                                                        src="{{ asset('assets/img/xs/avatar5.jpg') }}" alt="">
                                                     <div class="flex-fill ms-3">
-                                                        <p class="d-flex justify-content-between mb-0"><span>Olive
-                                                                Tree</span>
+                                                        <p class="d-flex justify-content-between mb-0">
+                                                            <span>{{ __('dash.olive_tree') }}</span>
                                                             <small>13MIN</small>
                                                         </p>
-                                                        <span>making it over 2000 years old</span>
+                                                        <span>{{ __('dash.making_it_over_2000_years_old') }}</span>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar6.jpg') }}"
-                                                        alt="">
+                                                    <img class="avatar rounded-circle"
+                                                        src="{{ asset('assets/img/xs/avatar6.jpg') }}" alt="">
                                                     <div class="flex-fill ms-3">
-                                                        <p class="d-flex justify-content-between mb-0"><span>Del
-                                                                Phineum</span>
+                                                        <p class="d-flex justify-content-between mb-0">
+                                                            <span>{{ __('dash.del_phineum') }}</span>
                                                             <small>1HR</small>
                                                         </p>
-                                                        <span>There are many variations of passages</span>
+                                                        <span>{{ __('dash.many_variations_passages') }}</span>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar1.jpg') }}"
-                                                        alt="">
+                                                    <img class="avatar rounded-circle"
+                                                        src="{{ asset('assets/img/xs/avatar1.jpg') }}" alt="">
                                                     <div class="flex-fill ms-3">
-                                                        <p class="d-flex justify-content-between mb-0"><span>Rose
-                                                                Bush</span>
+                                                        <p class="d-flex justify-content-between mb-0">
+                                                            <span>{{ __('dash.rose_bush') }}</span>
                                                             <small>2MIN</small>
                                                         </p>
-                                                        <span>changed an issue from "In Progress" to <span
-                                                                class="badge bg-success">Review</span></span>
+                                                        <span>{{ __('dash.changed_issue_progress_to_review') }} <span
+                                                                class="badge bg-success">{{ __('dash.review') }}</span></span>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <div class="avatar rounded-circle no-thumbnail">PT</div>
+                                                    <div class="avatar rounded-circle no-thumbnail">
+                                                        {{ __('dash.pt_initials') }}</div>
                                                     <div class="flex-fill ms-3">
-                                                        <p class="d-flex justify-content-between mb-0"><span>Pat
-                                                                Thettick</span>
+                                                        <p class="d-flex justify-content-between mb-0">
+                                                            <span>{{ __('dash.pat_thettick') }}</span>
                                                             <small>13MIN</small>
                                                         </p>
-                                                        <span>It is a long established fact that a reader will be
-                                                            distracted</span>
+                                                        <span>{{ __('dash.long_established_fact') }}</span>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar3.jpg') }}"
-                                                        alt="">
+                                                    <img class="avatar rounded-circle"
+                                                        src="{{ asset('assets/img/xs/avatar3.jpg') }}" alt="">
                                                     <div class="flex-fill ms-3">
-                                                        <p class="d-flex justify-content-between mb-0"><span>Eileen
-                                                                Dover</span>
+                                                        <p class="d-flex justify-content-between mb-0">
+                                                            <span>{{ __('dash.eileen_dover') }}</span>
                                                             <small>1HR</small>
                                                         </p>
-                                                        <span>There are many variations of passages</span>
+                                                        <span>{{ __('dash.many_variations_passages') }}</span>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="py-2 mb-1 border-bottom">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar4.jpg') }}"
-                                                        alt="">
+                                                    <img class="avatar rounded-circle"
+                                                        src="{{ asset('assets/img/xs/avatar4.jpg') }}" alt="">
                                                     <div class="flex-fill ms-3">
-                                                        <p class="d-flex justify-content-between mb-0"><span>Carmen
-                                                                Goh</span>
+                                                        <p class="d-flex justify-content-between mb-0">
+                                                            <span>{{ __('dash.carmen_goh') }}</span>
                                                             <small>1DAY</small>
                                                         </p>
-                                                        <span>Contrary to popular belief <span
-                                                                class="badge bg-danger">Code</span></span>
+                                                        <span>{{ __('dash.contrary_to_popular_belief') }} <span
+                                                                class="badge bg-danger">{{ __('dash.code') }}</span></span>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="py-2">
                                                 <a href="javascript:void(0);" class="d-flex">
-                                                    <img class="avatar rounded-circle" src="{{ asset('assets/img/xs/avatar7.jpg') }}"
-                                                        alt="">
+                                                    <img class="avatar rounded-circle"
+                                                        src="{{ asset('assets/img/xs/avatar7.jpg') }}" alt="">
                                                     <div class="flex-fill ms-3">
-                                                        <p class="d-flex justify-content-between mb-0"><span>Karen
-                                                                Onnabit</span>
+                                                        <p class="d-flex justify-content-between mb-0">
+                                                            <span>{{ __('dash.karen_onnabit') }}</span>
                                                             <small>1DAY</small>
                                                         </p>
-                                                        <span>The generated Lorem Ipsum</span>
+                                                        <span>{{ __('dash.generated_lorem_ipsum') }}</span>
                                                     </div>
                                                 </a>
                                             </li>
@@ -226,10 +214,10 @@
                                                             class="fa fa-thumbs-up fa-lg"></i>
                                                     </div>
                                                     <div class="flex-fill ms-3">
-                                                        <p class="mb-0">Your New Campaign <strong
-                                                                class="text-primary">Holiday Sale</strong> is
-                                                            approved.</p>
-                                                        <small>11:30 AM Today</small>
+                                                        <p class="mb-0">{{ __('dash.your_new_campaign') }} <strong
+                                                                class="text-primary">{{ __('dash.holiday_sale') }}</strong>
+                                                            {{ __('dash.is_approved') }}.</p>
+                                                        <small>11:30 AM {{ __('dash.today') }}</small>
                                                     </div>
                                                 </a>
                                             </li>
@@ -239,10 +227,11 @@
                                                             class="fa fa-pie-chart fa-lg"></i>
                                                     </div>
                                                     <div class="flex-fill ms-3">
-                                                        <p class="mb-0">Website visits from Twitter is <strong
+                                                        <p class="mb-0">{{ __('dash.website_visits_twitter') }} <strong
                                                                 class="text-danger">27%
-                                                                higher</strong> than last week.</p>
-                                                        <small>04:00 PM Today</small>
+                                                                {{ __('dash.higher') }}</strong>
+                                                            {{ __('dash.than_last_week') }}.</p>
+                                                        <small>04:00 PM {{ __('dash.today') }}</small>
                                                     </div>
                                                 </a>
                                             </li>
@@ -252,10 +241,10 @@
                                                             class="fa fa-info-circle fa-lg"></i>
                                                     </div>
                                                     <div class="flex-fill ms-3">
-                                                        <p class="mb-0">Campaign <strong class="text-primary">Holiday
-                                                                Sale</strong> is nearly
-                                                            reach budget limit.</p>
-                                                        <small>10:00 AM Today</small>
+                                                        <p class="mb-0">{{ __('dash.campaign') }} <strong
+                                                                class="text-primary">{{ __('dash.holiday_sale') }}</strong>
+                                                            {{ __('dash.is_nearly_reach_budget') }}.</p>
+                                                        <small>10:00 AM {{ __('dash.today') }}</small>
                                                     </div>
                                                 </a>
                                             </li>
@@ -264,25 +253,25 @@
                                                     <div class="avatar rounded-circle no-thumbnail"><i
                                                             class="fa fa-warning fa-lg"></i></div>
                                                     <div class="flex-fill ms-3">
-                                                        <p class="mb-0"><strong class="text-warning">Error</strong> on
-                                                            website analytics
-                                                            configurations</p>
-                                                        <small>Yesterday</small>
+                                                        <p class="mb-0"><strong
+                                                                class="text-warning">{{ __('dash.error') }}</strong>
+                                                            {{ __('dash.on_website_analytics_configurations') }}</p>
+                                                        <small>{{ __('dash.yesterday') }}</small>
                                                     </div>
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="tab-pane fade" id="Noti-tab-Logs" role="tabpanel">
-                                        <h4 class="color-400">No Logs right now!</h4>
+                                        <h4 class="color-400">{{ __('dash.no_logs_right_now') }}!</h4>
                                     </div>
                                 </div>
-                                <a href="#" class="btn btn-primary text-light rounded-0">View all notifications</a>
+                                <a href="#"
+                                    class="btn btn-primary text-light rounded-0">{{ __('dash.view_all_notifications') }}</a>
                             </div>
                         </div>
                     </div>
                 </li>
-
                 <li class="d-none d-xl-inline-block">
                     <a class="nav-link fullscreen" href="javascript:void(0);"
                         onclick="toggleFullScreen(documentElement)">
@@ -294,7 +283,6 @@
                         </svg>
                     </a>
                 </li>
-
                 <li class="d-none d-xl-inline-block">
                     <div class="dropdown morphing scale-left Language mx-sm-2">
                         <a class="nav-link dropdown-toggle after-none" href="#" role="button" data-bs-toggle="dropdown">
@@ -306,28 +294,24 @@
                                     d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z" />
                             </svg>
                         </a>
-                        <div class="dropdown-menu rounded-4 shadow border-0 p-0" data-bs-popper="none">
+                        <div class="{{ app()->getLocale() === 'ar' ? 'dropdown-menu rounded-4 shadow border-0 p-0' : 'dropdown-menu rounded-4 shadow border-0 p-0' }}" data-bs-popper="none">
                             <div class="card">
                                 <div class="list-group list-group-custom" style="width: 200px;">
                                     <a href="#" class="list-group-item"><span
-                                            class="flag-icon flag-icon-gb me-2"></span>UK
-                                        English</a>
+                                            class="flag-icon flag-icon-gb me-2"></span>{{ __('dash.uk_english') }}</a>
                                     <a href="#" class="list-group-item"><span
-                                            class="flag-icon flag-icon-us me-2"></span>US
-                                        English</a>
+                                            class="flag-icon flag-icon-us me-2"></span>{{ __('dash.us_english') }}</a>
                                     <a href="#" class="list-group-item"><span
-                                            class="flag-icon flag-icon-de me-2"></span>Germany</a>
+                                            class="flag-icon flag-icon-de me-2"></span>{{ __('dash.germany') }}</a>
                                     <a href="#" class="list-group-item"><span
-                                            class="flag-icon flag-icon-in me-2"></span>Hindi</a>
+                                            class="flag-icon flag-icon-in me-2"></span>{{ __('dash.hindi') }}</a>
                                     <a href="#" class="list-group-item"><span
-                                            class="flag-icon flag-icon-sa me-2"></span>Saudi
-                                        Arabia</a>
+                                            class="flag-icon flag-icon-sa me-2"></span>{{ __('dash.saudi_arabia') }}</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </li>
-
                 <li class="d-none d-lg-inline-block">
                     <div class="dropdown morphing scale-left grid-menu mx-sm-2">
                         <a class="nav-link dropdown-toggle after-none" href="#" role="button" data-bs-toggle="dropdown">
@@ -352,8 +336,8 @@
                                                 <path fill-rule="evenodd"
                                                     d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
                                             </svg>
-                                            <p class="mb-0 color-600">Dashboard</p>
-                                            <small class="text-muted">View All</small>
+                                            <p class="mb-0 color-600">{{ __('dash.dashboard') }}</p>
+                                            <small class="text-muted">{{ __('dash.view_all') }}</small>
                                         </a>
                                     </div>
                                     <div class="col-6">
@@ -365,8 +349,8 @@
                                                     d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z" />
                                                 <path class="fill-secondary" d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                                             </svg>
-                                            <p class="mb-0 color-600">Application</p>
-                                            <small class="text-muted">View All</small>
+                                            <p class="mb-0 color-600">{{ __('dash.application') }}</p>
+                                            <small class="text-muted">{{ __('dash.view_all') }}</small>
                                         </a>
                                     </div>
                                     <div class="col-6">
@@ -380,8 +364,8 @@
                                                     d="M0.146447 10.1464C0.240215 10.0527 0.367392 10 0.5 10H15.5C15.6326 10 15.7598 10.0527 15.8536 10.1464C15.9473 10.2402 16 10.3674 16 10.5C16 10.6326 15.9473 10.7598 15.8536 10.8536C15.7598 10.9473 15.6326 11 15.5 11H0.5C0.367392 11 0.240215 10.9473 0.146447 10.8536C0.0526784 10.7598 0 10.6326 0 10.5C0 10.3674 0.0526784 10.2402 0.146447 10.1464Z"
                                                     fill="black" />
                                             </svg>
-                                            <p class="mb-0 color-600">Pages</p>
-                                            <small class="text-muted">Crafted Pages</small>
+                                            <p class="mb-0 color-600">{{ __('dash.pages') }}</p>
+                                            <small class="text-muted">{{ __('dash.crafted_pages') }}</small>
                                         </a>
                                     </div>
                                     <div class="col-6">
@@ -394,8 +378,8 @@
                                                 <path class="fill-secondary"
                                                     d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
                                             </svg>
-                                            <p class="mb-0 color-600">Layouts</p>
-                                            <small class="text-muted">Crafted Layout</small>
+                                            <p class="mb-0 color-600">{{ __('dash.layouts') }}</p>
+                                            <small class="text-muted">{{ __('dash.crafted_layout') }}</small>
                                         </a>
                                     </div>
                                 </div>
@@ -403,7 +387,6 @@
                         </div>
                     </div>
                 </li>
-
                 <li class="d-none d-sm-inline-block d-xl-none">
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#MynotesModal">
                         <svg viewBox="0 0 16 16" width="18px" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -414,7 +397,6 @@
                         </svg>
                     </a>
                 </li>
-
                 <li class="d-none d-sm-inline-block d-xl-none">
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#RecentChat">
                         <svg viewBox="0 0 16 16" width="18px" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -425,7 +407,6 @@
                         </svg>
                     </a>
                 </li>
-
                 <li>
                     <a class="nav-link quick-light-dark" href="#">
                         <svg viewBox="0 0 16 16" width="18px" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -436,56 +417,57 @@
                         </svg>
                     </a>
                 </li>
-
                 <li>
                     <div class="dropdown morphing scale-left user-profile mx-lg-3 mx-2">
                         <a class="nav-link dropdown-toggle rounded-circle after-none p-0" href="#" role="button"
                             data-bs-toggle="dropdown">
                             <img class="avatar img-thumbnail rounded-circle shadow" src="{{ auth('admin')->user()->photo
-                                                ? asset('storage/' . auth('admin')->user()->photo)
-                                                : asset('assets/img/avatar.png') }}"
-                                alt="">
+    ? asset('storage/' . auth('admin')->user()->photo)
+    : asset('assets/img/avatar.png') }}" alt="">
                         </a>
                         <div class="dropdown-menu border-0 rounded-4 shadow p-0">
                             <div class="card border-0 w240">
                                 <div class="card-body border-bottom d-flex">
                                     <img class="avatar rounded-circle" src="{{ auth('admin')->user()->photo
-                                                ? asset('storage/' . auth('admin')->user()->photo)
-                                                : asset('assets/img/avatar.png') }}" alt="">
+    ? asset('storage/' . auth('admin')->user()->photo)
+    : asset('assets/img/avatar.png') }}" alt="">
                                     <div class="flex-fill ms-3">
                                         <h6 class="card-title mb-0">{{ auth('admin')->user()->name }}</h6>
-                                        <span class="text-muted"><a href="/cdn-cgi/l/email-protection"
-                                                class="__cf_email__"
-                                                data-cfemail="1d7c717174787a6f7c69786f5d71687372337e7270">[email&#160;protected]</a></span>
+                                        <span class="text-muted">{{ auth('admin')->user()->email }}</span>
                                     </div>
                                 </div>
                                 <div class="list-group m-2 mb-3">
                                     <a class="list-group-item list-group-item-action border-0"
-                                        href="{{ route('dashboard.profile') }}"><i class="w30 fa fa-user"></i>My Profile</a>
+                                        href="{{ route('dashboard.profile') }}"><i
+                                            class="w30 fa fa-user"></i>{{ __('dash.my_profile') }}</a>
                                     <a class="list-group-item list-group-item-action border-0"
-                                        href="account-settings.html"><i class="w30 fa fa-gear"></i>Settings</a>
+                                        href="account-settings.html"><i
+                                            class="w30 fa fa-gear"></i>{{ __('dash.settings') }}</a>
                                     <a class="list-group-item list-group-item-action border-0"
-                                        href="account-billing.html"><i class="w30 fa fa-credit-card"></i>Billing</a>
+                                        href="account-billing.html"><i
+                                            class="w30 fa fa-credit-card"></i>{{ __('dash.billing') }}</a>
                                     <a class="list-group-item list-group-item-action border-0"
-                                        href="./page-teamsboard.html"><i class="w30 fa fa-users"></i>Manage Team</a>
+                                        href="./page-teamsboard.html"><i
+                                            class="w30 fa fa-users"></i>{{ __('dash.manage_team') }}</a>
                                     <a class="list-group-item list-group-item-action border-0"
-                                        href="./dashboard-enevt.html"><i class="w30 fa fa-calendar"></i>My Events</a>
+                                        href="./dashboard-event.html"><i
+                                            class="w30 fa fa-calendar"></i>{{ __('dash.my_events') }}</a>
                                     <a class="list-group-item list-group-item-action border-0"
-                                        href="./page-support-ticket.html"><i class="w30 fa fa-tag"></i>Support
-                                        Ticket</a>
+                                        href="./page-support-ticket.html"><i
+                                            class="w30 fa fa-tag"></i>{{ __('dash.support_ticket') }}</a>
                                 </div>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="btn bg-secondary text-light text-uppercase rounded-0">Sign Out</button>
+                                    <button type="submit"
+                                        class="btn bg-secondary text-light text-uppercase rounded-0">{{ __('dash.sign_out') }}</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </li>
-
                 <li>
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#SettingsModal"
-                        title="Settings">
+                        title="{{ __('dash.settings') }}">
                         <svg viewBox="0 0 16 16" width="18px" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path class="fill-secondary"
                                 d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z">

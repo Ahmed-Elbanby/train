@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Register')
+@section('title', __('auth.register'))
 
 @section('content')
 
@@ -25,25 +25,22 @@
                                 </svg>
                             </div>
                             <div class="mb-5">
-                                <h2 class="color-900">Build digital products with:</h2>
+                                <h2 class="color-900">{{__('auth.auth_text_1')}}</h2>
                             </div>
 
                             <ul class="list-unstyled mb-5">
                                 <li class="mb-4">
-                                    <span class="d-block mb-1 fs-4 fw-light">All-in-one tool</span>
-                                    <span class="color-600">Amazing Features to make your life easier & work
-                                        efficient</span>
+                                    <span class="d-block mb-1 fs-4 fw-light">{{__('auth.auth_text_2')}}</span>
+                                    <span class="color-600">{{__('auth.auth_text_3')}}</span>
                                 </li>
                                 <li>
-                                    <span class="d-block mb-1 fs-4 fw-light">Easily add &amp; manage your
-                                        services</span>
-                                    <span class="color-600">It brings together your tasks, projects, timelines, files
-                                        and more</span>
+                                    <span class="d-block mb-1 fs-4 fw-light">{{__('auth.auth_text_4')}}</span>
+                                    <span class="color-600">{{__('auth.auth_text_5')}}</span>
                                 </li>
                             </ul>
                             <div class="mb-2">
-                                <a href="#" class="me-3 color-600">Home</a>
-                                <a href="#" class="me-3 color-600">About Us</a>
+                                <a href="#" class="me-3 color-600">{{__('auth.home')}}</a>
+                                <a href="#" class="me-3 color-600">{{__('auth.about_us')}}</a>
                                 <a href="#" class="me-3 color-600">FAQs</a>
                             </div>
                             <div>
@@ -60,64 +57,62 @@
                             <form id="registerForm" enctype="multipart/form-data" class="row g-3">
                                 @csrf
                                 <div class="col-12 text-center mb-5">
-                                    <h1>Create account</h1>
-                                    <span>Free access to our dashboard.</span>
+                                    <h1>{{__('auth.create_account')}}</h1>
+                                    <span>{{__('auth.auth_text_6')}}</span>
                                 </div>
                                 <div id="registerError"></div>
                                 <div class="col-12">
-                                    <label class="form-label">Full name</label>
+                                    <label class="form-label">{{__('auth.full_name')}}</label>
                                     <input type="text" name="name" class="form-control form-control-lg"
-                                        placeholder="John Pots" required>
+                                        placeholder="" required>
                                 </div>
                                 <!-- <div class="col-6">
     <label class="form-label">&nbsp;</label>
     <input type="text" class="form-control form-control-lg" placeholder="Parker">
     </div> -->
                                 <div class="col-12">
-                                    <label class="form-label">Email address</label>
+                                    <label class="form-label">{{__('auth.email')}}</label>
                                     <input type="email" name="email" class="form-control form-control-lg"
-                                        placeholder="name@example.com" required>
+                                        placeholder="" required>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Username</label>
+                                    <label class="form-label">{{__('auth.username_or_email')}}</label>
                                     <input type="text" name="username" class="form-control form-control-lg"
-                                        placeholder="username" required>
+                                        placeholder="" required>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Password</label>
+                                    <label class="form-label">{{__('auth.password')}}</label>
                                     <input type="password" name="password" class="form-control form-control-lg"
-                                        placeholder="8+ characters required" required>
+                                        placeholder="" required>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Confirm password</label>
+                                    <label class="form-label">{{__('auth.confirm_password')}}</label>
                                     <input type="password" name="password_confirmation" class="form-control form-control-lg"
-                                        placeholder="8+ characters required" required>
+                                        placeholder="" required>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Phone</label>
+                                    <label class="form-label">{{__('auth.phone')}}</label>
                                     <input type="text" name="phone" class="form-control form-control-lg"
-                                        placeholder="Phone number" required>
+                                        placeholder="" required>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Profile Photo</label>
+                                    <label class="form-label">{{__('auth.profile_photo')}}</label>
                                     <input type="file" name="photo" class="form-control form-control-lg" accept="image/*">
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
                                         <input type="checkbox" id="flexCheckDefault" name="terms" value=""
                                             class="form-check-input" required>
-                                        <label class="form-check-label" for="flexCheckDefault"> I accept the <a href="#"
-                                                title="" class="text-primary">Terms and Conditions</a>
+                                        <label class="form-check-label" for="flexCheckDefault">{{__('auth.i_accept_the')}} <a href="#"
+                                                title="" class="text-primary">{{__('auth.terms_and_conditions')}}</a>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-12 text-center mt-4">
-                                    <button type="submit" class="btn btn-lg btn-block btn-dark lift text-uppercase">SIGN
-                                        UP</button>
+                                    <button type="submit" class="btn btn-lg btn-block btn-dark lift text-uppercase">{{__('auth.sign_up')}}</button>
                                 </div>
                                 <div class="col-12 text-center mt-4">
-                                    <span class="text-muted">Already have an account? <a href="{{ route('login') }}">Sign in
-                                            here</a></span>
+                                    <span class="text-muted">{{__('auth.already_have_account')}} <a href="{{ route('login') }}">{{__('auth.sign_in_here')}}</a></span>
                                 </div>
                             </form>
                             <script>
