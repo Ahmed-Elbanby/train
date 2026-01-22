@@ -168,6 +168,7 @@ return [
     'profile_updated_successfully' => 'Profile updated successfully!',
     'something_went_wrong' => 'Something went wrong!',
     'validation_errors' => 'Validation errors',
+    'fix_errors' => 'Please fix the errors',
     'error' => 'Error',
     'something_went_wrong_try_again' => 'Something went wrong! Please try again.',
 

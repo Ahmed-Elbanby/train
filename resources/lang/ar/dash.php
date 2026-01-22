@@ -168,6 +168,7 @@ return [
     'profile_updated_successfully' => 'تم تحديث الملف الشخصي بنجاح!',
     'something_went_wrong' => 'حدث خطأ ما!',
     'validation_errors' => 'أخطاء التحقق',
+    'fix_errors' => 'يرجى تصحيح الأخطاء',
     'error' => 'خطأ',
     'something_went_wrong_try_again' => 'حدث خطأ ما! يرجى المحاولة مرة أخرى.',
 

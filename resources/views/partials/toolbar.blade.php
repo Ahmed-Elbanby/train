@@ -1,6 +1,6 @@
 <div class="page-toolbar px-xl-4 px-sm-2 px-0 py-3">
     <div class="container-fluid">
-        <div class="row g-3 mb-3 align-items-center">
+        <!-- <div class="row g-3 mb-3 align-items-center">
             <div class="col">
                 <ol class="breadcrumb bg-transparent mb-0">
                     <li class="breadcrumb-item"><a class="text-secondary" href="{{ route('dashboard.index') }}">{{ __('dash.home') }}</a></li>
@@ -8,7 +8,7 @@
                     <li class="breadcrumb-item active" aria-current="page">{{ __('dash.my_profile') }}</li>
                 </ol>
             </div>
-        </div>
+        </div> -->
         <div class="row align-items-center">
             <div class="col-auto">
                 <h1 class="fs-5 color-900 mt-1 mb-0">{{ __('dash.welcome_back', ['name' => auth('admin')->user()->name]) }}</h1>

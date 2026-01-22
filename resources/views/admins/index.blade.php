@@ -6,7 +6,7 @@
 
     <!-- Add Admin Button -->
     <div class="mb-3">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAdminModal">
+        <button type="button" class="btn btn-primary" onclick="openCreateModal()">
             <i class="fa fa-plus"></i> {{ __('dash.add_admin') }}
         </button>
     </div>
@@ -23,205 +23,280 @@
                 <th>{{ __('dash.actions') }}</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach($admins as $admin)
-                <tr id="admin_row_{{ $admin->id }}">
-                    <td>{{ $admin->id }}</td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            @if(!empty($admin->photo) && \Illuminate\Support\Facades\Storage::disk('public')->exists($admin->photo))
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url($admin->photo) }}"
-                                    class="rounded-circle sm avatar" alt="{{ $admin->name }}"
-                                    style="width: 40px; height: 40px; object-fit: cover;">
-                            @else
-                                <img src="{{ asset('assets/img/avatar.png') }}" class="rounded-circle sm avatar" alt="{{ $admin->name }}"
-                                    style="width: 40px; height: 40px; object-fit: cover;">
-                            @endif
-                        </div>
-                    </td>
-                    <td>{{ $admin->name }}</td>
-                    <td>{{ $admin->email }}</td>
-                    <td>{{ $admin->username }}</td>
-                    <td>{{ $admin->phone }}</td>
-                    <td>
-                        <!-- Edit Button -->
-                        <button type="button" class="btn btn-link btn-sm color-400 edit-admin-btn" data-bs-toggle="modal"
-                            data-bs-target="#editAdminModal" data-admin-id="{{ $admin->id }}"
-                            data-admin-name="{{ $admin->name }}" data-admin-email="{{ $admin->email }}"
-                            data-admin-username="{{ $admin->username }}" data-admin-phone="{{ $admin->phone }}"
-                            @if(!empty($admin->photo) && \Illuminate\Support\Facades\Storage::disk('public')->exists($admin->photo))
-                                data-admin-photo="{{ \Illuminate\Support\Facades\Storage::url($admin->photo) }}"
-                            @else
-                                data-admin-photo="{{ asset('assets/img/avatar.png') }}"
-                            @endif
-                            data-action="{{ route('admins.update', $admin->id) }}"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('dash.edit') }}">
-                            <i class="fa fa-pencil"></i>
-                        </button>
-
-                        <!-- Delete Button - Only show if not current admin -->
-                        @if($admin->id != auth('admin')->id())
-                            <form action="{{ route('admins.destroy', $admin->id) }}" method="POST"
-                                class="d-inline delete-admin-form" id="delete_form_{{ $admin->id }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" class="btn btn-link btn-sm color-400 delete-admin-btn"
-                                    data-admin-id="{{ $admin->id }}" data-admin-name="{{ $admin->name }}" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="{{ __('dash.delete') }}">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
-                        @else
-                            <!-- Disabled delete button for current admin -->
-                            <!-- <button type="button" class="btn btn-link btn-sm color-400" disabled data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title="{{ __('dash.cannot_delete_self') }}">
-                                                        <i class="fa fa-trash text-muted"></i>
-                                                    </button> -->
-                        @endif
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
+        <tbody></tbody>
     </table>
 
-    <!-- Create Admin Modal -->
-    <div class="modal fade" id="createAdminModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('dash.add_new_admin') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Combined Admin Modal -->
+    <!-- <div class="modal fade" id="generalAdminModal" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 id="adminModalTitle" class="modal-title"></h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form id="AdminForm" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="hidden" name="_method" id="formMethod">
+                                                <input type="hidden" name="admin_id" id="admin_id">
+                                                <div class="modal-body">
+                                                    <div class="mb-3 text-center">
+                                                        <div class="image-input avatar xxl rounded-4"
+                                                            style="background-image: url('{{ asset('assets/img/avatar.png') }}')" id="photoPreview">
+                                                            <div class="avatar-wrapper rounded-4"></div>
+                                                            <div class="file-input">
+                                                                <input type="file" class="form-control" name="photo" id="create_photo">
+                                                                <label for="create_photo" class="fa fa-pencil shadow"></label>
+                                                            </div>
+                                                            <div class="invalid-feedback"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{{ __('dash.name') }} *</label>
+                                                        <input type="text" id="name" name="name" class="form-control" required>
+                                                        <div class="invalid-feedback"></div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{{ __('dash.email') }} *</label>
+                                                        <input type="email" id="email" name="email" class="form-control" required>
+                                                        <div class="invalid-feedback"></div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{{ __('dash.username') }}</label>
+                                                        <input type="text" id="username" name="username" class="form-control">
+                                                        <div class="invalid-feedback"></div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{{ __('dash.password') }} *</label>
+                                                        <input type="password" id="password" name="password" class="form-control" required>
+                                                        <div class="invalid-feedback"></div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{{ __('dash.confirm_password') }} *</label>
+                                                        <input type="password" name="password_confirmation" class="form-control" required>
+                                                        <div class="invalid-feedback"></div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">{{ __('dash.phone') }}</label>
+                                                        <input type="text" id="phone" name="phone" class="form-control">
+                                                        <div class="invalid-feedback"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                        {{ __('dash.cancel') }}
+                                                    </button>
+                                                    <button type="submit" id="submitBtn" class="btn btn-primary">
+                                                        <span class="submit-text"></span>
+                                                        <span class="loading-text d-none">
+                                                            <i class="fa fa-spinner fa-spin"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div> -->
+    <!-- <div class="modal fade" id="adminModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 id="adminModalTitle"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <form id="adminForm" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="_method" id="formMethod">
+                            <input type="hidden" name="admin_id" id="admin_id">
+
+                            <div class="modal-body">
+
+                                <div class="mb-3 text-center">
+                                    <div class="image-input avatar xxl rounded-4" id="photoPreview"
+                                        style="background-image:url('{{ asset('assets/img/avatar.png') }}')">
+                                        <input type="file" name="photo" class="form-control">
+                                    </div>
+                                </div>
+
+                                <input type="text" name="name" id="name" class="form-control mb-2" placeholder="Name">
+                                <input type="email" name="email" id="email" class="form-control mb-2" placeholder="Email">
+                                <input type="text" name="username" id="username" class="form-control mb-2" placeholder="Username">
+                                <input type="text" name="phone" id="phone" class="form-control mb-2" placeholder="Phone">
+
+                                <div id="passwordFields">
+                                    <input type="password" name="password" class="form-control mb-2" placeholder="Password">
+                                    <input type="password" name="password_confirmation" class="form-control"
+                                        placeholder="Confirm Password">
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" id="submitBtn" class="btn btn-primary"></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <form id="createAdminForm" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="mb-3 text-center">
-                            <div class="image-input avatar xxl rounded-4"
-                                style="background-image: url('{{ asset('assets/img/avatar.png') }}')"
-                                id="createPhotoPreview">
-                                <div class="avatar-wrapper rounded-4"></div>
-                                <div class="file-input">
-                                    <input type="file" class="form-control" name="photo" id="create_photo">
-                                    <label for="create_photo" class="fa fa-pencil shadow"></label>
+            </div> -->
+    <!-- <div class="modal fade" id="adminModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">{{ __('dash.add_new_admin') }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="adminForm" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="_method" id="formMethod" value="POST">
+                        <input type="hidden" name="admin_id" id="admin_id">
+
+                        <div class="modal-body">
+                            <div class="mb-3 text-center">
+                                <div class="image-input avatar xxl rounded-4" id="photoPreview"
+                                    style="background-image: url('{{ asset('assets/img/avatar.png') }}')">
+                                    <div class="avatar-wrapper rounded-4"></div>
+                                    <div class="file-input">
+                                        <input type="file" class="form-control" name="photo" id="photo">
+                                        <label for="photo" class="fa fa-pencil shadow"></label>
+                                    </div>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">{{ __('dash.name') }} *</label>
-                            <input type="text" name="name" class="form-control" required>
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('dash.name') }} *</label>
+                                <input type="text" name="name" id="name" class="form-control" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">{{ __('dash.email') }} *</label>
-                            <input type="email" name="email" class="form-control" required>
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('dash.email') }} *</label>
+                                <input type="email" name="email" id="email" class="form-control" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">{{ __('dash.username') }}</label>
-                            <input type="text" name="username" class="form-control">
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('dash.username') }}</label>
+                                <input type="text" name="username" id="username" class="form-control">
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">{{ __('dash.password') }} *</label>
-                            <input type="password" name="password" class="form-control" required>
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('dash.password') }}
+                                    <span id="passwordRequired">*</span>
+                                    <small id="passwordHint" class="text-muted d-none">
+                                        {{ __('dash.leave_blank_keep') }}
+                                    </small>
+                                </label>
+                                <input type="password" name="password" id="password" class="form-control">
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">{{ __('dash.confirm_password') }} *</label>
-                            <input type="password" name="password_confirmation" class="form-control" required>
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('dash.confirm_password') }}
+                                    <span id="confirmPasswordRequired">*</span>
+                                </label>
+                                <input type="password" name="password_confirmation" id="password_confirmation"
+                                    class="form-control">
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">{{ __('dash.phone') }}</label>
-                            <input type="text" name="phone" class="form-control">
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('dash.phone') }}</label>
+                                <input type="text" name="phone" id="phone" class="form-control">
+                                <div class="invalid-feedback"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            {{ __('dash.cancel') }}
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            <span class="submit-text">{{ __('dash.save') }}</span>
-                            <span class="loading-text d-none">
-                                <i class="fa fa-spinner fa-spin"></i> {{ __('dash.saving') }}...
-                            </span>
-                        </button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                {{ __('dash.cancel') }}
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="modalSubmitBtn">
+                                <span class="submit-text">{{ __('dash.save') }}</span>
+                                <span class="loading-text d-none">
+                                    <i class="fa fa-spinner fa-spin"></i> <span
+                                        id="loadingText">{{ __('dash.saving') }}...</span>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </div>
+        </div> -->
 
-    <!-- Edit Admin Modal -->
-    <div class="modal fade" id="editAdminModal" tabindex="-1" aria-hidden="true">
+    <!-- Combined Admin Modal -->
+    <div class="modal fade" id="adminModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ __('dash.edit_admin') }}</h5>
+                    <h5 id="adminModalTitle" class="modal-title"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editAdminForm" enctype="multipart/form-data">
+                <form id="adminForm" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
-                    <input type="hidden" name="admin_id" id="edit_admin_id">
+                    <input type="hidden" name="_method" id="formMethod" value="POST">
+                    <input type="hidden" name="admin_id" id="admin_id">
 
                     <div class="modal-body">
                         <div class="mb-3 text-center">
-                            <div class="image-input avatar xxl rounded-4" id="editPhotoPreview">
+                            <div class="image-input avatar xxl rounded-4" id="photoPreview" style="background-image: url('{{ asset('assets/img/avatar.png') }}')">
                                 <div class="avatar-wrapper rounded-4"></div>
                                 <div class="file-input">
-                                    <input type="file" class="form-control" name="photo" id="edit_photo">
-                                    <label for="edit_photo" class="fa fa-pencil shadow"></label>
+                                    <input type="file" class="form-control" name="photo" id="photo">
+                                    <label for="photo" class="fa fa-pencil shadow"></label>
                                 </div>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">{{ __('dash.name') }} *</label>
-                            <input type="text" name="name" id="edit_name" value="{{ auth('admin')->user()->name }}"
-                                class="form-control" required>
+                            <input type="text" name="name" id="name" class="form-control" required>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">{{ __('dash.email') }} *</label>
-                            <input type="email" name="email" id="edit_email" value="{{ auth('admin')->user()->email }}"
-                                class="form-control" required>
+                            <input type="email" name="email" id="email" class="form-control" required>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">{{ __('dash.username') }}</label>
-                            <input type="text" name="username" id="edit_username"
-                                value="{{ auth('admin')->user()->username }}" class="form-control">
+                            <input type="text" name="username" id="username" class="form-control">
+                            <div class="invalid-feedback"></div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">{{ __('dash.password') }}</label>
-                            <input type="password" name="password" class="form-control"
-                                placeholder="{{ __('dash.leave_blank') }}">
-                            <small class="text-muted">{{ __('dash.leave_blank_keep') }}</small>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">{{ __('dash.confirm_password') }}</label>
-                            <input type="password" name="password_confirmation" class="form-control">
+                        <div id="passwordFields">
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('dash.password') }}</label>
+                                <input type="password" name="password" id="password" class="form-control">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('dash.confirm_password') }}</label>
+                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+                                <div class="invalid-feedback"></div>
+                            </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">{{ __('dash.phone') }}</label>
-                            <input type="text" name="phone" id="edit_phone" value="{{ auth('admin')->user()->phone }}"
-                                class="form-control">
+                            <input type="text" name="phone" id="phone" class="form-control">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            {{ __('dash.cancel') }}
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            <span class="submit-text">{{ __('dash.update') }}</span>
-                            <span class="loading-text d-none">
-                                <i class="fa fa-spinner fa-spin"></i> {{ __('dash.updating') }}...
-                            </span>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('dash.cancel') }}</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary">
+                            <span class="submit-text"></span>
+                            <span class="loading-text d-none"><i class="fa fa-spinner fa-spin"></i></span>
                         </button>
                     </div>
                 </form>
@@ -233,11 +308,71 @@
 
 @push('scripts')
     <script src="{{ asset('assets/js/bundle/dataTables.bundle.js') }}"></script>
+    <!-- <script>
+        function openCreateModal() {
+            $('#adminForm')[0].reset();
+
+            $('#adminModalTitle').text('Add New Admin');
+            $('#submitBtn').text('Save');
+
+            $('#adminForm').attr('action', '/admins');
+            $('#formMethod').val('POST');
+
+            $('#admin_id').val('');
+            $('#passwordFields').show();
+
+            $('#photoPreview').css('background-image', "url('/assets/img/avatar.png')");
+
+            $('#adminModal').modal('show');
+        }
+
+        function openEditModal(admin) {
+            $('#adminForm')[0].reset();
+
+            $('#adminModalTitle').text('Edit Admin');
+            $('#submitBtn').text('Update');
+
+            $('#adminForm').attr('action', '/admins/' + admin.id);
+            $('#formMethod').val('PUT');
+
+            $('#admin_id').val(admin.id);
+            $('#name').val(admin.name);
+            $('#email').val(admin.email);
+            $('#username').val(admin.username);
+            $('#phone').val(admin.phone);
+
+            // $('#passwordFields').hide();
+
+            if (admin.photo) {
+                $('#photoPreview').css(
+                    'background-image',
+                    'url(/storage/admins/' + admin.photo + ')'
+                );
+            }
+
+            $('#adminModal').modal('show');
+        }
+    </script> -->
     <script>
         $(document).ready(function () {
-            // Initialize DataTable
-            $('#admins_table').DataTable({
+            // Initialize Yajra / server-side DataTable
+            var adminsTable = $('#admins_table').DataTable({
+                processing: true,
+                serverSide: true,
                 responsive: true,
+                ajax: {
+                    url: "{{ route('admins.index') }}",
+                    type: 'GET'
+                },
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'photo', name: 'photo', orderable: false, searchable: false },
+                    { data: 'name', name: 'name' },
+                    { data: 'email', name: 'email' },
+                    { data: 'username', name: 'username' },
+                    { data: 'phone', name: 'phone' },
+                    { data: 'actions', name: 'actions', orderable: false, searchable: false }
+                ],
                 language: {
                     search: "{{ __('dash.search') }}:",
                     lengthMenu: "{{ __('dash.show') }} _MENU_ {{ __('dash.entries') }}",
@@ -251,56 +386,35 @@
                 }
             });
 
-            // Photo preview for create form
-            $('#create_photo').on('change', function () {
+            // Photo preview for modal photo input
+            $('#photo').on('change', function () {
                 const file = this.files[0];
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function (e) {
-                        $('#createPhotoPreview').css('background-image', 'url(' + e.target.result + ')');
+                        $('#photoPreview').css('background-image', 'url(' + e.target.result + ')');
                     }
                     reader.readAsDataURL(file);
                 }
             });
 
-            // Photo preview for edit form
-            $('#edit_photo').on('change', function () {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#editPhotoPreview').css('background-image', 'url(' + e.target.result + ')');
-                    }
-                    reader.readAsDataURL(file);
-                }
+            // Handle Edit Button Click (delegated for server-side rows) - use data- attributes
+            $(document).on('click', '.edit-admin-btn', function () {
+                const btn = $(this);
+                const admin = {
+                    id: btn.data('admin-id'),
+                    name: btn.data('admin-name'),
+                    email: btn.data('admin-email'),
+                    username: btn.data('admin-username'),
+                    phone: btn.data('admin-phone'),
+                    photo: btn.data('admin-photo')
+                };
+
+                openEditModal(admin);
             });
 
-            // Handle Edit Button Click
-            $('.edit-admin-btn').on('click', function () {
-                const adminId = $(this).data('admin-id');
-                const adminName = $(this).data('admin-name');
-                const adminEmail = $(this).data('admin-email');
-                const adminUsername = $(this).data('admin-username');
-                const adminPhone = $(this).data('admin-phone');
-                const adminPhoto = $(this).data('admin-photo');
-
-                // Use server-generated localized action URL
-                const actionUrl = $(this).data('action');
-
-                // Set form values
-                $('#edit_admin_id').val(adminId);
-                $('#edit_name').val(adminName);
-                $('#edit_email').val(adminEmail);
-                $('#edit_username').val(adminUsername);
-                $('#edit_phone').val(adminPhone);
-                $('#editPhotoPreview').css('background-image', 'url(' + adminPhoto + ')');
-
-                // Set form action (localized)
-                $('#editAdminForm').attr('action', actionUrl);
-            });
-
-            // Handle Delete Button Click
-            $('.delete-admin-btn').on('click', function (e) {
+            // Handle Delete Button Click (delegated)
+            $(document).on('click', '.delete-admin-btn', function (e) {
                 e.preventDefault();
 
                 const adminId = $(this).data('admin-id');
@@ -343,8 +457,10 @@
                             },
                             success: function (response) {
                                 if (response.success) {
-                                    // Remove row from table
-                                    $('#admin_row_' + adminId).remove();
+                                    // Reload table to reflect deletion
+                                    if (typeof adminsTable !== 'undefined') {
+                                        adminsTable.ajax.reload(null, false);
+                                    }
 
                                     Swal.fire(
                                         "{{ __('dash.deleted') }}",
@@ -375,140 +491,111 @@
                 });
             });
 
-            // Create Admin Form Submission - DEBUG VERSION
-            $('#createAdminForm').on('submit', function (e) {
-                e.preventDefault();
+            // Combined admin form submit handler (handles create and update)
+            window.openCreateModal = function() {
+                $('#adminForm')[0].reset();
+                $('#adminModalTitle').text('{{ __('dash.add_new_admin') }}');
+                $('#submitBtn .submit-text').text('{{ __('dash.save') }}');
+                $('#formMethod').val('POST');
+                $('#adminForm').attr('action', '{{ route('admins.store') }}');
+                $('#admin_id').val('');
+                $('#passwordFields').show();
+                $('#photoPreview').css('background-image', "url('{{ asset('assets/img/avatar.png') }}')");
+                $('#adminModal').modal('show');
+            }
 
-                console.log('📝 Create admin form submitted');
-
-                const formData = new FormData(this);
-
-                // Log form data for debugging
-                console.log('📤 FormData contents:');
-                for (let [key, value] of formData.entries()) {
-                    console.log(key + ':', value);
+            window.openEditModal = function(admin) {
+                $('#adminForm')[0].reset();
+                $('#adminModalTitle').text('{{ __('dash.edit_admin') }}');
+                $('#submitBtn .submit-text').text('{{ __('dash.update') }}');
+                $('#adminForm').attr('action', '/admins/' + admin.id);
+                $('#formMethod').val('PUT');
+                $('#admin_id').val(admin.id);
+                $('#name').val(admin.name);
+                $('#email').val(admin.email);
+                $('#username').val(admin.username);
+                $('#phone').val(admin.phone);
+                if (admin.photo) {
+                    $('#photoPreview').css('background-image', 'url(' + admin.photo + ')');
                 }
+                $('#adminModal').modal('show');
+            }
 
-                const submitBtn = $(this).find('button[type="submit"]');
-
-                // Show loading
-                submitBtn.find('.submit-text').addClass('d-none');
-                submitBtn.find('.loading-text').removeClass('d-none');
-                submitBtn.prop('disabled', true);
-
-                $.ajax({
-                    url: "{{ route('admins.store') }}",
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    success: function (response) {
-                        console.log('✅ Server response:', response);
-
-                        if (response.success) {
-                            console.log('✅ Admin created successfully');
-                            // alert('✅ Admin created! Page will reload...');
-                            // Wait 1 second then reload
-                            setTimeout(function () {
-                                location.reload();
-                            }, 1000);
-                        } else {
-                            console.log('❌ Server returned success false:', response);
-                            alert('❌ ' + (response.message || 'Failed to create admin'));
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('❌ AJAX Error:', {
-                            status: xhr.status,
-                            statusText: xhr.statusText,
-                            responseText: xhr.responseText,
-                            error: error
-                        });
-
-                        let errorMessage = "Something went wrong!";
-
-                        if (xhr.status === 422) {
-                            // Validation errors
-                            let errors = xhr.responseJSON?.errors;
-                            if (errors) {
-                                errorMessage = 'Validation errors:\n';
-                                Object.values(errors).forEach(errorArray => {
-                                    errorArray.forEach(error => {
-                                        errorMessage += '• ' + error + '\n';
-                                    });
-                                });
-                            }
-                        } else if (xhr.responseJSON?.message) {
-                            errorMessage = xhr.responseJSON.message;
-                        }
-
-                        alert('❌ ' + errorMessage);
-                    },
-                    complete: function () {
-                        // Reset button state
-                        submitBtn.find('.submit-text').removeClass('d-none');
-                        submitBtn.find('.loading-text').addClass('d-none');
-                        submitBtn.prop('disabled', false);
-                    }
-                });
-            });
-
-            // Edit Admin Form Submission
-            $('#editAdminForm').on('submit', function (e) {
+            $('#adminForm').on('submit', function (e) {
                 e.preventDefault();
 
-                const formData = new FormData(this);
-                const submitBtn = $(this).find('button[type="submit"]');
-                const adminId = $('#edit_admin_id').val();
+                const form = $(this);
+                form.find('.is-invalid').removeClass('is-invalid');
+                form.find('.invalid-feedback').text('');
 
-                // Show loading
-                submitBtn.find('.submit-text').addClass('d-none');
-                submitBtn.find('.loading-text').removeClass('d-none');
+                const formData = new FormData(this);
+                const method = $('#formMethod').val();
+                if (method === 'PUT') formData.append('_method', 'PUT');
+
+                const submitBtn = $('#submitBtn');
+                const submitText = submitBtn.find('.submit-text');
+                const loadingText = submitBtn.find('.loading-text');
+
+                submitText.addClass('d-none');
+                loadingText.removeClass('d-none');
                 submitBtn.prop('disabled', true);
 
                 $.ajax({
-                    url: $(this).attr('action'),
+                    url: form.attr('action'),
                     type: 'POST',
                     data: formData,
                     processData: false,
                     contentType: false,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
+                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
                     success: function (response) {
                         if (response.success) {
-                            // Reload page to show updated data
-                            location.reload();
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: response.message || (method === 'PUT' ? '{{ __('dash.admin_updated') }}' : '{{ __('dash.admin_created') }}'),
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+
+                            form[0].reset();
+                            $('#photoPreview').css('background-image', "url('{{ asset('assets/img/avatar.png') }}')");
+                            try { $('#adminModal').modal('hide'); } catch (e) {}
+                            if (typeof adminsTable !== 'undefined') adminsTable.ajax.reload(null, false);
                         } else {
-                            Swal.fire(
-                                "{{ __('dash.error') }}",
-                                response.message,
-                                'error'
-                            );
+                            Swal.fire({ toast: true, position: 'top-end', icon: 'error', title: response.message || '{{ __('dash.something_went_wrong') }}', showConfirmButton: false, timer: 2000 });
                         }
                     },
                     error: function (xhr) {
-                        let errorMessage = "{{ __('dash.something_went_wrong') }}";
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            errorMessage = xhr.responseJSON.message;
-                        } else if (xhr.responseJSON && xhr.responseJSON.errors) {
+                        if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
                             const errors = xhr.responseJSON.errors;
-                            errorMessage = Object.values(errors).flat().join('<br>');
-                        }
+                            Object.keys(errors).forEach(function (field) {
+                                let input = form.find('[name="' + field + '"]');
+                                if (!input.length) {
+                                    const alt = field.replace(/\.[0-9]+/g, '');
+                                    input = form.find('[name="' + alt + '"]');
+                                }
+                                if (!input.length) input = form.find('[name="' + field + '[]"]');
+                                if (input.length) {
+                                    input.addClass('is-invalid');
+                                    let wrapper = input.closest('.mb-3');
+                                    if (wrapper.length && wrapper.find('.invalid-feedback').length) wrapper.find('.invalid-feedback').text(errors[field][0]);
+                                    else {
+                                        if (input.next('.invalid-feedback').length) input.next('.invalid-feedback').text(errors[field][0]);
+                                        else input.after('<div class="invalid-feedback">' + errors[field][0] + '</div>');
+                                    }
+                                }
+                            });
 
-                        Swal.fire(
-                            "{{ __('dash.error') }}",
-                            errorMessage,
-                            'error'
-                        );
+                            Swal.fire({ toast: true, position: 'top-end', icon: 'error', title: '{{ __('dash.fix_errors') }}', showConfirmButton: false, timer: 2000 });
+                        } else {
+                            const msg = (xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : '{{ __('dash.something_went_wrong') }}';
+                            Swal.fire({ toast: true, position: 'top-end', icon: 'error', title: msg, showConfirmButton: false, timer: 2000 });
+                        }
                     },
                     complete: function () {
-                        // Reset button state
-                        submitBtn.find('.submit-text').removeClass('d-none');
-                        submitBtn.find('.loading-text').addClass('d-none');
+                        submitText.removeClass('d-none');
+                        loadingText.addClass('d-none');
                         submitBtn.prop('disabled', false);
                     }
                 });
