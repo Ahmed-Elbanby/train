@@ -1,0 +1,178 @@
+$(function(){
+  $.ajaxSetup({
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+  });
+
+  const productModal = new bootstrap.Modal(document.getElementById('productModal'));
+  const $form = $('#productForm');
+  let currentActionUrl = PRODUCTS_STORE_URL;
+  let currentMethod = 'POST';
+  const $hasOfferCheckbox = $('#hasOfferCheckbox');
+  const $offerFields = $('#offerFields');
+  const $offerFieldsSection = $('#offerFieldsSection');
+  const $finalPriceDisplay = $('#finalPriceDisplay');
+  const $finalPriceSection = $('#finalPriceSection');
+
+  const table = $('#products-table').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: PRODUCTS_DATA_URL,
+    columns: [
+      { data: 'id', name: 'id' },
+      { data: 'name_en', name: 'translations.name' },
+      { data: 'name_ar', name: 'translations.name' },
+      { data: 'price', name: 'price' },
+      { data: 'has_offer', name: 'has_offer', render: function(d){ return d ? 'Yes' : 'No'; } },
+      { data: 'actions', orderable: false, searchable: false, render: function(data, type, row){
+          return `
+            <button class="btn btn-sm btn-info edit-btn" data-id="${row.id}">Edit</button>
+            <button class="btn btn-sm btn-danger delete-btn" data-id="${row.id}">Delete</button>
+          `;
+      } }
+    ]
+  });
+
+  function clearFormErrors(){
+    $form.find('.is-invalid').removeClass('is-invalid');
+    $form.find('.invalid-feedback').text('');
+  }
+
+  function fillForm(data){
+    $form.find('[name="name_en"]').val(data.translations?.find(t=>t.locale==='en')?.name || data.name_en || '');
+    $form.find('[name="name_ar"]').val(data.translations?.find(t=>t.locale==='ar')?.name || data.name_ar || '');
+    $form.find('[name="details_en"]').val(data.translations?.find(t=>t.locale==='en')?.details || data.details_en || '');
+    $form.find('[name="details_ar"]').val(data.translations?.find(t=>t.locale==='ar')?.details || data.details_ar || '');
+    $form.find('[name="price"]').val(data.price || '');
+    // set has_offer checkbox and hidden input
+    $hasOfferCheckbox.prop('checked', !!data.has_offer);
+    $form.find('[name="has_offer"]').val(data.has_offer ? '1' : '0');
+    $form.find('[name="offer_type"]').val(data.offer_type || '');
+    $form.find('[name="offer_amount"]').val(data.offer_amount || '');
+    toggleOfferFields();
+    calculateFinalPrice();
+  }
+
+  $('#createProductBtn').on('click', function(){
+    currentActionUrl = PRODUCTS_STORE_URL;
+    currentMethod = 'POST';
+    $('#productModalLabel').text('Create Product');
+    $form[0].reset();
+    clearFormErrors();
+    $('#form_method').val('POST');
+    $hasOfferCheckbox.prop('checked', false);
+    $form.find('[name="has_offer"]').val('0');
+    toggleOfferFields();
+    productModal.show();
+  });
+
+  $('#products-table').on('click', '.edit-btn', function(){
+    const id = $(this).data('id');
+    const url = `${PRODUCTS_BASE_URL}/${id}`;
+    $.get(url).done(function(res){
+      fillForm(res);
+      clearFormErrors();
+      currentActionUrl = url;
+      currentMethod = 'PUT';
+      $('#form_method').val('PUT');
+      $('#productModalLabel').text('Edit Product');
+      productModal.show();
+    }).fail(function(){
+      Swal.fire('Error', 'Unable to fetch product', 'error');
+    });
+  });
+
+  $('#products-table').on('click', '.delete-btn', function(){
+    const id = $(this).data('id');
+    const url = `${PRODUCTS_BASE_URL}/${id}`;
+    Swal.fire({
+      title: 'Delete?',
+      text: 'This action cannot be undone',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete'
+    }).then((result)=>{
+      if (result.isConfirmed) {
+        $.ajax({ url: url, method: 'DELETE' }).done(function(){
+          table.ajax.reload(null, false);
+          Swal.fire('Deleted', '', 'success');
+        }).fail(function(){
+          Swal.fire('Error', 'Delete failed', 'error');
+        });
+      }
+    });
+  });
+
+  $('#saveProductBtn').on('click', function(){
+    // ensure hidden has_offer value reflects checkbox
+    $form.find('[name="has_offer"]').val($hasOfferCheckbox.is(':checked') ? '1' : '0');
+    const data = $form.serialize();
+    const method = currentMethod === 'PUT' ? 'POST' : currentMethod; // use POST with _method=PUT
+    $.ajax({
+      url: currentActionUrl,
+      method: method,
+      data: data,
+    }).done(function(resp){
+      productModal.hide();
+      table.ajax.reload(null, false);
+      Swal.fire('Success', resp.message || 'Saved', 'success');
+    }).fail(function(xhr){
+      if (xhr.status === 422) {
+        const errors = xhr.responseJSON.errors || {};
+        clearFormErrors();
+        for (let key in errors) {
+          const $el = $form.find(`[name="${key}"]`);
+          $el.addClass('is-invalid');
+          $el.closest('.mb-3').find('.invalid-feedback').text(errors[key][0]);
+        }
+      } else {
+        const msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'An error occurred';
+        Swal.fire('Error', msg, 'error');
+      }
+    });
+  });
+
+  function toggleOfferFields(){
+    if ($hasOfferCheckbox.is(':checked')){
+      $offerFields.show();
+      $offerFieldsSection.show();
+      $finalPriceSection.show();
+    } else {
+      $offerFields.hide();
+      $offerFieldsSection.hide();
+      $finalPriceDisplay.text('-');
+      $finalPriceSection.hide();
+    }
+  }
+
+  function calculateFinalPrice(){
+    const price = parseFloat($form.find('[name="price"]').val());
+    const hasOffer = $hasOfferCheckbox.is(':checked');
+    const type = $form.find('[name="offer_type"]').val();
+    const amount = parseFloat($form.find('[name="offer_amount"]').val());
+    if (!hasOffer || isNaN(price)){
+      $finalPriceDisplay.text('-');
+      return;
+    }
+    if (type === 'percent' && !isNaN(amount)){
+      const finalP = price - (price * (amount / 100));
+      $finalPriceDisplay.text(finalP.toFixed(2));
+      return;
+    }
+    if (type === 'value' && !isNaN(amount)){
+      const finalP = price - amount;
+      $finalPriceDisplay.text(finalP.toFixed(2));
+      return;
+    }
+    $finalPriceDisplay.text('-');
+  }
+
+  // events to toggle and calc
+  $hasOfferCheckbox.on('change', function(){
+    toggleOfferFields();
+    calculateFinalPrice();
+  });
+  $form.find('[name="price"]').on('input', calculateFinalPrice);
+  $form.find('[name="offer_type"]').on('change', calculateFinalPrice);
+  $form.find('[name="offer_amount"]').on('input', calculateFinalPrice);
+
+});

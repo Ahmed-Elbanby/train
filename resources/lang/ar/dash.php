@@ -267,6 +267,7 @@ return [
     'my_schedule' => 'جدولي',
     'my_notes' => 'ملاحظاتي',
     'sign_out' => 'تسجيل الخروج',
+    'products' => 'المنتجات',
 
     // Modals translations
     'setup_new_project' => 'إعداد مشروع جديد',
@@ -521,4 +522,24 @@ return [
     'deleted' => 'تم الحذف!',
     'admin_deleted' => 'تم حذف المدير.',
     'cannot_delete_self' => 'لا يمكنك حذف حسابك الخاص.',
+
+    // Products translations
+    'Products' => 'المنتجات',
+    'Create Product' => 'إنشاء منتج',
+    'Name (EN)' => 'الاسم (EN)',
+    'Name (AR)' => 'الاسم (AR)',
+    'Details (EN)' => 'التفاصيل (EN)',
+    'Details (AR)' => 'التفاصيل (AR)',
+    'Price' => 'السعر',
+    'Has Offer' => 'لديه عرض',
+    'Actions' => 'الإجراءات',
+    'Close' => 'إغلاق',
+    'Save' => 'حفظ',
+    'No' => 'لا',
+    'Yes' => 'نعم',
+    'Offer Type' => 'نوع العرض',
+    'Percent' => 'نسبة',
+    'Value' => 'قيمة',
+    'Offer Amount' => 'قيمة العرض',
+    'Final Price' => 'السعر النهائي',
 ];

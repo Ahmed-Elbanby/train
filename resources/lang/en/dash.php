@@ -267,6 +267,7 @@ return [
     'my_schedule' => 'My Schedule',
     'my_notes' => 'My notes',
     'sign_out' => 'sign-out',
+    'products' => 'Products',
 
     // Modals translations
     'setup_new_project' => 'Setup new project',
@@ -524,4 +525,24 @@ return [
     'deleted' => 'Deleted!',
     'admin_deleted' => 'Admin has been deleted.',
     'cannot_delete_self' => 'Cannot delete your own account',
+    
+    // Products translations
+    'Products' => 'Products',
+    'Create Product' => 'Create Product',
+    'Name (EN)' => 'Name (EN)',
+    'Name (AR)' => 'Name (AR)',
+    'Details (EN)' => 'Details (EN)',
+    'Details (AR)' => 'Details (AR)',
+    'Price' => 'Price',
+    'Has Offer' => 'Has Offer',
+    'Actions' => 'Actions',
+    'Close' => 'Close',
+    'Save' => 'Save',
+    'No' => 'No',
+    'Yes' => 'Yes',
+    'Offer Type' => 'Offer Type',
+    'Percent' => 'Percent',
+    'Value' => 'Value',
+    'Offer Amount' => 'Offer Amount',
+    'Final Price' => 'Final Price',
 ];
