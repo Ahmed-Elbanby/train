@@ -46,6 +46,10 @@ Route::group([
         // Accept both POST and PUT so forms using method override work and AJAX POSTs also match
         Route::match(['post', 'put'], '/admins/{admin}', [AdminController::class, 'update'])->name('admins.update');
         Route::delete('/admins/{admin}', [AdminController::class, 'destroy'])->name('admins.destroy');
+
+        // Modals
+        Route::get('/products/create-modal', [ProductController::class, 'createModal'])->name('products.create-modal');
+        Route::get('/products/{id}/edit-modal', [ProductController::class, 'editModal'])->name('products.edit-modal');
     });
 
     Route::post('/login', [AdminLoginController::class, 'login']);

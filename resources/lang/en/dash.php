@@ -529,6 +529,7 @@ return [
     // Products translations
     'Products' => 'Products',
     'Create Product' => 'Create Product',
+    'Edit Product' => 'Edit Product',
     'Name (EN)' => 'Name (EN)',
     'Name (AR)' => 'Name (AR)',
     'Details (EN)' => 'Details (EN)',

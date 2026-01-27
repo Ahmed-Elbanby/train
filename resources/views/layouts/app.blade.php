@@ -18,14 +18,14 @@
 <body class="layout-1" data-luno="theme-blue" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
   @include('partials.sidebar')
-  
+
 
   <div class="wrapper">
 
     @include('partials.header')
-    
+
     @include('partials.toolbar')
-    
+
     <!-- Page Content -->
     @yield('content')
 
@@ -37,6 +37,16 @@
   @include('partials.modals')
 
   @include('partials.scripts')
+
+
+  <!-- General Modal  -->
+  <div id="globalModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="modalContent">
+        <!-- Modal Content -->
+      </div>
+    </div>
+  </div>
 
 </body>
 

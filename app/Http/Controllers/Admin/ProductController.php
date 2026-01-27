@@ -19,6 +19,23 @@ class ProductController extends Controller
     }
 
     /**
+     * Display Create Product Modal.
+     */
+    public function createModal()
+    {
+        return view('modals.products.create-modal');
+    }
+
+    /**
+     * Display Edit Product Modal.
+     */
+    public function editModal($id)
+    {
+        $product = Product::with('translations')->findOrFail($id);
+        return view('modals.products.edit-modal', compact('product'));
+    }
+
+    /**
      * Return datatables JSON for AJAX requests
      */
     public function data(Request $request)
@@ -34,7 +51,10 @@ class ProductController extends Controller
                     return $product->translate('ar')->name ?? '';
                 })
                 ->addColumn('actions', function (Product $product) {
-                    return '';
+                    $editUrl = route('products.edit-modal', $product->id);
+                    $deleteBtn = '<button class="btn btn-sm btn-danger delete-btn" data-id="' . $product->id . '">Delete</button>';
+                    $editBtn = '<button class="btn btn-sm btn-info edit-btn" data-modal="' . $editUrl . '">Edit</button>';
+                    return $editBtn . ' ' . $deleteBtn;
                 })
                 ->rawColumns(['actions'])
                 ->make(true);

@@ -526,6 +526,7 @@ return [
     // Products translations
     'Products' => 'المنتجات',
     'Create Product' => 'إنشاء منتج',
+    'Edit Product' => 'تعديل منتج',
     'Name (EN)' => 'الاسم (EN)',
     'Name (AR)' => 'الاسم (AR)',
     'Details (EN)' => 'التفاصيل (EN)',

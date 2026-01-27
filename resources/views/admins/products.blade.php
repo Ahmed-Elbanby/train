@@ -6,7 +6,7 @@
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>{{ __('dash.Products') }}</h3>
-    <button class="btn btn-primary" id="createProductBtn">{{ __('dash.Create Product') }}</button>
+    <button class="btn btn-primary" data-modal="{{ route('products.create-modal') }}" id="createProductBtn">{{ __('dash.Create Product') }}</button>
   </div>
 
   <table class="table table-striped" id="products-table">
@@ -28,7 +28,7 @@
 <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
+      <!-- <div class="modal-header">
         <h5 class="modal-title" id="productModalLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -72,11 +72,6 @@
                 <div class="invalid-feedback"></div>
               </div>
             </div>
-            <!-- <div class="col-md-4">
-              <div class="mb-3">
-                <label class="form-label">{{ __('dash.Price') }}</label>
-              </div>
-            </div> -->
             <div class="col-md-12">
               <div class="mb-3 col-md-2">
                 <label class="form-label d-block sr-only">{{ __('dash.Has Offer') }}</label>
@@ -117,7 +112,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('dash.Close') }}</button>
         <button type="button" class="btn btn-primary" id="saveProductBtn">{{ __('dash.Save') }}</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
