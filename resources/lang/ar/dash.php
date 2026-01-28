@@ -543,4 +543,10 @@ return [
     'Value' => 'قيمة',
     'Offer Amount' => 'قيمة العرض',
     'Final Price' => 'السعر النهائي',
+
+    // Categories Translations
+    'Categories' => 'التصنيفات',
+    'Create Category' => 'إنشاء تصنيف',
+    'Edit Category' => 'تعديل تصنيف',
+    'Photo' => 'الصورة',
 ];

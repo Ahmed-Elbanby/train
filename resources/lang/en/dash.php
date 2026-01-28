@@ -546,4 +546,10 @@ return [
     'Value' => 'Value',
     'Offer Amount' => 'Offer Amount',
     'Final Price' => 'Final Price',
+
+    // Categories Translations
+    'Categories' => 'Categories',
+    'Create Category' => 'Create Category',
+    'Edit Category' => 'Edit Category',
+    'Photo' => 'Photo',
 ];
