@@ -45,6 +45,19 @@ class CategoryController extends Controller
             $query = Category::with('translations');
 
             return DataTables::of($query)
+                // ->addColumn('photo', function (Category $category) {
+                //     $url = $category->photo ? asset('storage/' . $category->photo) : asset('assets/img/avatar.png');
+                //     return '<img src="' . $url . '" style="width:40px;height:40px;border-radius:6px;object-fit:cover"/>';
+                // })
+                ->addColumn('photo', function (Category $category) {
+                    if ($category->photo && \Storage::disk('public')->exists($category->photo)) {
+                        $url = \Storage::url($category->photo);
+                    } else {
+                        $url = asset('assets/img/avatar.png');
+                    }
+
+                    return '<img src="' . $url . '" class="rounded-circle sm avatar" alt="' . e($category->translate('en')->name ?? '') . '" style="width:40px;height:40px;object-fit:cover;">';
+                })
                 ->addColumn('name_en', function (Category $category) {
                     return $category->translate('en')->name ?? '';
                 })
@@ -57,7 +70,7 @@ class CategoryController extends Controller
                     $editBtn = '<button class="btn btn-sm btn-info edit-btn" data-modal="' . $editUrl . '">Edit</button>';
                     return $editBtn . ' ' . $deleteBtn;
                 })
-                ->rawColumns(['actions'])
+                ->rawColumns(['photo', 'actions'])
                 ->make(true);
         } catch (\Throwable $e) {
             return response()->json(['message' => 'Failed to load categories data: ' . $e->getMessage()], 500);
@@ -80,7 +93,8 @@ class CategoryController extends Controller
         try
         {
             $validated = $request->validate([
-                'name' => 'required|string|max:255',
+                'name_en' => 'required|string|max:255',
+                'name_ar' => 'required|string|max:255',
                 'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
 
