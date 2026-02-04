@@ -29,6 +29,17 @@
 		</div>
 
 		<div class="mb-3">
+			<label class="form-label">{{ __('dash.Category') }}</label>
+			<select name="category_id" class="form-control">
+				<option value="">-</option>
+				@foreach(\App\Models\Category::all() as $cat)
+					<option value="{{ $cat->id }}" {{ (old('category_id', isset($product) ? $product->category_id : '') == $cat->id) ? 'selected' : '' }}>{{ $cat->translate('en')->name ?? $cat->id }}</option>
+				@endforeach
+			</select>
+			<div class="invalid-feedback"></div>
+		</div>
+
+		<div class="mb-3">
 			<label class="form-label">{{ __('dash.Details (EN)') }}</label>
 			<textarea name="details_en" class="form-control" rows="3">{{ old('details_en', isset($product) ? ($product->translate('en')->details ?? '') : '') }}</textarea>
 			<div class="invalid-feedback"></div>

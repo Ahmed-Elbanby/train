@@ -15,6 +15,7 @@
         <th>#</th>
         <th>{{ __('dash.Name (EN)') }}</th>
         <th>{{ __('dash.Name (AR)') }}</th>
+        <th>{{ __('dash.Category') }}</th>
         <th>{{ __('dash.Price') }}</th>
         <th>{{ __('dash.Has Offer') }}</th>
         <th>{{ __('dash.Actions') }}</th>

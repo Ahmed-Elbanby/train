@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Yajra\DataTables\Facades\DataTables;
 use App\Utils\LocalizedString;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -42,13 +43,9 @@ class CategoryController extends Controller
     public function data(Request $request)
     {
         try {
-            $query = Category::with('translations');
+            $query = Category::with('translations')->withCount('products');
 
             return DataTables::of($query)
-                // ->addColumn('photo', function (Category $category) {
-                //     $url = $category->photo ? asset('storage/' . $category->photo) : asset('assets/img/avatar.png');
-                //     return '<img src="' . $url . '" style="width:40px;height:40px;border-radius:6px;object-fit:cover"/>';
-                // })
                 ->addColumn('photo', function (Category $category) {
                     if ($category->photo && \Storage::disk('public')->exists($category->photo)) {
                         $url = \Storage::url($category->photo);
@@ -66,9 +63,12 @@ class CategoryController extends Controller
                 })
                 ->addColumn('actions', function (Category $category) {
                     $editUrl = route('categories.edit-modal', $category->id);
-                    $deleteBtn = '<button class="btn btn-sm btn-danger delete-btn" data-id="' . $category->id . '">Delete</button>';
                     $editBtn = '<button class="btn btn-sm btn-info edit-btn" data-modal="' . $editUrl . '">Edit</button>';
-                    return $editBtn . ' ' . $deleteBtn;
+                    $deleteBtn = '';
+                    if (empty($category->products_count)) {
+                        $deleteBtn = ' <button class="btn btn-sm btn-danger delete-btn" data-id="' . $category->id . '">Delete</button>';
+                    }
+                    return $editBtn . $deleteBtn;
                 })
                 ->rawColumns(['photo', 'actions'])
                 ->make(true);
@@ -142,7 +142,39 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name_en' => 'required|string|max:255',
+                'name_ar' => 'required|string|max:255',
+                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
+
+            $category = Category::findOrFail($id);
+
+            $category->translateOrNew('en')->name = $validated['name_en'];
+            $category->translateOrNew('ar')->name = $validated['name_ar'];
+
+            if ($request->hasFile('photo')) {
+                $path = $request->file('photo')->store('categories', 'public');
+                // delete old photo if exists
+                if ($category->photo && Storage::disk('public')->exists($category->photo)) {
+                    try { Storage::disk('public')->delete($category->photo); } catch (\Throwable $e) { }
+                }
+                $category->photo = $path;
+            }
+
+            $category->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => __('Category updated successfully')
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -150,6 +182,33 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $category = Category::findOrFail($id);
+
+            // Prevent deletion if category has products
+            if ($category->products()->exists()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => __('Cannot delete category while products exist')
+                ], 409);
+            }
+
+            if ($category->photo && Storage::disk('public')->exists($category->photo)) {
+                try { Storage::disk('public')->delete($category->photo); } catch (\Throwable $e) { }
+            }
+
+            $category->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => __('Category deleted successfully')
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ], 500);
+        }
     }
 }
+

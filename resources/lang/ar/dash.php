@@ -549,4 +549,6 @@ return [
     'Create Category' => 'إنشاء تصنيف',
     'Edit Category' => 'تعديل تصنيف',
     'Photo' => 'الصورة',
+    'Update' => 'تعديل',
+    'Category' => 'التصنيف',
 ];

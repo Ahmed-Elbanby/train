@@ -12,4 +12,12 @@ class Category extends Model
     protected $fillable = ['photo'];
 
     public $translatedAttributes = ['name'];
+
+    /**
+     * Products relation
+     */
+    public function products()
+    {
+        return $this->hasMany(\App\Models\Product::class);
+    }
 }

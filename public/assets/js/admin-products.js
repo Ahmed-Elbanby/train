@@ -15,6 +15,7 @@ $(function(){
       { data: 'id', name: 'id' },
       { data: 'name_en', name: 'translations.name' },
       { data: 'name_ar', name: 'translations.name' },
+      { data: 'Category', name: 'category' },
       { data: 'price', name: 'price' },
       { data: 'has_offer', name: 'has_offer', render: function(d){ return d ? 'Yes' : 'No'; } },
       { data: 'actions', orderable: false, searchable: false }
@@ -99,13 +100,14 @@ $(function(){
     const $cb = $form.find('#hasOfferCheckbox');
     $form.find('[name="has_offer"]').val($cb.is(':checked') ? '1' : '0');
     const data = $form.serialize();
-    const method = currentMethod === 'PUT' ? 'POST' : currentMethod;
+    const actionUrl = $form.attr('action') || currentActionUrl;
+    // Always send as POST so server receives full form data; form may include _method for PUT
     $.ajax({
-      url: currentActionUrl,
-      method: method,
+      url: actionUrl,
+      method: 'POST',
       data: data,
     }).done(function(resp){
-      try { productModal.hide(); } catch(e){}
+      $('#globalModal').modal('hide');
       table.ajax.reload(null, false);
       Swal.fire('Success', resp.message || 'Saved', 'success');
     }).fail(function(xhr){

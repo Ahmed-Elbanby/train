@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Log;
 
@@ -15,7 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admins.products');
+        $categories = Category::with('translations');
+        return view('admins.products', compact('categories'));
     }
 
     /**
@@ -23,7 +25,8 @@ class ProductController extends Controller
      */
     public function createModal()
     {
-        return view('modals.products.create-modal');
+        $categories = Category::with('translations');
+        return view('modals.products.create-modal', compact('categories'));
     }
 
     /**
@@ -32,7 +35,8 @@ class ProductController extends Controller
     public function editModal($id)
     {
         $product = Product::with('translations')->findOrFail($id);
-        return view('modals.products.edit-modal', compact('product'));
+        $categories = Category::with('translations');
+        return view('modals.products.edit-modal', compact('product', 'categories'));
     }
 
     /**
@@ -49,6 +53,13 @@ class ProductController extends Controller
                 })
                 ->addColumn('name_ar', function (Product $product) {
                     return $product->translate('ar')->name ?? '';
+                })
+                ->addColumn('Category', function (Product $product) {
+                    $cat = $product->category;
+                    if (!$cat) return '';
+                    // try current locale then fallback to en
+                    $name = $cat->translate(app()->getLocale())->name ?? $cat->translate('en')->name ?? '';
+                    return $name;
                 })
                 ->addColumn('actions', function (Product $product) {
                     $editUrl = route('products.edit-modal', $product->id);
@@ -78,6 +89,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'category_id' => 'exists:categories,id',
             'price' => 'required|numeric|min:0',
             'has_offer' => 'boolean',
             'offer_type' => 'nullable|required_if:has_offer,1|in:percent,value',
@@ -90,6 +102,7 @@ class ProductController extends Controller
 
         try {
             $product = Product::create([
+                'category_id' => $validated['category_id'] ?? null,
                 'price' => $validated['price'],
                 'has_offer' => $validated['has_offer'] ?? false,
                 'offer_type' => $validated['offer_type'] ?? null,
@@ -146,6 +159,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
+            'category_id' => 'exists:categories,id',
             'price' => 'required|numeric|min:0',
             'has_offer' => 'boolean',
             'offer_type' => 'nullable|required_if:has_offer,1|in:percent,value',
@@ -158,6 +172,7 @@ class ProductController extends Controller
 
         try {
             $product->update([
+                'category_id' => $validated['category_id'] ?? null,
                 'price' => $validated['price'],
                 'has_offer' => $validated['has_offer'] ?? false,
                 'offer_type' => $validated['offer_type'] ?? null,

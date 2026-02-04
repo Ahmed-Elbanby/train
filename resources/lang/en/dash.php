@@ -552,4 +552,6 @@ return [
     'Create Category' => 'Create Category',
     'Edit Category' => 'Edit Category',
     'Photo' => 'Photo',
+    'Update' => 'Update',
+    'Category' => 'Category',
 ];

@@ -10,6 +10,7 @@ class Product extends Model
     use Translatable;
 
     protected $fillable = [
+        'category_id',
         'price',
         'has_offer',
         'offer_type',
@@ -40,6 +41,14 @@ class Product extends Model
                 $product->final_price = $product->price;
             }
         });
+    }
+
+    /**
+     * Category relation
+     */
+    public function category()
+    {
+        return $this->belongsTo(\App\Models\Category::class);
     }
 
     // Accessor for final price
