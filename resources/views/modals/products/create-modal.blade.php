@@ -24,15 +24,30 @@
 			</div>
 		</div>
 
-		<div class="mb-3">
-			<label class="form-label">{{ __('dash.Category') }}</label>
-			<select name="category_id" class="form-control">
-				<option value="">-</option>
-				@foreach(\App\Models\Category::all() as $cat)
-					<option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->translate('en')->name ?? $cat->id }}</option>
-				@endforeach
-			</select>
-			<div class="invalid-feedback"></div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label class="form-label">{{ __('dash.Category') }}</label>
+					<select name="category_id" id="parentCategorySelect" class="form-control required" data-get-subcategories-url="{{ route('categories.subcategories', ['category' => ':category']) }}">
+						<option value="">-</option>
+						@foreach($parentCategories as $cat)
+							<option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ? 'selected' : '' }}>
+								{{ $cat->translate('en')->name ?? $cat->id }}
+							</option>
+						@endforeach
+					</select>
+					<div class="invalid-feedback"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label class="form-label">{{ __('dash.Sub Category') }}</label>
+					<select name="sub_category_id" id="subCategorySelect" class="form-control" disabled>
+						<option value="">Choose Parent Category First</option>
+					</select>
+					<div class="invalid-feedback"></div>
+				</div>
+			</div>
 		</div>
 
 		<div class="mb-3">
@@ -51,7 +66,8 @@
 			<div class="col-md-12">
 				<div class="mb-3">
 					<label class="form-label">{{ __('dash.Price') }}</label>
-					<input type="number" step="0.01" min="0" name="price" class="form-control" value="{{ old('price') }}" />
+					<input type="number" step="0.01" min="0" name="price" class="form-control"
+						value="{{ old('price') }}" />
 					<div class="invalid-feedback"></div>
 				</div>
 			</div>
@@ -61,7 +77,8 @@
 					<label class="form-label d-block sr-only">{{ __('dash.Has Offer') }}</label>
 					<input type="hidden" name="has_offer" value="0" />
 					<div class="form-check form-switch">
-						<input class="form-check-input" type="checkbox" id="hasOfferCheckbox" name="has_offer" value="1" {{ old('has_offer') ? 'checked' : '' }}>
+						<input class="form-check-input" type="checkbox" id="hasOfferCheckbox" name="has_offer" value="1"
+							{{ old('has_offer') ? 'checked' : '' }}>
 						<label class="form-check-label" for="hasOfferCheckbox">{{ __('dash.Has Offer') }}</label>
 					</div>
 					<div class="invalid-feedback"></div>
@@ -81,7 +98,8 @@
 			</div>
 			<div class="mb-3 col-md-8" id="offerFieldsSection" style="display:none;">
 				<label class="form-label">{{ __('dash.Offer Amount') }}</label>
-				<input type="number" step="0.01" name="offer_amount" class="form-control" value="{{ old('offer_amount') }}" />
+				<input type="number" step="0.01" name="offer_amount" class="form-control"
+					value="{{ old('offer_amount') }}" />
 				<div class="invalid-feedback"></div>
 			</div>
 		</div>
@@ -92,8 +110,8 @@
 		</div>
 
 	</form>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('dash.Close') }}</button>
-		<button type="button" class="btn btn-primary" id="saveProductBtn">{{ __('dash.Save') }}</button>
-	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('dash.Close') }}</button>
+	<button type="button" class="btn btn-primary" id="saveProductBtn">{{ __('dash.Save') }}</button>
+</div>

@@ -1,4 +1,4 @@
-$(function(){
+$(function () {
   $.ajaxSetup({
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
   });
@@ -17,64 +17,71 @@ $(function(){
       { data: 'name_ar', name: 'translations.name' },
       { data: 'Category', name: 'category' },
       { data: 'price', name: 'price' },
-      { data: 'has_offer', name: 'has_offer', render: function(d){ return d ? 'Yes' : 'No'; } },
+      { data: 'has_offer', name: 'has_offer', render: function (d) { return d ? 'Yes' : 'No'; } },
       { data: 'actions', orderable: false, searchable: false }
     ]
   });
 
-  function clearFormErrors($form){
+  function clearFormErrors($form) {
     $form.find('.is-invalid').removeClass('is-invalid');
     $form.find('.invalid-feedback').text('');
   }
 
-  function fillForm(data){
-    const $form = $('#productForm');
-    $form.find('[name="name_en"]').val(data.translations?.find(t=>t.locale==='en')?.name || data.name_en || '');
-    $form.find('[name="name_ar"]').val(data.translations?.find(t=>t.locale==='ar')?.name || data.name_ar || '');
-    $form.find('[name="details_en"]').val(data.translations?.find(t=>t.locale==='en')?.details || data.details_en || '');
-    $form.find('[name="details_ar"]').val(data.translations?.find(t=>t.locale==='ar')?.details || data.details_ar || '');
-    $form.find('[name="price"]').val(data.price || '');
-    const $cb = $form.find('#hasOfferCheckbox');
-    $cb.prop('checked', !!data.has_offer);
-    $form.find('[name="has_offer"]').val(data.has_offer ? '1' : '0');
-    $form.find('[name="offer_type"]').val(data.offer_type || '');
-    $form.find('[name="offer_amount"]').val(data.offer_amount || '');
-    toggleOfferFieldsFor($form);
-    calculateFinalPriceFor($form);
-  }
+  $(document).on('change', '#parentCategorySelect', function () {
+    const categoryId = $(this).val();
+    const $subCategorySelect = $('#subCategorySelect');
+    const getSubCategoriesUrl = $(this).data('get-subcategories-url').replace(':category', categoryId);
+    console.log('Parent category changed');
+    if (categoryId) {
+      console.log('Fetching sub-categories for category ID:', categoryId);
+        $subCategorySelect.empty().append('<option value="">Loading..</option>');
+      $.ajax({
+        url: getSubCategoriesUrl,
+        method: 'GET'
+      }).done(function (res) {
+        $subCategorySelect.empty().append('<option value="">Choose Sub Category</option>');
+        $.each(res, function (i, subCat) {
+          $subCategorySelect.append(`<option value="${subCat.id}">${subCat.name}</option>`);
+        });
+        $subCategorySelect.prop('disabled', false);
+        // $subCategorySelect.trigger('subcategories.loaded', [res]);
+      }).fail(function () {
+        $subCategorySelect.empty().append('<option value="">Failed To Load Sub Categories</option>');
+        Swal.fire('Error', 'Failed to fetch sub categories', 'error');
+      });
+    } else {
+      $subCategorySelect.empty().append('<option value="">Choose Parent Category First</option>');
+      $subCategorySelect.prop('disabled', true);
+    }
+  });
 
-  
+    // // When an edit modal is shown, pre-select parent/subcategory according to the product
+    // $(document).on('shown.bs.modal', '#globalModal', function () {
+    //   const $modal = $(this);
+    //   const $form = $modal.find('#productForm');
+    //   if (!$form.length) return;
 
-  // $('#createProductBtn').on('click', function(){
-    // currentActionUrl = PRODUCTS_STORE_URL;
-    // currentMethod = 'POST';
-    // $('#productModalLabel').text('Create Product');
-    // $form[0].reset();
-    // clearFormErrors();
-    // $('#form_method').val('POST');
-    // $hasOfferCheckbox.prop('checked', false);
-    // $form.find('[name="has_offer"]').val('0');
-    // toggleOfferFields();
-    // productModal.show();
-  // });
+    //   const currentCatId = $modal.find('#currentProductCategoryId').val();
+    //   const currentParentId = $modal.find('#currentProductCategoryParentId').val();
+    //   const $parentSelect = $form.find('#parentCategorySelect');
+    //   const $subSelect = $form.find('#subCategorySelect');
 
-  // $('#products-table').on('click', '.edit-btn', function(){
-    // const id = $(this).data('id');
-    // const url = `${PRODUCTS_BASE_URL}/${id}`;
-    // $.get(url).done(function(res){
-    //   fillForm(res);
-    //   clearFormErrors();
-    //   currentActionUrl = url;
-    //   currentMethod = 'PUT';
-    //   $('#form_method').val('PUT');
-    //   $('#productModalLabel').text('Edit Product');
-    //   productModal.show();
-    // }).fail(function(){
-    //   Swal.fire('Error', 'Unable to fetch product', 'error');
+    //   if (!currentCatId) return;
+
+    //   if (currentParentId) {
+    //     // product's category is a subcategory: select its parent, load children and select the product category
+    //     $parentSelect.val(currentParentId).trigger('change');
+    //     $subSelect.one('subcategories.loaded', function (e, res) {
+    //       $subSelect.val(currentCatId).prop('disabled', false);
+    //     });
+    //   } else {
+    //     // product's category is a parent: select parent and load its subcategories (no selection)
+    //     $parentSelect.val(currentCatId).trigger('change');
+    //     // no further action needed; subcategories will be loaded by change handler
+    //   }
     // });
-  // });
 
-  $('#products-table').on('click', '.delete-btn', function(){
+  $('#products-table').on('click', '.delete-btn', function () {
     const id = $(this).data('id');
     const url = `${PRODUCTS_BASE_URL}/${id}`;
     Swal.fire({
@@ -83,19 +90,19 @@ $(function(){
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Delete'
-    }).then((result)=>{
+    }).then((result) => {
       if (result.isConfirmed) {
-        $.ajax({ url: url, method: 'DELETE' }).done(function(){
+        $.ajax({ url: url, method: 'DELETE' }).done(function () {
           table.ajax.reload(null, false);
           Swal.fire('Deleted', '', 'success');
-        }).fail(function(){
+        }).fail(function () {
           Swal.fire('Error', 'Delete failed', 'error');
         });
       }
     });
   });
 
-  $(document).on('click', '#saveProductBtn', function(){
+  $(document).on('click', '#saveProductBtn', function () {
     const $form = $('#productForm');
     const $cb = $form.find('#hasOfferCheckbox');
     $form.find('[name="has_offer"]').val($cb.is(':checked') ? '1' : '0');
@@ -106,11 +113,11 @@ $(function(){
       url: actionUrl,
       method: 'POST',
       data: data,
-    }).done(function(resp){
+    }).done(function (resp) {
       $('#globalModal').modal('hide');
       table.ajax.reload(null, false);
       Swal.fire('Success', resp.message || 'Saved', 'success');
-    }).fail(function(xhr){
+    }).fail(function (xhr) {
       if (xhr.status === 422) {
         const errors = xhr.responseJSON.errors || {};
         clearFormErrors($form);
@@ -126,12 +133,12 @@ $(function(){
     });
   });
 
-  function toggleOfferFieldsFor($form){
+  function toggleOfferFieldsFor($form) {
     const $cb = $form.find('#hasOfferCheckbox');
     const $offerFields = $form.find('#offerFields');
     const $offerFieldsSection = $form.find('#offerFieldsSection');
     const $finalPriceSection = $form.find('#finalPriceSection');
-    if ($cb.is(':checked')){
+    if ($cb.is(':checked')) {
       $offerFields.show();
       $offerFieldsSection.show();
       $finalPriceSection.show();
@@ -143,22 +150,22 @@ $(function(){
     }
   }
 
-  function calculateFinalPriceFor($form){
+  function calculateFinalPriceFor($form) {
     const price = parseFloat($form.find('[name="price"]').val());
     const hasOffer = $form.find('#hasOfferCheckbox').is(':checked');
     const type = $form.find('[name="offer_type"]').val();
     const amount = parseFloat($form.find('[name="offer_amount"]').val());
     const $finalPriceDisplay = $form.find('#finalPriceDisplay');
-    if (!hasOffer || isNaN(price)){
+    if (!hasOffer || isNaN(price)) {
       $finalPriceDisplay.text('-');
       return;
     }
-    if (type === 'percent' && !isNaN(amount)){
+    if (type === 'percent' && !isNaN(amount)) {
       const finalP = price - (price * (amount / 100));
       $finalPriceDisplay.text(finalP.toFixed(2));
       return;
     }
-    if (type === 'value' && !isNaN(amount)){
+    if (type === 'value' && !isNaN(amount)) {
       const finalP = price - amount;
       $finalPriceDisplay.text(finalP.toFixed(2));
       return;
@@ -166,22 +173,22 @@ $(function(){
     $finalPriceDisplay.text('-');
   }
 
-  $(document).on('change', '#hasOfferCheckbox', function(){
+  $(document).on('change', '#hasOfferCheckbox', function () {
     let $form = $(this).closest('form');
     if (!$form.length) $form = $(this).closest('.modal').find('#productForm');
     if (!$form.length) $form = $('#productForm');
     toggleOfferFieldsFor($form);
     calculateFinalPriceFor($form);
   });
-  $(document).on('input', '#productForm [name="price"]', function(){
+  $(document).on('input', '#productForm [name="price"]', function () {
     let $form = $(this).closest('form'); if (!$form.length) $form = $(this).closest('.modal').find('#productForm');
     calculateFinalPriceFor($form);
   });
-  $(document).on('change', '#productForm [name="offer_type"]', function(){
+  $(document).on('change', '#productForm [name="offer_type"]', function () {
     let $form = $(this).closest('form'); if (!$form.length) $form = $(this).closest('.modal').find('#productForm');
     calculateFinalPriceFor($form);
   });
-  $(document).on('input', '#productForm [name="offer_amount"]', function(){
+  $(document).on('input', '#productForm [name="offer_amount"]', function () {
     let $form = $(this).closest('form'); if (!$form.length) $form = $(this).closest('.modal').find('#productForm');
     calculateFinalPriceFor($form);
   });

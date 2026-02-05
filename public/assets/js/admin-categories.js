@@ -13,6 +13,7 @@ $(function () {
             { data: 'photo', name: 'photo' },
             { data: 'name_en', name: 'translations.name' },
             { data: 'name_ar', name: 'translations.name' },
+            { data: 'parent_category', name: 'parent_category' },
             { data: 'actions', orderable: false, searchable: false }
         ]
     });

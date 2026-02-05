@@ -9,7 +9,7 @@ class Category extends Model
 {
     use Translatable;
 
-    protected $fillable = ['photo'];
+    protected $fillable = ['photo', 'parent_category'];
 
     public $translatedAttributes = ['name'];
 
@@ -19,5 +19,21 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(\App\Models\Product::class);
+    }
+
+    /**
+     * Parent category relation
+     */
+    public function parent()
+    {
+        return $this->belongsTo(__CLASS__, 'parent_category');
+    }
+
+    /**
+     * Children categories relation
+     */
+    public function children()
+    {
+        return $this->hasMany(__CLASS__, 'parent_category');
     }
 }

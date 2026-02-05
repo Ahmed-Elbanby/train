@@ -554,4 +554,8 @@ return [
     'Photo' => 'Photo',
     'Update' => 'Update',
     'Category' => 'Category',
+    'Parent Category' => 'Parent Category',
+    'Select Parent Category' => 'Select Parent Category',
+    'Parent Category (Optional)' => 'Parent Category (Optional)',
+    'Sub Category' => 'Sub Category',
 ];

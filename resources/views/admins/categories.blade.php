@@ -16,6 +16,7 @@
         <th>{{ __('dash.Photo') }}</th>
         <th>{{ __('dash.Name (EN)') }}</th>
         <th>{{ __('dash.Name (AR)') }}</th>
+        <th>{{ __('dash.Parent Category') }}</th>
         <th>{{ __('dash.Actions') }}</th>
       </tr>
     </thead>

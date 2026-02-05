@@ -40,6 +40,10 @@ Route::group([
         Route::get('/admins/products/{product}', [ProductController::class, 'show'])->name('admins.products.show');
         Route::match(['post', 'put'], '/admins/products/{product}', [ProductController::class, 'update'])->name('admins.products.update');
         Route::delete('/admins/products/{product}', [ProductController::class, 'destroy'])->name('admins.products.destroy');
+        // Get Sub-Categories for a Category
+        Route::get('/categories/{category}/subcategories', function (App\Models\Category $category) {
+            return response()->json($category->children()->with('translations')->get());
+        })->name('categories.subcategories');
 
         // Admins Management
         Route::get('/admins', [AdminController::class, 'index'])->name('admins.index');

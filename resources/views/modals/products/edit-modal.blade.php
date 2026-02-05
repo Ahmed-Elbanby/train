@@ -5,6 +5,8 @@
 <div class="modal-body">
 	<form id="productForm" action="{{ isset($product) ? route('admins.products.update', $product->id) : '#' }}" method="POST">
 		@csrf
+		<!-- <input type="hidden" id="currentProductCategoryId" value="{{ isset($product) ? $product->category_id : '' }}">
+		<input type="hidden" id="currentProductCategoryParentId" value="{{ isset($product) && $product->category && $product->category->parent_category ? $product->category->parent_category : '' }}"> -->
 		@if(isset($product))
 		<input type="hidden" name="_method" id="form_method" value="PUT">
 		@else
@@ -28,15 +30,30 @@
 			</div>
 		</div>
 
-		<div class="mb-3">
-			<label class="form-label">{{ __('dash.Category') }}</label>
-			<select name="category_id" class="form-control">
-				<option value="">-</option>
-				@foreach(\App\Models\Category::all() as $cat)
-					<option value="{{ $cat->id }}" {{ (old('category_id', isset($product) ? $product->category_id : '') == $cat->id) ? 'selected' : '' }}>{{ $cat->translate('en')->name ?? $cat->id }}</option>
-				@endforeach
-			</select>
-			<div class="invalid-feedback"></div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label class="form-label">{{ __('dash.Category') }}</label>
+					<select name="category_id" id="parentCategorySelect" class="form-control" data-get-subcategories-url="{{ route('categories.subcategories', ['category' => ':category']) }}">
+						<option value="">-</option>
+						@foreach($parentCategories as $cat)
+							<option value="{{ $cat->id }}" {{ old('category_id', $product->category_id ?? null) == $cat->id ? 'selected' : '' }}>
+								{{ $cat->translate('en')->name ?? $cat->id }}
+							</option>
+						@endforeach
+					</select>
+					<div class="invalid-feedback"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label class="form-label">{{ __('dash.Sub Category') }}</label>
+					<select name="sub_category_id" id="subCategorySelect" class="form-control" disabled>
+						<option value="">Choose Parent Category First</option>
+					</select>
+					<div class="invalid-feedback"></div>
+				</div>
+			</div>
 		</div>
 
 		<div class="mb-3">

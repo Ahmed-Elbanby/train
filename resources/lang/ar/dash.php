@@ -551,4 +551,8 @@ return [
     'Photo' => 'الصورة',
     'Update' => 'تعديل',
     'Category' => 'التصنيف',
+    'Parent Category' => 'التصنيف الرئيسي',
+    'Select Parent Category' => 'اختر التصنيف الرئيسي',
+    'Parent Category (Optional)' => 'التصنيف الرئيسي (اختياري)',
+    'Sub Category' => 'تصنيف فرعي',
 ];

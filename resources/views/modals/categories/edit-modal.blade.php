@@ -49,6 +49,22 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="mb-3">
+					<label class="form-label">{{ __('dash.Parent Category') }}</label>
+					<select name="parent_category" class="form-select">
+						<option value="">{{ __('dash.Parent Category (Optional)') }}</option>
+						@foreach($parentCategories as $category)
+							<option value="{{ $category->id }}" {{ old('parent_category') == $category->id ? 'selected' : '' }}>
+								{{ $category->name }}
+							</option>
+						@endforeach
+					</select>
+					<div class="invalid-feedback"></div>
+				</div>
+			</div>
+		</div>
 	</form>
 </div>
 <div class="modal-footer">

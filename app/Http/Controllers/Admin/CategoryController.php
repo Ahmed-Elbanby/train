@@ -25,7 +25,8 @@ class CategoryController extends Controller
      */
     public function createModal()
     {
-        return view('modals.categories.create-modal');
+        $parentCategories = Category::with('translations')->get();
+        return view('modals.categories.create-modal', compact('parentCategories'));
     }
 
     /**
@@ -34,7 +35,8 @@ class CategoryController extends Controller
     public function editModal($id)
     {
         $category = Category::with('translations')->findOrFail($id);
-        return view('modals.categories.edit-modal', compact('category'));
+        $parentCategories = Category::with('translations')->get()->where('parent_category', '=', null);
+        return view('modals.categories.edit-modal', compact('category', 'parentCategories'));
     }
 
     /**
@@ -43,7 +45,7 @@ class CategoryController extends Controller
     public function data(Request $request)
     {
         try {
-            $query = Category::with('translations')->withCount('products');
+            $query = Category::with(['translations', 'parent.translations'])->withCount(['products', 'children']);
 
             return DataTables::of($query)
                 ->addColumn('photo', function (Category $category) {
@@ -61,11 +63,17 @@ class CategoryController extends Controller
                 ->addColumn('name_ar', function (Category $category) {
                     return $category->translate('ar')->name ?? '';
                 })
+                ->addColumn('parent_category', function (Category $category) {
+                    if ($category->parent) {
+                        return $category->parent->translate('en')->name ?? $category->parent->translate('ar')->name ?? '';
+                    }
+                    return '';
+                })
                 ->addColumn('actions', function (Category $category) {
                     $editUrl = route('categories.edit-modal', $category->id);
                     $editBtn = '<button class="btn btn-sm btn-info edit-btn" data-modal="' . $editUrl . '">Edit</button>';
                     $deleteBtn = '';
-                    if (empty($category->products_count)) {
+                    if (empty($category->products_count) && empty($category->children_count)) {
                         $deleteBtn = ' <button class="btn btn-sm btn-danger delete-btn" data-id="' . $category->id . '">Delete</button>';
                     }
                     return $editBtn . $deleteBtn;
@@ -95,7 +103,8 @@ class CategoryController extends Controller
             $validated = $request->validate([
                 'name_en' => 'required|string|max:255',
                 'name_ar' => 'required|string|max:255',
-                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'parent_category' => 'nullable',
             ]);
 
             $category = new Category();
@@ -106,6 +115,7 @@ class CategoryController extends Controller
                 $path = $request->file('photo')->store('categories', 'public');
                 $category->photo = $path;
             }
+            $category->parent_category = $validated['parent_category'] ?? null;
 
             $category->save();
             
@@ -146,7 +156,8 @@ class CategoryController extends Controller
             $validated = $request->validate([
                 'name_en' => 'required|string|max:255',
                 'name_ar' => 'required|string|max:255',
-                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'parent_category' => 'nullable',
             ]);
 
             $category = Category::findOrFail($id);
@@ -162,6 +173,7 @@ class CategoryController extends Controller
                 }
                 $category->photo = $path;
             }
+            $category->parent_category = $validated['parent_category'] ?? null;
 
             $category->save();
 
@@ -185,8 +197,8 @@ class CategoryController extends Controller
         try {
             $category = Category::findOrFail($id);
 
-            // Prevent deletion if category has products
-            if ($category->products()->exists()) {
+            // Prevent deletion if category has products or sub-categories
+            if ($category->products()->exists() || $category->children()->exists()) {
                 return response()->json([
                     'success' => false,
                     'message' => __('Cannot delete category while products exist')

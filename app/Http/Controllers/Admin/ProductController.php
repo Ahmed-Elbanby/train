@@ -25,8 +25,8 @@ class ProductController extends Controller
      */
     public function createModal()
     {
-        $categories = Category::with('translations');
-        return view('modals.products.create-modal', compact('categories'));
+        $parentCategories = Category::with('translations')->get()->where('parent_category', '=', null);
+        return view('modals.products.create-modal', compact('parentCategories'));
     }
 
     /**
@@ -34,9 +34,9 @@ class ProductController extends Controller
      */
     public function editModal($id)
     {
-        $product = Product::with('translations')->findOrFail($id);
-        $categories = Category::with('translations');
-        return view('modals.products.edit-modal', compact('product', 'categories'));
+        $product = Product::with(['translations', 'category'])->findOrFail($id);
+        $parentCategories = Category::with('translations')->get()->where('parent_category', '=', null);
+        return view('modals.products.edit-modal', compact('product', 'parentCategories'));
     }
 
     /**
@@ -56,7 +56,8 @@ class ProductController extends Controller
                 })
                 ->addColumn('Category', function (Product $product) {
                     $cat = $product->category;
-                    if (!$cat) return '';
+                    if (!$cat)
+                        return '';
                     // try current locale then fallback to en
                     $name = $cat->translate(app()->getLocale())->name ?? $cat->translate('en')->name ?? '';
                     return $name;
@@ -90,6 +91,7 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'category_id' => 'exists:categories,id',
+            'sub_category_id' => 'nullable|exists:categories,id',
             'price' => 'required|numeric|min:0',
             'has_offer' => 'boolean',
             'offer_type' => 'nullable|required_if:has_offer,1|in:percent,value',
@@ -100,9 +102,11 @@ class ProductController extends Controller
             'details_ar' => 'nullable|string',
         ]);
 
+        $productCategoryId = $validated['sub_category_id'] ?? $validated['category_id'];
+
         try {
             $product = Product::create([
-                'category_id' => $validated['category_id'] ?? null,
+                'category_id' => $productCategoryId,
                 'price' => $validated['price'],
                 'has_offer' => $validated['has_offer'] ?? false,
                 'offer_type' => $validated['offer_type'] ?? null,
@@ -114,7 +118,7 @@ class ProductController extends Controller
             $product->translateOrNew('en')->details = $validated['details_en'];
             $product->translateOrNew('ar')->name = $validated['name_ar'];
             $product->translateOrNew('ar')->details = $validated['details_ar'];
-            
+
             $product->save();
 
             if ($request->ajax()) {
@@ -160,6 +164,7 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'category_id' => 'exists:categories,id',
+            'sub_category_id' => 'nullable|exists:categories,id',
             'price' => 'required|numeric|min:0',
             'has_offer' => 'boolean',
             'offer_type' => 'nullable|required_if:has_offer,1|in:percent,value',
@@ -170,9 +175,11 @@ class ProductController extends Controller
             'details_ar' => 'nullable|string',
         ]);
 
+        $productCategoryId = $validated['sub_category_id'] ?? $validated['category_id'];
+
         try {
             $product->update([
-                'category_id' => $validated['category_id'] ?? null,
+                'category_id' => $productCategoryId,
                 'price' => $validated['price'],
                 'has_offer' => $validated['has_offer'] ?? false,
                 'offer_type' => $validated['offer_type'] ?? null,
@@ -184,7 +191,7 @@ class ProductController extends Controller
             $product->translateOrNew('en')->details = $validated['details_en'];
             $product->translateOrNew('ar')->name = $validated['name_ar'];
             $product->translateOrNew('ar')->details = $validated['details_ar'];
-            
+
             $product->save();
 
             if ($request->ajax()) {
