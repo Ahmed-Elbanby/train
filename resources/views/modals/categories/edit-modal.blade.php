@@ -55,9 +55,9 @@
 					<label class="form-label">{{ __('dash.Parent Category') }}</label>
 					<select name="parent_category" class="form-select">
 						<option value="">{{ __('dash.Parent Category (Optional)') }}</option>
-						@foreach($parentCategories as $category)
-							<option value="{{ $category->id }}" {{ old('parent_category') == $category->id ? 'selected' : '' }}>
-								{{ $category->name }}
+						@foreach($parentCategories as $parent)
+							<option value="{{ $parent->id }}" {{ old('parent_category', $parent->id ?? '') == $parent->id ? 'selected' : '' }}>
+								{{ $parent->name }}
 							</option>
 						@endforeach
 					</select>

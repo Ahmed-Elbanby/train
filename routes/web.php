@@ -9,6 +9,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\TaskController;
 
 
 
@@ -65,6 +66,9 @@ Route::group([
         Route::get('/products/{id}/edit-modal', [ProductController::class, 'editModal'])->name('products.edit-modal');
         Route::get('/categories/create-modal', [CategoryController::class, 'createModal'])->name('categories.create-modal');
         Route::get('/categories/{id}/edit-modal', [CategoryController::class, 'editModal'])->name('categories.edit-modal');
+
+        // Task
+        Route::get('/task', [TaskController::class, 'index'])->name('task.index');
     });
 
     Route::post('/login', [AdminLoginController::class, 'login']);

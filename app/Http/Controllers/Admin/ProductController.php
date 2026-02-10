@@ -62,6 +62,12 @@ class ProductController extends Controller
                     $name = $cat->translate(app()->getLocale())->name ?? $cat->translate('en')->name ?? '';
                     return $name;
                 })
+                // Handle searching by category name (category column in the JS is named 'category')
+                ->filterColumn('category', function ($query, $keyword) {
+                    $query->whereHas('category.translations', function ($q) use ($keyword) {
+                        $q->where('name', 'like', "%{$keyword}%");
+                    });
+                })
                 ->addColumn('actions', function (Product $product) {
                     $editUrl = route('products.edit-modal', $product->id);
                     $deleteBtn = '<button class="btn btn-sm btn-danger delete-btn" data-id="' . $product->id . '">Delete</button>';

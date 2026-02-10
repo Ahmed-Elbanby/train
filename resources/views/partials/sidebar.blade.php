@@ -58,6 +58,7 @@
                         <li><a class="ms-link" href="{{ route('admins.index') }}">{{ __('dash.admins_control') }}</a></li>
                         <li><a class="ms-link" href="{{ route('admins.products.index') }}">{{ __('dash.products') }}</a></li>
                         <li><a class="ms-link" href="{{ route('categories.index') }}">{{ __('dash.categories') }}</a></li>
+                        <li><a class="ms-link" href="{{ route('task.index') }}">Task</a></li>
                     </ul>
                 </li>
                 <li class="collapsed">
