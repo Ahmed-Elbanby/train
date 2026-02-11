@@ -69,6 +69,10 @@ Route::group([
 
         // Task
         Route::get('/task', [TaskController::class, 'index'])->name('task.index');
+        Route::post('/get-t1-data', [TaskController::class, 'getT1Data'])->name('tasks.getT1Data');
+        Route::post('/get-t2-data', [TaskController::class, 'getT2Data'])->name('tasks.getT2Data');
+        Route::post('/get-t3-data', [TaskController::class, 'getT3Data'])->name('tasks.getT3Data');
+        Route::post('/get-t4-data', [TaskController::class, 'getT4Data'])->name('tasks.getT4Data');
     });
 
     Route::post('/login', [AdminLoginController::class, 'login']);

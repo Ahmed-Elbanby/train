@@ -7,20 +7,6 @@
   <title>Nami Soft Task </title>
   <!-- Bootstrap 5 CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-  <style>
-    .collapse-row>td {
-      border-top: none;
-      border-bottom: 1px solid #dee2e6;
-    }
-
-    .table thead th {
-      background-color: #f8f9fa;
-    }
-  </style>
 </head>
 
 <body>
@@ -32,6 +18,7 @@
       <div class="col-sm-6 col-md-4">
         <label for="tableSelect" class="form-label">Choose Project to display</label>
         <select id="tableSelect" class="form-select" aria-label="Select table">
+          <option value="" selected>Choose</option>
           <option value="all" selected>All Projects</option>
           @foreach ($projects as $project)
             <option value="{{ $project->id }}">{{ $project->name }}</option>
@@ -41,7 +28,7 @@
 
       <div class="col-auto">
         <label class="form-label d-block mb-1">&nbsp;</label>
-        <button class="btn btn-primary" id="applyFilter">Apply</button>
+        <button class="btn btn-primary">Apply</button>
       </div>
 
       <div class="col-12 col-md-4 align-self-end">
@@ -133,7 +120,7 @@
         </div>
       </div>
 
-      <!-- Table 4 -->
+
       <div id="t4" class="col-12">
         <div class="card shadow-sm">
           <div class="card-header">
@@ -149,8 +136,22 @@
                     <th>Hours</th>
                   </tr>
                 </thead>
-                <tbody id="table4-body">
-
+                <tbody>
+                  <tr>
+                    <td>Website Redesign</td>
+                    <td>test</td>
+                    <td>6.5</td>
+                  </tr>
+                  <tr>
+                    <td>API Stabilization</td>
+                    <td>Design</td>
+                    <td>7.0</td>
+                  </tr>
+                  <tr>
+                    <td>Testing</td>
+                    <td>Mobile App</td>
+                    <td>6.5</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -229,12 +230,11 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
   <script>
-    function loadTable1(projectId = 'all') {
+    function loadTable1() {
       $.ajax({
         url: '{{ route("tasks.getT1Data") }}', // ensure you have named the route
         method: 'POST',
         data: {
-          project_id: projectId,
           _token: '{{ csrf_token() }}'
         },
         success: function (response) {
@@ -287,128 +287,38 @@
           _token: '{{ csrf_token() }}'
         },
         success: function (response) {
-          // 1. Group work logs by date
-          const groups = {};
-          response.data.forEach(item => {
-            if (!groups[item.date]) groups[item.date] = [];
-            groups[item.date].push(item);
-          });
-
           let html = '';
-
-          // 2. Loop through each date (sorted oldest first)
-          Object.keys(groups).sort().forEach(date => {
-            const logs = groups[date];
-
-            // ▶ Date row – click to toggle details
-            html += `<tr class="date-row" data-date="${date}">
-                    <td colspan="5">
-                        <span style="cursor: pointer;">
-                            <span class="toggle-icon">▶</span>
-                            <strong>${date}</strong>
-                            <span class="badge bg-secondary">${logs.length} entries</span>
-                        </span>
-                    </td>
+          response.data.forEach(function (item) {
+            html += `<tr>
+                    <td>${item.date}</td>
+                    <td>${item.employee}</td>
+                    <td>${item.project}</td>
+                    <td>${item.hours}</td>
+                    <td>${item.modul}</td>
                 </tr>`;
-
-            // ▼ Detail rows – initially hidden
-            logs.forEach(log => {
-              html += `<tr class="detail-${date}" style="display: none;">
-                        <td></td>  <!-- empty to keep alignment -->
-                        <td>${log.employee}</td>
-                        <td>${log.project}</td>
-                        <td>${log.hours}</td>
-                        <td>${log.modul}</td>
-                    </tr>`;
-            });
           });
-
           $('#table3-body').html(html);
-
-          // 3. Click on date row toggles its details + icon
-          $('.date-row').on('click', function () {
-            const date = $(this).data('date');
-            $(`.detail-${date}`).toggle();   // show/hide details
-            const icon = $(this).find('.toggle-icon');
-            icon.text(icon.text() === '▶' ? '▼' : '▶');
-          });
         },
         error: function (xhr) {
           console.error('Table 3 error:', xhr.responseText);
           alert('Failed to load time logs.');
         }
       });
-
-    }
-    function loadTable4(projectId = 'all') {
-      $.ajax({
-        url: '{{ route("tasks.getT4Data") }}',
-        method: 'POST',
-        data: {
-          project_id: projectId,
-          _token: '{{ csrf_token() }}'
-        },
-        success: function (response) {
-          let html = '';
-          response.data.forEach(function (item) {
-            html += `<tr>
-                  <td>${item.modul_name}</td>
-                  <td>${item.project_name}</td>
-                  <td>${item.hours}</td>
-              </tr>`;
-          });
-          $('#table4-body').html(html);
-        },
-        error: function (xhr) {
-          console.error('Table 4 error:', xhr.responseText);
-          alert('Failed to load module data.');
-        }
-      });
-    }
-
-    function loadTable5(projectId = 'all') {
-      $.ajax({
-        url: '{{ route("tasks.getT5Data") }}',
-        method: 'POST',
-        data: {
-          project_id: projectId,
-          _token: '{{ csrf_token() }}'
-        },
-        success: function (response) {
-          let html = '';
-          response.data.forEach(function (item) {
-            html += `<tr>
-                    <td>${item.date}</td>
-                    <td>${item.employee}</td>
-                    <td>${item.hours}</td>
-                </tr>`;
-          });
-          $('#table5-body').html(html);
-        },
-        error: function (xhr) {
-          console.error('Table 5 error:', xhr.responseText);
-          alert('Failed to load work logs.');
-        }
-      });
     }
 
     $(document).ready(function () {
 
-      loadTable1('all');
+      loadTable1();
 
       loadTable2('all');
 
       loadTable3('all');
 
-      loadTable4('all');
-
       // Apply filter button
-      $('#applyFilter').click(function () {
-        const selectedProject = $('#tableSelect').val();
-        loadTable1(selectedProject);
+      $('.btn-primary').click(function () {
+        var selectedProject = $('#tableSelect').val();
         loadTable2(selectedProject);
         loadTable3(selectedProject);
-        loadTable4(selectedProject);
       });
 
     });
