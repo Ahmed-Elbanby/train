@@ -156,24 +156,71 @@ class TaskController extends Controller
     {
         $projectId = $request->input('project_id', 'all');
 
-        $query = WorkTime::with(['employee'])
-            ->select('date', 'emp_id', DB::raw('SUM(hours) as total_hours'))
-            ->groupBy('date', 'emp_id');
-
+        // Get all dates
+        $datesQuery = WorkTime::select('date')->distinct()->orderBy('date', 'asc');
         if ($projectId !== 'all') {
-            $query->where('project_id', $projectId);
+            $datesQuery->where('project_id', $projectId);
+        }
+        $dates = [];
+        foreach ($datesQuery->get() as $item) {
+            $dates[] = $item->date->format('Y-m-d');
         }
 
-        $logs = $query->orderBy('date', 'asc')
-            ->get()
-            ->map(function ($log) {
-                return [
-                    'date' => $log->date->format('Y-m-d'),
-                    'employee' => $log->employee->name,
-                    'hours' => round($log->total_hours, 1),
-                ];
-            });
+        // Get all employees
+        $empIdsQuery = WorkTime::select('emp_id')->distinct();
+        if ($projectId !== 'all') {
+            $empIdsQuery->where('project_id', $projectId);
+        }
+        $empIds = [];
+        foreach ($empIdsQuery->get() as $item) {
+            $empIds[] = $item->emp_id;
+        }
 
-        return response()->json(['data' => $logs]);
+        // Get employee details
+        $employees = Employee::whereIn('id', $empIds)->orderBy('name')->get();
+
+        // for each employee get work hours for each date
+        $rows = [];
+        foreach ($employees as $employee) {
+            $row = ['employee' => $employee->name];
+            foreach ($dates as $date) {
+                $query = WorkTime::where('emp_id', $employee->id)
+                    ->where('date', $date);
+                if ($projectId !== 'all') {
+                    $query->where('project_id', $projectId);
+                }
+                $totalHours = $query->sum('hours');
+                $row[$date] = round($totalHours, 1);
+            }
+            $rows[] = $row;
+        }
+        return response()->json(['dates' => $dates, 'rows'  => $rows]);
+
+
+
+
+
+
+
+
+        // $query = WorkTime::with(['employee'])
+        //     ->select('date', 'emp_id', DB::raw('SUM(hours) as total_hours'))
+        //     ->groupBy('date', 'emp_id');
+
+        // if ($projectId !== 'all') {
+        //     $query->where('project_id', $projectId);
+        // }
+
+        // $logs = $query->orderBy('date', 'asc')
+        //     ->get()
+        //     ->map(function ($log) {
+        //         return [
+        //             'date' => $log->date->format('Y-m-d'),
+        //             'employee' => $log->employee->name,
+        //             'hours' => round($log->total_hours, 1),
+        //         ];
+        //     });
+
+        // return response()->json(['data' => $logs]);
     }
 }

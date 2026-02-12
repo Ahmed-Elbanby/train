@@ -20,6 +20,10 @@
     .table thead th {
       background-color: #f8f9fa;
     }
+
+    #table5-thead th {
+      min-width: 100px !important;
+    }
   </style>
 </head>
 
@@ -162,50 +166,16 @@
       <div id="t5" class="col-12">
         <div class="card shadow-sm">
           <div class="card-header">
-            <strong>Table 4 — logs </strong>
+            <strong>Table 5 — logs </strong>
           </div>
           <div class="card-body p-0">
             <div class="table-responsive">
               <table class="table table-sm mb-0">
-                <thead class="table-light">
-                  <tr>
-                    <th>Employee</th>
-                    <th>2025-10-01</th>
-                    <th>2025-10-02</th>
-                    <th>2025-10-05</th>
-                    <th>2025-10-07</th>
-                    <th>2025-10-20</th>
-                    <th>2025-10-30</th>
-                  </tr>
+                <thead class="table-light" id="table5-thead">
+
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Alice</td>
-                    <td>6</td>
-                    <td>5</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>1</td>
-                    <td>6</td>
-                  </tr>
-                  <tr>
-                    <td>Bob</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>2</td>
-                    <td>8</td>
-                  </tr>
-                  <tr>
-                    <td>Carol</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>7</td>
-                    <td>2</td>
-                    <td>5</td>
-                  </tr>
+                <tbody id="table5-body">
+
                 </tbody>
               </table>
             </div>
@@ -375,15 +345,26 @@
           _token: '{{ csrf_token() }}'
         },
         success: function (response) {
-          let html = '';
-          response.data.forEach(function (item) {
-            html += `<tr>
-                    <td>${item.date}</td>
-                    <td>${item.employee}</td>
-                    <td>${item.hours}</td>
-                </tr>`;
-          });
-          $('#table5-body').html(html);
+
+          var theadHtml = '<tr><th>Employee</th>';
+          for (var c = 0; c < response.dates.length; c++) {
+            theadHtml += '<th>' + response.dates[c] + '</th>';
+          }
+          theadHtml += '</tr>';
+          $('#table5-thead').html(theadHtml);
+
+          var tbodyHtml = '';
+          for (var r = 0; r < response.rows.length; r++) {
+            var row = response.rows[r];
+            tbodyHtml += '<tr>';
+            tbodyHtml += '<td>' + row.employee + '</td>';
+            for (var d = 0; d < response.dates.length; d++) {
+              var date = response.dates[d];
+              tbodyHtml += '<td>' + row[date] + '</td>';
+            }
+            tbodyHtml += '</tr>';
+          }
+          $('#table5-body').html(tbodyHtml);
         },
         error: function (xhr) {
           console.error('Table 5 error:', xhr.responseText);
@@ -402,6 +383,8 @@
 
       loadTable4('all');
 
+      loadTable5('all');
+
       // Apply filter button
       $('#applyFilter').click(function () {
         const selectedProject = $('#tableSelect').val();
@@ -409,6 +392,7 @@
         loadTable2(selectedProject);
         loadTable3(selectedProject);
         loadTable4(selectedProject);
+        loadTable5(selectedProject);
       });
 
     });
