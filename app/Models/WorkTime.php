@@ -11,7 +11,7 @@ class WorkTime extends Model
 
     protected $fillable = ['date', 'hours', 'emp_id', 'project_id', 'modul_id'];
     protected $casts = [
-        'date' => 'date',
+        'date' => 'date:Y-m-d',
     ];
 
     public function employee()

@@ -15,4 +15,11 @@ class Employee extends Model
     {
         return $this->hasMany(WorkTime::class, 'emp_id');
     }
+
+    // Always Calcolate and Sends hour_cost
+    protected $appends = ['hour_cost'];
+    public function getHourCostAttribute()
+    {
+        return round($this->salary / 30 / 8, 2);
+    }
 }
